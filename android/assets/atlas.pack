@@ -1,0 +1,157 @@
+
+atlas.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+decimator_head
+  rotate: false
+  xy: 1, 58
+  size: 143, 55
+  orig: 143, 55
+  offset: 0, 0
+  index: -1
+decimator_head_attack
+  rotate: false
+  xy: 1, 1
+  size: 143, 55
+  orig: 143, 55
+  offset: 0, 0
+  index: -1
+decimator_head_broken
+  rotate: false
+  xy: 146, 58
+  size: 143, 55
+  orig: 143, 55
+  offset: 0, 0
+  index: -1
+decimator_head_team
+  rotate: false
+  xy: 146, 1
+  size: 143, 55
+  orig: 143, 55
+  offset: 0, 0
+  index: -1
+builder_body
+  rotate: false
+  xy: 291, 58
+  size: 95, 55
+  orig: 95, 55
+  offset: 0, 0
+  index: -1
+builder_body_broken
+  rotate: false
+  xy: 291, 1
+  size: 95, 55
+  orig: 95, 55
+  offset: 0, 0
+  index: -1
+builder_body_team
+  rotate: false
+  xy: 388, 58
+  size: 95, 55
+  orig: 95, 55
+  offset: 0, 0
+  index: -1
+builder_head
+  rotate: false
+  xy: 388, 1
+  size: 94, 55
+  orig: 94, 55
+  offset: 0, 0
+  index: -1
+builder_head_attack
+  rotate: false
+  xy: 485, 58
+  size: 94, 55
+  orig: 94, 55
+  offset: 0, 0
+  index: -1
+builder_head_broken
+  rotate: false
+  xy: 484, 1
+  size: 94, 55
+  orig: 94, 55
+  offset: 0, 0
+  index: -1
+builder_head_team
+  rotate: false
+  xy: 581, 58
+  size: 94, 55
+  orig: 94, 55
+  offset: 0, 0
+  index: -1
+sand
+  rotate: false
+  xy: 677, 38
+  size: 75, 75
+  orig: 75, 75
+  offset: 0, 0
+  index: -1
+
+atlas2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+frame/cb
+  rotate: false
+  xy: 1, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+frame/cc
+  rotate: false
+  xy: 19, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+frame/ct
+  rotate: false
+  xy: 37, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+frame/lb
+  rotate: false
+  xy: 55, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+frame/lc
+  rotate: false
+  xy: 73, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+frame/lt
+  rotate: false
+  xy: 91, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+frame/rb
+  rotate: false
+  xy: 109, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+frame/rc
+  rotate: false
+  xy: 127, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+frame/rt
+  rotate: false
+  xy: 145, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
