@@ -5,6 +5,7 @@
  */
 package com.lobseek.game.screens;
 
+import com.lobseek.game.actors.Test;
 import com.lobseek.game.components.Room;
 
 /**
@@ -17,12 +18,14 @@ public class GameScreen extends Screen {
 
     public GameScreen() {
         room = new Room(this, 256, 64);
-        room.add()
+        room.add(new Test(100, 100, 25));
+        room.start();
+        add(room);
     }
 
     @Override
     public void render(float delta) {
-        room.render(delta);
+        super.render(delta);
     }
 
 }

@@ -14,6 +14,12 @@ public class Particle {
     public Room room;
     final int lifeTime;
 
+    public Particle(float x, float y, int lifeTime) {
+        this.x = x;
+        this.y = y;
+        this.lifeTime = Math.max(lifeTime, 10000);
+    }
+
     public int timeLeft() {
         if(removed)return -1000;
         return (int) (creationTime + lifeTime - System.currentTimeMillis());
@@ -25,12 +31,6 @@ public class Particle {
     
     public void remove(){
         removed = true;
-    }
-
-    public Particle(float x, float y, int lifeTime) {
-        this.x = x;
-        this.y = y;
-        this.lifeTime = Math.max(lifeTime, 10000);
     }
 
     public void act(float delta) {

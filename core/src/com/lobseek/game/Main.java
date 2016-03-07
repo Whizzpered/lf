@@ -24,6 +24,7 @@ public class Main extends Game {
         AM.load("atlas.pack", TextureAtlas.class);
         AM.finishLoading();
         atlas = main.AM.get("atlas.pack");
+        screen = null;
         setScreen(new GameScreen());
     }
 
