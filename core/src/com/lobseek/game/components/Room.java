@@ -14,9 +14,12 @@
  */
 package com.lobseek.game.components;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.lobseek.game.Main;
 import com.lobseek.game.screens.Screen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,9 +32,9 @@ import javax.swing.Timer;
  */
 public class Room implements Layer {
 
-    public Actor[] actors;
     private final Particle[] particles;
-    private final Actor[] actorList;
+    public final Actor[] actors;
+    private final Actor[] renderActors;
     public final Screen screen;
     private final OrthographicCamera camera = new OrthographicCamera();
     public final Point cam = new Point();
@@ -40,6 +43,7 @@ public class Room implements Layer {
     private int maxActor;
     private long actTime, tickTime;
     private final Timer actTimer, tickTimer;
+    private BitmapFont font = new BitmapFont();
     
     /**
      * @param screen screen where Room will be displayed
@@ -48,9 +52,9 @@ public class Room implements Layer {
      */
     public Room(Screen screen, int actors, int particles) {
         this.screen = screen;
-        this.actorList = new Actor[actors];
+        this.actors = new Actor[actors];
+        this.renderActors = new Actor[actors];
         this.particles = new Particle[particles];
-        this.actors = new Actor[0];
         actTimer = new Timer(10, new ActionListener() {
 
             @Override
@@ -66,7 +70,7 @@ public class Room implements Layer {
             public void actionPerformed(ActionEvent e) {
                 float d = (float) (System.currentTimeMillis() - tickTime) / 1000f;
                 tickTime = System.currentTimeMillis();
-                act(d);
+                tick(d);
             }
         });
     }
@@ -81,10 +85,10 @@ public class Room implements Layer {
         if (actor == null) {
             return null;
         }
-        for (int i = 0; i < actorList.length; i++) {
-            Actor a = actorList[i];
+        for (int i = 0; i < actors.length; i++) {
+            Actor a = actors[i];
             if (a == null || a.removed) {
-                actorList[i] = actor;
+                actors[i] = actor;
                 maxActor = Math.max(i + 1, maxActor);
                 actor.room = this;
                 actor.create();
@@ -182,9 +186,6 @@ public class Room implements Layer {
      * @param delta time between acts in seconds
      */
     public void act(float delta) {
-        Actor[] actors = Arrays.copyOf(actorList, maxActor);
-        Arrays.sort(actors);
-        this.actors = actors;
         int cur = 0, max = 0;
         for (Actor a : actors) {
             cur++;
@@ -203,6 +204,10 @@ public class Room implements Layer {
      */
     @Override
     public void render(float delta) {
+        for (int i = 0; i < actors.length; i++) {
+            renderActors[i] = actors[i];
+        }
+        Arrays.sort(renderActors);
         float width = screen.width - deltaSize;
         float height = (width / screen.width) * screen.height;
         camera.setToOrtho(false, width, height);
@@ -213,7 +218,7 @@ public class Room implements Layer {
         batch.setProjectionMatrix(camera.combined);
 //        System.out.println(camera.position.x + ":" + camera.position.y + " (" +
 //                camera.viewportWidth + ":" + camera.viewportHeight + ")");
-        for (Actor a : actors) {
+        for (Actor a : renderActors) {
             if (a != null && !a.removed) {
                 if (a.x + a.width / 2
                         >= camera.position.x - camera.viewportWidth / 2
@@ -228,6 +233,10 @@ public class Room implements Layer {
             }
         }
         batch.end();
+        screen.B.begin();
+        font.setColor(Color.WHITE);
+        font.draw(screen.B, String.valueOf(Main.fps), 20, 20);
+        screen.B.end();
     }
 
     /**

@@ -10,25 +10,41 @@ import com.lobseek.game.Main;
 import com.lobseek.game.components.Actor;
 import com.lobseek.game.components.Sprite;
 
+import static com.lobseek.utils.Math.*;
+
 /**
  *
  * @author Yew_Mentzaki
  */
-public class Test extends Actor{
+public class Test extends Actor {
 
-    Sprite sprite = new Sprite("builder_body");
+    float dangle, hangle, hdangle;
+
+    Sprite sprite = new Sprite("disruptor_body");
+    Sprite head_sprite = new Sprite("disruptor_head");
+
     public Test(float x, float y, float angle) {
         super(x, y, angle);
         z = 10;
-//        width = 75;
-//        height = 75;
+        width = 75;
+        height = 75;
+        mass = 10;
     }
 
     @Override
     public void act(float delta) {
-    x += (float)Math.cos(angle) * delta * 100;
-    y += (float)Math.sin(angle) * delta * 100;
-    angle += (Main.R.nextFloat() - 0.5f) * 50f * delta;
+
+        x += cos(angle) * delta * 30;
+        y += sin(angle) * delta * 30;
+        dangle += (Main.R.nextFloat() - 0.5f) * 0.02f * delta;
+        angle += dangle;
+        hdangle += (Main.R.nextFloat() - 0.5f) * 0.02f * delta;
+        hangle += hdangle;
+    }
+
+    @Override
+    public void tick(float delta) {
+        handleCollision(delta);
     }
 
     @Override
@@ -37,9 +53,9 @@ public class Test extends Actor{
         sprite.y = y;
         sprite.angle = angle;
         sprite.draw(batch);
-        
-        
-        
+        head_sprite.x = x;
+        head_sprite.y = y;
+        head_sprite.angle = hangle;
+        head_sprite.draw(batch);
     }
-    
 }

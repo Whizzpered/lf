@@ -33,7 +33,7 @@ import java.util.Random;
  */
 public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
 
-    protected static final SpriteBatch B = new SpriteBatch();
+    public static final SpriteBatch B = new SpriteBatch();
     protected static final Random R = Main.R;
     protected Main main = Main.main;
     public float width, height;

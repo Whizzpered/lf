@@ -31,8 +31,11 @@ public class Main extends Game {
     public static final Random R = new Random(Long.MAX_VALUE - System.nanoTime());
     public static final AssetManager AM = new AssetManager();
     public static Main main;
+    public static int fps;
     public static TextureAtlas atlas;
     private boolean loaded;
+    private static long time;
+    private static int frames;
 
     public void load() {
         if (loaded) {
@@ -54,6 +57,13 @@ public class Main extends Game {
 
     @Override
     public void render() {
+        frames++;
+        long t = System.currentTimeMillis();
+        if(t - time > 1000){
+            time = t;
+            fps = frames;
+            frames = 0;
+        }
         super.render();
     }
 }

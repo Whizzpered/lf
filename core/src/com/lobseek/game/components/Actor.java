@@ -15,6 +15,7 @@
 package com.lobseek.game.components;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import static com.lobseek.utils.Math.*;
 
 /**
  *
@@ -23,12 +24,13 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 public class Actor implements Comparable<Actor> {
 
     public float x, y, z, angle;
-    public float width, height;
+    public float width, height, mass;
     boolean removed;
+    public boolean phantom;
     public Room room;
 
     /**
-* @param x abscissa of actor
+     * @param x abscissa of actor
      * @param y ordinate of actor
      * @param angle direction of actor in radians
      */
@@ -97,6 +99,35 @@ public class Actor implements Comparable<Actor> {
      * @param delta time between tick in seconds
      */
     public void tick(float delta) {
+        
+    }
 
+    public void kick(float dist, float angle) {
+        x += cos(angle) * dist;
+        y += sin(angle) * dist;
+    }
+
+    public void handleCollision(float delta) {
+        for (Actor a : room.actors) {
+            if (a != null && !a.phantom && a != this) {
+                if(abs(x - a.x) > width + 20 || abs(y - a.y) > height + 20)continue;
+                float d = dist(x, y, a.x, a.y);
+                float r = dist(0, 0, width + a.width, height + a.height) / 2 - 20;
+                if (d < r) {
+                    r -= d;
+                    float angle = atan2(a.y - y, a.x - x);
+                    if (a.mass == 0) {
+                        a.kick(r, angle);
+                    } else if (mass == 0) {
+                        kick(r, angle + PI);
+                    } else {
+                        r /= 2;
+                        float m = a.mass / mass;
+                        a.kick(r / m, angle);
+                        kick(r * m, angle + PI);
+                    }
+                }
+            }
+        }
     }
 }

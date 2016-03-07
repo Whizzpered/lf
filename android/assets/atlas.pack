@@ -3,9 +3,23 @@ atlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-decimator_head
+disruptor_body_big
+  rotate: false
+  xy: 1, 541
+  size: 670, 481
+  orig: 670, 481
+  offset: 0, 0
+  index: -1
+disruptor_body_big_team
   rotate: false
   xy: 1, 58
+  size: 670, 481
+  orig: 670, 481
+  offset: 0, 0
+  index: -1
+decimator_head
+  rotate: false
+  xy: 673, 967
   size: 143, 55
   orig: 143, 55
   offset: 0, 0
@@ -19,76 +33,116 @@ decimator_head_attack
   index: -1
 decimator_head_broken
   rotate: false
-  xy: 146, 58
+  xy: 673, 910
   size: 143, 55
   orig: 143, 55
   offset: 0, 0
   index: -1
 decimator_head_team
   rotate: false
-  xy: 146, 1
+  xy: 818, 967
   size: 143, 55
   orig: 143, 55
   offset: 0, 0
   index: -1
+disruptor_body
+  rotate: false
+  xy: 673, 836
+  size: 100, 72
+  orig: 100, 72
+  offset: 0, 0
+  index: -1
+disruptor_body_team
+  rotate: false
+  xy: 673, 762
+  size: 100, 72
+  orig: 100, 72
+  offset: 0, 0
+  index: -1
 builder_body
   rotate: false
-  xy: 291, 58
+  xy: 146, 1
   size: 95, 55
   orig: 95, 55
   offset: 0, 0
   index: -1
 builder_body_broken
   rotate: false
-  xy: 291, 1
+  xy: 818, 910
   size: 95, 55
   orig: 95, 55
   offset: 0, 0
   index: -1
 builder_body_team
   rotate: false
-  xy: 388, 58
+  xy: 775, 853
   size: 95, 55
   orig: 95, 55
   offset: 0, 0
   index: -1
+sand
+  rotate: false
+  xy: 673, 685
+  size: 75, 75
+  orig: 75, 75
+  offset: 0, 0
+  index: -1
 builder_head
   rotate: false
-  xy: 388, 1
+  xy: 243, 1
   size: 94, 55
   orig: 94, 55
   offset: 0, 0
   index: -1
 builder_head_attack
   rotate: false
-  xy: 485, 58
+  xy: 775, 796
   size: 94, 55
   orig: 94, 55
   offset: 0, 0
   index: -1
 builder_head_broken
   rotate: false
-  xy: 484, 1
+  xy: 339, 1
   size: 94, 55
   orig: 94, 55
   offset: 0, 0
   index: -1
 builder_head_team
   rotate: false
-  xy: 581, 58
+  xy: 435, 1
   size: 94, 55
   orig: 94, 55
   offset: 0, 0
   index: -1
-sand
+disruptor_head
   rotate: false
-  xy: 677, 38
-  size: 75, 75
-  orig: 75, 75
+  xy: 531, 9
+  size: 100, 47
+  orig: 100, 47
   offset: 0, 0
   index: -1
 
 atlas2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+disruptor_head_big
+  rotate: false
+  xy: 1, 551
+  size: 717, 340
+  orig: 717, 340
+  offset: 0, 0
+  index: -1
+photo_2016-03-07_22-33-57
+  rotate: false
+  xy: 1, 1
+  size: 500, 548
+  orig: 500, 548
+  offset: 0, 0
+  index: -1
+
+atlas3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
