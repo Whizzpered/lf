@@ -12,7 +12,7 @@ import com.lobseek.game.components.Sprite;
 
 /**
  *
- * @author aenge
+ * @author Yew_Mentzaki
  */
 public class Test extends Actor{
 

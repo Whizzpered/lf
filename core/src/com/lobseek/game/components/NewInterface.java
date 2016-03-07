@@ -12,17 +12,12 @@
  *                                                    this program.
  *  * share compiled program with people who have no legal copy of it. 
  */
-package com.lobseek.game.screens;
+package com.lobseek.game.components;
 
 /**
  *
  * @author Yew_Mentzaki
  */
-public class MainMenuScreen extends Screen{
-
-    @Override
-    public void render(float delta) {
-        super.render(delta); 
-    }
+public interface NewInterface {
     
 }
