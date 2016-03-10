@@ -23,6 +23,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lobseek.game.Main;
 import com.lobseek.game.components.Layer;
+import com.lobseek.game.components.Touch;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -39,6 +40,13 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
     public float width, height;
     public OrthographicCamera camera = new OrthographicCamera(960, 540);
     private List<Layer> layers = new ArrayList<Layer>();
+    public final Touch[] touches = new Touch[10];
+
+    public Screen() {
+        for (int i = 0; i < 10; i++) {
+            touches[i] = new Touch();
+        }
+    }
 
     public Layer add(Layer l) {
         layers.add(l);
@@ -52,6 +60,7 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(this);
     }
 
     @Override
@@ -106,7 +115,17 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        for (int i = layers.size(); i >= 0; i--) {
+        if (pointer < 10) {
+            Touch t = touches[pointer];
+            t.x = t.lx = screenX;
+            t.y = t.ly = screenY;
+            t.dx = t.dy = 0;
+            t.down = true;
+            System.out.println("Pointer " + pointer);
+            System.out.println("   x: " + t.x);
+            System.out.println("   y: " + t.y);
+        }
+        for (int i = layers.size() - 1; i >= 0; i--) {
             if (layers.get(i).touchDown(screenX, screenY, pointer, button)) {
                 return true;
             }
@@ -116,7 +135,11 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        for (int i = layers.size(); i >= 0; i--) {
+        if (pointer < 10) {
+            Touch t = touches[pointer];
+            t.down = false;
+        }
+        for (int i = layers.size() - 1; i >= 0; i--) {
             if (layers.get(i).touchUp(screenX, screenY, pointer, button)) {
                 return true;
             }
@@ -126,7 +149,17 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        for (int i = layers.size(); i >= 0; i--) {
+        if (pointer < 10) {
+            Touch t = touches[pointer];
+            t.lx = t.x;
+            t.ly = t.y;
+            t.x = screenX;
+            t.y = screenY;
+            t.dx = t.x - t.lx;
+            t.dy = t.y - t.ly;
+            t.down = true;
+        }
+        for (int i = layers.size() - 1; i >= 0; i--) {
             if (layers.get(i).touchDragged(screenX, screenY, pointer)) {
                 return true;
             }

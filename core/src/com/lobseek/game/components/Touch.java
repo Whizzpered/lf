@@ -18,6 +18,7 @@ package com.lobseek.game.components;
  *
  * @author Yew_Mentzaki
  */
-public interface NewInterface {
-    
+public class Touch {
+    public boolean down;
+    public float x, y, dx, dy, lx, ly;
 }

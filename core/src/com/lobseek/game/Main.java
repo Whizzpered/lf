@@ -37,6 +37,10 @@ public class Main extends Game {
     private static long time;
     private static int frames;
 
+    /**
+     * Called when application is loading. Handle load of all textures, sounds,
+     * fonts and locale files.
+     */
     public void load() {
         if (loaded) {
             return;
@@ -49,12 +53,18 @@ public class Main extends Game {
         setScreen(new GameScreen());
     }
 
+    /**
+     * Called when application was just launched.
+     */
     @Override
     public void create() {
         main = this;
         setScreen(new SplashScreen());
     }
 
+    /**
+     * Handles render and counts frames per second.
+     */
     @Override
     public void render() {
         frames++;

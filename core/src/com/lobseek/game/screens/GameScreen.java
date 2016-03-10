@@ -27,9 +27,6 @@ public class GameScreen extends Screen {
 
     public GameScreen() {
         room = new Room(this, 256, 64);
-        for (int i = 0; i < 256; i++) {
-            room.add(new Test(R.nextInt(20), R.nextInt(20), R.nextFloat() * 6.28f));
-        }
         room.start();
         add(room);
     }

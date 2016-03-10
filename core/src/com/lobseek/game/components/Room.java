@@ -20,11 +20,15 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.lobseek.game.Main;
+import com.lobseek.game.actors.Test;
 import com.lobseek.game.screens.Screen;
+import static com.lobseek.utils.Math.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
-import javax.swing.Timer;
+import java.util.Comparator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -44,7 +48,9 @@ public class Room implements Layer {
     private long actTime, tickTime;
     private final Timer actTimer, tickTimer;
     private BitmapFont font = new BitmapFont();
-    
+    private boolean running;
+    private float fingerDistance;
+
     /**
      * @param screen screen where Room will be displayed
      * @param actors maximal number of actors in room
@@ -55,24 +61,29 @@ public class Room implements Layer {
         this.actors = new Actor[actors];
         this.renderActors = new Actor[actors];
         this.particles = new Particle[particles];
-        actTimer = new Timer(10, new ActionListener() {
+        actTimer = new Timer("Act Timer");
+        tickTimer = new Timer("Tick Timer");
 
+        actTimer.schedule(new TimerTask() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                float d = (float) (System.currentTimeMillis() - actTime) / 1000f;
-                actTime = System.currentTimeMillis();
-                act(d);
+            public void run() {
+                if (running) {
+                    float d = (float) (System.currentTimeMillis() - actTime) / 1000f;
+                    actTime = System.currentTimeMillis();
+                    act(d);
+                }
             }
-        });
-        tickTimer = new Timer(50, new ActionListener() {
-
+        }, 10, 10);
+        tickTimer.schedule(new TimerTask() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                float d = (float) (System.currentTimeMillis() - tickTime) / 1000f;
-                tickTime = System.currentTimeMillis();
-                tick(d);
+            public void run() {
+                if (running) {
+                    float d = (float) (System.currentTimeMillis() - tickTime) / 1000f;
+                    tickTime = System.currentTimeMillis();
+                    tick(d);
+                }
             }
-        });
+        }, 25, 25);
     }
 
     /**
@@ -136,7 +147,7 @@ public class Room implements Layer {
     /**
      * Removes actor from this room. Actually, just hidding it before the next
      * one will replace it.
-     * 
+     *
      * @param actor
      * @return the actor from parameter
      */
@@ -151,33 +162,21 @@ public class Room implements Layer {
      * Pauses or unpauses game.
      */
     public void pause() {
-        if (actTimer.isRunning()) {
-            stop();
-        } else {
-            start();
-        }
+        running = !running;
     }
 
     /**
      * Starting game in it's stoped or not began yet.
      */
     public void start() {
-        if (!actTimer.isRunning()) {
-            actTime = System.currentTimeMillis();
-            tickTime = System.currentTimeMillis();
-            actTimer.start();
-            tickTimer.start();
-        }
+        running = true;
     }
 
     /**
      * Stoping game if it runs.
      */
     public void stop() {
-        if (actTimer.isRunning()) {
-            actTimer.stop();
-            tickTimer.stop();
-        }
+        running = false;
     }
 
     /**
@@ -207,10 +206,24 @@ public class Room implements Layer {
         for (int i = 0; i < actors.length; i++) {
             renderActors[i] = actors[i];
         }
-        Arrays.sort(renderActors);
+        Arrays.sort(renderActors, new Comparator<Actor>() {
+            @Override
+            public int compare(Actor o1, Actor o2) {
+                if (o1 == null && o2 == null) {
+                    return 0;
+                }
+                if (o1 == null) {
+                    return 1;
+                }
+                if (o2 == null) {
+                    return -1;
+                }
+                return o1.compareTo(o2);
+            }
+        });
         float width = screen.width - deltaSize;
         float height = (width / screen.width) * screen.height;
-        camera.setToOrtho(false, width, height);
+        camera.setToOrtho(true, width, height);
         camera.position.x = cam.x;
         camera.position.y = cam.y;
         camera.update();
@@ -263,6 +276,14 @@ public class Room implements Layer {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (!screen.touches[1].down) {
+            add(new Test(screenX + cam.x - screen.width / 2,
+                    screenY + cam.y - screen.height / 2,
+                    Main.R.nextFloat() * 6.28f));
+        } else if (screen.touches[0].down) {
+            fingerDistance = dist(screen.touches[1].x, screen.touches[1].y,
+                    screen.touches[0].x, screen.touches[0].y);
+        }
         return false;
     }
 
@@ -290,6 +311,26 @@ public class Room implements Layer {
      */
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        if (screen.touches[0].down && !screen.touches[1].down) {
+            cam.x -= screen.touches[0].dx;
+            cam.y -= screen.touches[0].dy;
+        } else if (screen.touches[0].down && screen.touches[1].down) {
+            float fd = dist(screen.touches[1].x, screen.touches[1].y,
+                    screen.touches[0].x, screen.touches[0].y);
+            float d = fd - fingerDistance;
+            deltaSize += d;
+            float fx = (screen.touches[0].x - screen.width / 2) +
+                    (screen.touches[1].x - screen.width / 2);
+            float fy = (screen.touches[0].y - screen.height / 2) +
+                    (screen.touches[1].y - screen.height / 2);
+            float a = atan2(fy, fx);
+            fx = abs(fx) / screen.width;
+            fy = abs(fy) / screen.height;
+            cam.x += cos(a) * d * fx;
+            cam.y += sin(a) * d * fy;
+            fingerDistance = fd;
+
+        }
         return false;
     }
 

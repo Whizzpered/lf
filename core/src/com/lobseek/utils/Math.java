@@ -273,6 +273,11 @@ public class Math {
         return (float) java.lang.Math.atan2(y, x);
     }
     
+    /**
+     * 
+     * @param a
+     * @return 
+     */
     public static float abs(double a){
         return (float) java.lang.Math.abs(a);
     }
