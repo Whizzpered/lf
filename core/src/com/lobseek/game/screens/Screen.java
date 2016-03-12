@@ -169,11 +169,24 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
 
     @Override
     public boolean mouseMoved(int screenX, int screenY) {
+        Touch t = touches[0];
+        t.lx = t.x;
+        t.ly = t.y;
+        t.x = screenX;
+        t.y = screenY;
+        t.dx = t.x - t.lx;
+        t.dy = t.y - t.ly;
+        t.down = false;
         return false;
     }
 
     @Override
     public boolean scrolled(int amount) {
+        for (int i = layers.size() - 1; i >= 0; i--) {
+            if (layers.get(i).scrolled(amount)) {
+                return true;
+            }
+        }
         return false;
     }
 

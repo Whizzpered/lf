@@ -32,6 +32,7 @@ public class Main extends Game {
     public static final AssetManager AM = new AssetManager();
     public static Main main;
     public static int fps;
+    public static long nanos;
     public static TextureAtlas atlas;
     private boolean loaded;
     private static long time;
@@ -69,11 +70,14 @@ public class Main extends Game {
     public void render() {
         frames++;
         long t = System.currentTimeMillis();
+        long n = System.nanoTime();
         if(t - time > 1000){
             time = t;
             fps = frames;
             frames = 0;
         }
         super.render();
+        n = System.nanoTime() - n;
+        nanos = (nanos * 10 + n) / 11;
     }
 }

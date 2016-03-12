@@ -3,121 +3,72 @@ atlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-disruptor_body_big
+base_underground
   rotate: false
-  xy: 1, 541
-  size: 670, 481
-  orig: 670, 481
+  xy: 1, 75
+  size: 180, 180
+  orig: 180, 180
   offset: 0, 0
   index: -1
-disruptor_body_big_team
+selection
   rotate: false
-  xy: 1, 58
-  size: 670, 481
-  orig: 670, 481
-  offset: 0, 0
-  index: -1
-decimator_head
-  rotate: false
-  xy: 673, 967
-  size: 143, 55
-  orig: 143, 55
-  offset: 0, 0
-  index: -1
-decimator_head_attack
-  rotate: false
-  xy: 1, 1
-  size: 143, 55
-  orig: 143, 55
-  offset: 0, 0
-  index: -1
-decimator_head_broken
-  rotate: false
-  xy: 673, 910
-  size: 143, 55
-  orig: 143, 55
-  offset: 0, 0
-  index: -1
-decimator_head_team
-  rotate: false
-  xy: 818, 967
-  size: 143, 55
-  orig: 143, 55
+  xy: 183, 155
+  size: 194, 100
+  orig: 194, 100
   offset: 0, 0
   index: -1
 disruptor_body
   rotate: false
-  xy: 673, 836
+  xy: 1, 1
   size: 100, 72
   orig: 100, 72
   offset: 0, 0
   index: -1
 disruptor_body_team
   rotate: false
-  xy: 673, 762
+  xy: 103, 1
   size: 100, 72
   orig: 100, 72
   offset: 0, 0
   index: -1
-builder_body
+base_hand
   rotate: false
-  xy: 146, 1
-  size: 95, 55
-  orig: 95, 55
+  xy: 379, 213
+  size: 200, 42
+  orig: 200, 42
   offset: 0, 0
   index: -1
-builder_body_broken
+base_hand_team
   rotate: false
-  xy: 818, 910
-  size: 95, 55
-  orig: 95, 55
+  xy: 379, 169
+  size: 200, 42
+  orig: 200, 42
   offset: 0, 0
   index: -1
-builder_body_team
+base_platform
   rotate: false
-  xy: 775, 853
-  size: 95, 55
-  orig: 95, 55
+  xy: 581, 139
+  size: 125, 116
+  orig: 125, 116
+  offset: 0, 0
+  index: -1
+crater
+  rotate: false
+  xy: 708, 148
+  size: 108, 107
+  orig: 108, 107
   offset: 0, 0
   index: -1
 sand
   rotate: false
-  xy: 673, 685
+  xy: 183, 78
   size: 75, 75
   orig: 75, 75
   offset: 0, 0
   index: -1
-builder_head
-  rotate: false
-  xy: 243, 1
-  size: 94, 55
-  orig: 94, 55
-  offset: 0, 0
-  index: -1
-builder_head_attack
-  rotate: false
-  xy: 775, 796
-  size: 94, 55
-  orig: 94, 55
-  offset: 0, 0
-  index: -1
-builder_head_broken
-  rotate: false
-  xy: 339, 1
-  size: 94, 55
-  orig: 94, 55
-  offset: 0, 0
-  index: -1
-builder_head_team
-  rotate: false
-  xy: 435, 1
-  size: 94, 55
-  orig: 94, 55
-  offset: 0, 0
-  index: -1
 disruptor_head
   rotate: false
-  xy: 531, 9
+  xy: 818, 208
   size: 100, 47
   orig: 100, 47
   offset: 0, 0
@@ -127,18 +78,32 @@ atlas2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-disruptor_head_big
+decorations/3
   rotate: false
-  xy: 1, 551
-  size: 717, 340
-  orig: 717, 340
+  xy: 1, 10
+  size: 108, 107
+  orig: 108, 107
   offset: 0, 0
   index: -1
-photo_2016-03-07_22-33-57
+decorations/1
   rotate: false
-  xy: 1, 1
-  size: 500, 548
-  orig: 500, 548
+  xy: 111, 1
+  size: 70, 116
+  orig: 70, 116
+  offset: 0, 0
+  index: -1
+decorations/0
+  rotate: false
+  xy: 183, 38
+  size: 73, 79
+  orig: 73, 79
+  offset: 0, 0
+  index: -1
+decorations/2
+  rotate: false
+  xy: 258, 55
+  size: 54, 62
+  orig: 54, 62
   offset: 0, 0
   index: -1
 
@@ -207,5 +172,59 @@ frame/rt
   xy: 145, 1
   size: 16, 16
   orig: 16, 16
+  offset: 0, 0
+  index: -1
+
+atlas4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+healthbar/0
+  rotate: false
+  xy: 1, 1
+  size: 108, 150
+  orig: 108, 150
+  offset: 0, 0
+  index: -1
+healthbar/1
+  rotate: false
+  xy: 111, 1
+  size: 108, 150
+  orig: 108, 150
+  offset: 0, 0
+  index: -1
+healthbar/2
+  rotate: false
+  xy: 221, 1
+  size: 108, 150
+  orig: 108, 150
+  offset: 0, 0
+  index: -1
+healthbar/3
+  rotate: false
+  xy: 331, 1
+  size: 108, 150
+  orig: 108, 150
+  offset: 0, 0
+  index: -1
+healthbar/4
+  rotate: false
+  xy: 441, 1
+  size: 108, 150
+  orig: 108, 150
+  offset: 0, 0
+  index: -1
+healthbar/5
+  rotate: false
+  xy: 551, 1
+  size: 108, 150
+  orig: 108, 150
+  offset: 0, 0
+  index: -1
+healthbar/6
+  rotate: false
+  xy: 661, 1
+  size: 108, 150
+  orig: 108, 150
   offset: 0, 0
   index: -1

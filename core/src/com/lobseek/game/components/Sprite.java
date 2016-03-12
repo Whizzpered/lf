@@ -14,6 +14,7 @@
  */
 package com.lobseek.game.components;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.lobseek.game.Main;
 
@@ -27,6 +28,7 @@ public class Sprite {
     public final String name;
     private com.badlogic.gdx.graphics.g2d.Sprite sprite;
     boolean loaded, broken;
+    public float r = 1, g = 1, b = 1, a = 1;
 
     /**
      * @param name path of image in "atlas.pack"
@@ -34,6 +36,18 @@ public class Sprite {
     public Sprite(String name) {
         this.name = name;
         load();
+    }
+    
+    public void setScale(float scale){
+        width = scale * originalWidth;
+        height = scale * originalHeight;
+    }
+    
+    public void setColor(Color color){
+        r = color.r;
+        g = color.g;
+        b = color.b;
+        a = color.a;
     }
 
     /**
@@ -73,6 +87,7 @@ public class Sprite {
         sprite.setSize(width, height);
         sprite.setOrigin(width / 2, height / 2);
         sprite.setCenter(x, y);
+        sprite.setColor(r, g, b, a);
         float a = angle * 57.2957f;
         sprite.rotate(a);
         sprite.draw(batch);

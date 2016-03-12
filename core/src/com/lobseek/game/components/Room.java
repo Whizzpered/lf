@@ -14,8 +14,10 @@
  */
 package com.lobseek.game.components;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -50,6 +52,10 @@ public class Room implements Layer {
     private BitmapFont font = new BitmapFont();
     private boolean running;
     private float fingerDistance;
+    public final Player players[];
+    public int player = -1;
+    public boolean selection;
+    private final com.badlogic.gdx.graphics.g2d.Sprite terrain;
 
     /**
      * @param screen screen where Room will be displayed
@@ -61,6 +67,19 @@ public class Room implements Layer {
         this.actors = new Actor[actors];
         this.renderActors = new Actor[actors];
         this.particles = new Particle[particles];
+        this.players = new Player[16];
+        players[0] = new Player(this) {
+
+            @Override
+            public boolean isEnemy(int player) {
+                return false;
+            }
+
+        };
+        players[0].name = "NPCs";
+        for (int i = 1; i < 16; i++) {
+            players[i] = new Player(this);
+        }
         actTimer = new Timer("Act Timer");
         tickTimer = new Timer("Tick Timer");
 
@@ -84,6 +103,8 @@ public class Room implements Layer {
                 }
             }
         }, 25, 25);
+        terrain = new com.badlogic.gdx.graphics.g2d.Sprite(
+                new Texture(Gdx.files.internal("dirt.png")));
     }
 
     /**
@@ -191,6 +212,38 @@ public class Room implements Layer {
             if (a != null && !a.removed) {
                 max = cur;
                 a.act(delta);
+                if (!selection) {
+                    if (a != null && (a instanceof Unit)) {
+                        Unit u = (Unit) a;
+                        u.selected = false;
+                    }
+                }
+            }
+        }
+        if (selection) {
+            Point p = getGlobalCoordinates(
+                    screen.touches[0].x,
+                    screen.touches[0].y);
+            float s = Math.abs(screen.width - deltaSize) / screen.width;
+            float fx = screen.touches[0].x - screen.width / 2;
+            float fy = screen.touches[0].y - screen.height / 2;
+            cam.x += fx * delta * s / 2;
+            cam.y += fy * delta * s / 2;
+
+            for (Actor a : actors) {
+                if (a != null && (a instanceof Unit)) {
+                    Unit u = (Unit) a;
+                    if (u.owner == player) {
+                        if (dist(p.x, p.y, u.x, u.y) < 100f * s) {
+                            u.selected = true;
+                            selection = true;
+                        }
+                    }
+                    if (u.selected) {
+                        u.tx = p.x;
+                        u.ty = p.y;
+                    }
+                }
             }
         }
         maxActor = max;
@@ -202,7 +255,8 @@ public class Room implements Layer {
      * @param delta time between frames in seconds
      */
     @Override
-    public void render(float delta) {
+    public void render(float delta
+    ) {
         for (int i = 0; i < actors.length; i++) {
             renderActors[i] = actors[i];
         }
@@ -229,8 +283,14 @@ public class Room implements Layer {
         camera.update();
         batch.begin();
         batch.setProjectionMatrix(camera.combined);
-//        System.out.println(camera.position.x + ":" + camera.position.y + " (" +
-//                camera.viewportWidth + ":" + camera.viewportHeight + ")");
+        for (int i = (int) ((cam.x - width / 2) / terrain.getWidth()) - 2;
+                i < (int) ((cam.x + width / 2) / terrain.getWidth()) + 2; i++) {
+            for (int j = (int) ((cam.y - height / 2) / terrain.getHeight()) - 2;
+                    j < (int) ((cam.y + height / 2) / terrain.getHeight()) + 2; j++) {
+                terrain.setCenter(i * terrain.getWidth(), j * terrain.getHeight());
+                terrain.draw(batch);
+            }
+        }
         for (Actor a : renderActors) {
             if (a != null && !a.removed) {
                 if (a.x + a.width / 2
@@ -248,7 +308,7 @@ public class Room implements Layer {
         batch.end();
         screen.B.begin();
         font.setColor(Color.WHITE);
-        font.draw(screen.B, String.valueOf(Main.fps), 20, 20);
+        font.draw(screen.B, Main.fps + "  ---  " + Main.nanos, 20, 20);
         screen.B.end();
     }
 
@@ -265,6 +325,17 @@ public class Room implements Layer {
         }
     }
 
+    public Point getGlobalCoordinates(float screenX, float screenY) {
+        Point p = new Point(screenX, screenY);
+        p.x -= screen.width / 2;
+        p.y -= screen.height / 2;
+        p.x *= (screen.width - deltaSize) / screen.width;
+        p.y *= (screen.width - deltaSize) / screen.width;
+        p.x += cam.x;
+        p.y += cam.y;
+        return p;
+    }
+
     /**
      * Handles touch down for this layer.
      *
@@ -277,9 +348,19 @@ public class Room implements Layer {
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
         if (!screen.touches[1].down) {
-            add(new Test(screenX + cam.x - screen.width / 2,
-                    screenY + cam.y - screen.height / 2,
-                    Main.R.nextFloat() * 6.28f));
+            Point p = getGlobalCoordinates(screenX, screenY);
+            float s = Math.abs(screen.width - deltaSize) / screen.width;
+            for (Actor a : actors) {
+                if (a != null && (a instanceof Unit)) {
+                    Unit u = (Unit) a;
+                    if (u.owner == player) {
+                        if (dist(p.x, p.y, u.x, u.y) < 100f * s) {
+                            u.selected = true;
+                            selection = true;
+                        }
+                    }
+                }
+            }
         } else if (screen.touches[0].down) {
             fingerDistance = dist(screen.touches[1].x, screen.touches[1].y,
                     screen.touches[0].x, screen.touches[0].y);
@@ -298,6 +379,7 @@ public class Room implements Layer {
      */
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        selection = false;
         return false;
     }
 
@@ -311,27 +393,52 @@ public class Room implements Layer {
      */
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        if (screen.touches[0].down && !screen.touches[1].down) {
-            cam.x -= screen.touches[0].dx;
-            cam.y -= screen.touches[0].dy;
-        } else if (screen.touches[0].down && screen.touches[1].down) {
-            float fd = dist(screen.touches[1].x, screen.touches[1].y,
-                    screen.touches[0].x, screen.touches[0].y);
-            float d = fd - fingerDistance;
-            deltaSize += d;
-            float fx = (screen.touches[0].x - screen.width / 2) +
-                    (screen.touches[1].x - screen.width / 2);
-            float fy = (screen.touches[0].y - screen.height / 2) +
-                    (screen.touches[1].y - screen.height / 2);
-            float a = atan2(fy, fx);
-            fx = abs(fx) / screen.width;
-            fy = abs(fy) / screen.height;
-            cam.x += cos(a) * d * fx;
-            cam.y += sin(a) * d * fy;
-            fingerDistance = fd;
+        if (!selection) {
+            if (screen.touches[0].down && !screen.touches[1].down) {
+                float s = (screen.width - deltaSize) / screen.width;
+                cam.x -= screen.touches[0].dx * s;
+                cam.y -= screen.touches[0].dy * s;
+            } else if (screen.touches[0].down && screen.touches[1].down) {
+                float fd = dist(screen.touches[1].x, screen.touches[1].y,
+                        screen.touches[0].x, screen.touches[0].y);
+                float d = fd - fingerDistance;
+                float ds = deltaSize;
+                float s = Math.abs(screen.width - deltaSize) / screen.width;
+                deltaSize = (float) Math.max(Math.min(deltaSize + d * s, screen.width / 2),
+                        -screen.width / 5 * 4);
+                d = deltaSize - ds;
+                float fx = (screen.touches[0].x - screen.width / 2)
+                        + (screen.touches[1].x - screen.width / 2);
+                float fy = (screen.touches[0].y - screen.height / 2)
+                        + (screen.touches[1].y - screen.height / 2);
+                float a = atan2(fy, fx);
+                fx = abs(fx) / screen.width;
+                fy = abs(fy) / screen.height;
+                cam.x += cos(a) * d * fx * s;
+                cam.y += sin(a) * d * fy * s;
+                fingerDistance = fd;
 
+            }
         }
         return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        float d = amount * 100;
+        float ds = deltaSize;
+        float s = (screen.width - deltaSize) / screen.width;
+        deltaSize = (float) Math.max(Math.min(deltaSize - d * s, screen.width / 2),
+                -screen.width / 5 * 4);
+        d = (deltaSize - ds) / 2;
+        float fx = (screen.touches[0].x - screen.width / 2);
+        float fy = (screen.touches[0].y - screen.height / 2);
+        float a = atan2(fy, fx);
+        fx = abs(fx) / screen.width * 2;
+        fy = abs(fy) / screen.height * 2;
+        cam.x += cos(a) * d * fx * s;
+        cam.y += sin(a) * d * fy * s;
+        return true;
     }
 
 }

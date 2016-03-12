@@ -63,9 +63,9 @@ public class Actor implements Comparable<Actor> {
     @Override
     public int compareTo(Actor actor) {
         if (z > actor.z) {
-            return 1;
-        } else if (z < actor.z) {
             return -1;
+        } else if (z < actor.z) {
+            return 1;
         } else {
             return 0;
         }

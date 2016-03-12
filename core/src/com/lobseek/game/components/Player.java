@@ -12,35 +12,35 @@
  *                                                    this program.
  *  * share compiled program with people who have no legal copy of it. 
  */
-package com.lobseek.game.screens;
+package com.lobseek.game.components;
 
-import com.lobseek.game.actors.Base;
-import com.lobseek.game.actors.Test;
-import com.lobseek.game.components.Room;
+import com.badlogic.gdx.graphics.Color;
 
 /**
  *
  * @author Yew_Mentzaki
  */
-public class GameScreen extends Screen {
+public class Player {
 
-    Room room;
+    private final Room room;
+    public String name = "Bot";
+    public Color color = Color.RED;
+    public boolean ai = false;
+    public int alliance = -1;
 
-    public GameScreen() {
-        room = new Room(this, 512, 64);
-        room.start();
-        room.player = 1;
-        add(room);
-        room.add(new Base(0, 0, 0));
-        room.add(new Base(800, 0, 0));
-        room.add(new Base(-800, 0, 0));
-        room.add(new Base(0, 800, 0));
-        room.add(new Base(0, -800, 0));
+    public Player(Room room) {
+        this.room = room;
     }
 
-    @Override
-    public void render(float delta) {
-        super.render(delta);
+    public boolean isEnemy(int player) {
+        if (player == 0) {
+            return false;
+        }
+        if (alliance == -1) {
+            return true;
+        }else{
+            return room.players[player].alliance == alliance;
+        }
     }
 
 }

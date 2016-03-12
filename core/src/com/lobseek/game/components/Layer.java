@@ -57,4 +57,6 @@ public interface Layer {
      */
     public boolean touchDragged(int screenX, int screenY, int pointer);
 
+    public boolean scrolled(int amount);
+    
 }
