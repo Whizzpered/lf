@@ -25,10 +25,10 @@ public class Actor implements Comparable<Actor> {
 
     public float x, y, z, angle;
     public float width, height, mass;
-    boolean removed;
+    boolean removed, created;
     public boolean phantom;
     public Room room;
-
+    
     /**
      * @param x abscissa of actor
      * @param y ordinate of actor
@@ -51,6 +51,7 @@ public class Actor implements Comparable<Actor> {
      * Being invoked when this actor is added to the room.
      */
     public void create() {
+        created = true;
     }
 
     /**
@@ -63,9 +64,9 @@ public class Actor implements Comparable<Actor> {
     @Override
     public int compareTo(Actor actor) {
         if (z > actor.z) {
-            return -1;
-        } else if (z < actor.z) {
             return 1;
+        } else if (z < actor.z) {
+            return -1;
         } else {
             return 0;
         }

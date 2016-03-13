@@ -17,6 +17,8 @@ package com.lobseek.game.screens;
 import com.lobseek.game.actors.Base;
 import com.lobseek.game.actors.Test;
 import com.lobseek.game.components.Room;
+import com.lobseek.game.units.Disruptor;
+import static com.lobseek.utils.Math.*;
 
 /**
  *
@@ -31,11 +33,14 @@ public class GameScreen extends Screen {
         room.start();
         room.player = 1;
         add(room);
-        room.add(new Base(0, 0, 0));
-        room.add(new Base(800, 0, 0));
-        room.add(new Base(-800, 0, 0));
-        room.add(new Base(0, 800, 0));
-        room.add(new Base(0, -800, 0));
+        room.add(new Base(800, 0, 1));
+        room.add(new Base(-800, 0, 1));
+        room.add(new Base(0, 800, 2));
+        room.add(new Base(0, -800, 2));
+        for (int i = 0; i < 30; i++) {
+            room.add(new Disruptor(-1000, 0, 0, 1));
+            room.add(new Disruptor(0, 1000, 0, 2));
+        }
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.lobseek.game.Main;
 import com.lobseek.game.components.Actor;
 import com.lobseek.game.components.Sprite;
 import com.lobseek.game.components.Unit;
+import com.lobseek.game.units.Disruptor;
 
 import static com.lobseek.utils.Math.*;
 
@@ -29,8 +30,9 @@ public class Base extends Actor {
             underground = new Sprite("base_underground"),
             platform = new Sprite("base_platform");
 
-    public Base(float x, float y, float angle) {
-        super(x, y, angle);
+    public Base(float x, float y, int owner) {
+        super(x, y, Main.R.nextFloat() * 6.28f);
+        this.owner = owner;
         z = 1;
         width = 200;
         height = 200;
@@ -39,6 +41,7 @@ public class Base extends Actor {
 
     @Override
     public void kick(float dist, float angle) {
+        //Base is the fucking building, it may not move. Nope, tornado.
     }
 
     @Override
@@ -65,8 +68,9 @@ public class Base extends Actor {
                 animation = Math.max(0, animation - delta / 2);
             } else {
                 platformAngle = Main.R.nextFloat() * PI * 2;
-                inQueue = new Unit(x, y, platformAngle, 1);
+                inQueue = new Disruptor(x, y, platformAngle, owner);
                 inQueue.room = room;
+                inQueue.create();
             }
         }
     }
@@ -110,8 +114,8 @@ public class Base extends Actor {
                     * (90 + 20 * sqrt(animation));
             sprite.y = y - sin(sp * ((float) i) + angle + animation)
                     * (90 + 20 * sqrt(animation));
-            sprite.angle = sp * ((float) i + angle + animation)
-                    + animation * PI / 2;
+            sprite.angle = sp * ((float) i + animation)
+                    + animation * PI / 2 + angle;
             sprite.draw(batch);
         }
         if (animation == 1) {

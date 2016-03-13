@@ -30,8 +30,10 @@ public class Unit extends Actor {
     public int owner;
     public float speed, turnSpeed, selectionAlpha;
     public float tx, ty, experience = 10;
-    public float hp;
+    public float hp, maxHp;
+    protected float deathTimer;
     boolean selected;
+    public Weapon weapons[];
 
     protected static final Sprite selection = new Sprite("selection");
     protected Sprite body;
@@ -41,13 +43,21 @@ public class Unit extends Actor {
         super(x, y, angle);
         tx = x;
         ty = y;
+        z = 10;
         this.owner = owner;
-        setSprite("disruptor");
-        width = height = 75;
-        mass = 10;
-        hp = 100;
-        speed = 100;
-        turnSpeed = 2;
+    }
+
+    @Override
+    public void create() {
+        super.create();
+        if (weapons != null) {
+            for (int i = 0; i < weapons.length; i++) {
+                weapons[i].on = this;
+                weapons[i].room = room;
+                weapons[i].angle = angle;
+                weapons[i].create();
+            }
+        }
     }
 
     public void hit(float hp, Unit from) {
@@ -98,6 +108,11 @@ public class Unit extends Actor {
     public void setSprite(String name) {
         body = new Sprite(name + "_body");
         body_team = new Sprite(name + "_body_team");
+        if (weapons != null) {
+            for (int i = 0; i < weapons.length; i++) {
+                weapons[i].setSprite(name);
+            }
+        }
     }
 
     @Override
@@ -109,20 +124,51 @@ public class Unit extends Actor {
         }
         if (hp > 0) {
             move(delta);
+            for (int i = 0; i < weapons.length; i++) {
+                weapons[i].act(delta);
+            }
+        } else {
+            deathTimer += delta / 2;
+            if (deathTimer >= 1) {
+                remove();
+            }
+        }
+    }
+
+    public void handleBarricadeCollision(float delta) {
+        Barricade b = room.getBarricade(x, y);
+        if (b != null) {
+            if (abs(x - b.x) > width + 20 || abs(y - b.y) > height + 20) {
+                return;
+            }
+            float d = dist(x, y, b.x, b.y);
+            float r = dist(0, 0, width + b.width, height + b.height) / 2 - 20;
+            if (d < r) {
+                r -= d;
+                float angle = atan2(b.y - y, b.x - x);
+                kick(r, angle + PI);
+                b.kick(0, angle);
+            }
         }
     }
 
     @Override
     public void tick(float delta) {
         handleCollision(delta);
+        handleBarricadeCollision(delta);
+        for (int i = 0; i < weapons.length; i++) {
+            weapons[i].tick(delta);
+        }
     }
 
     @Override
     public void render(Batch batch, float delta) {
         render(batch, delta, Color.WHITE);
     }
-    
+
     public void render(Batch batch, float delta, Color parentColor) {
+        parentColor = new Color(parentColor.r, parentColor.g,
+                parentColor.b, parentColor.a * Math.max(0, 1 - deathTimer));
         body.x = x;
         body.y = y;
         body.angle = angle;
@@ -135,6 +181,7 @@ public class Unit extends Actor {
         body_team.r *= parentColor.r;
         body_team.g *= parentColor.g;
         body_team.b *= parentColor.b;
+        body_team.a *= parentColor.a;
         body_team.draw(batch);
         if (selectionAlpha > 0) {
             selection.x = x;
@@ -142,6 +189,9 @@ public class Unit extends Actor {
             selection.angle = atan2(ty - y, tx - x);
             selection.setColor(ColorFabricator.neon(selectionAlpha));
             selection.draw(batch);
+        }
+        for (int i = 0; i < weapons.length; i++) {
+            weapons[i].render(batch, delta, parentColor);
         }
     }
 }

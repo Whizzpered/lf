@@ -14,38 +14,35 @@
  */
 package com.lobseek.game.components;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.lobseek.game.Main;
 
 /**
  *
  * @author Yew_Mentzaki
  */
-public class Player {
+public class Barricade extends Actor{
 
-    private final Room room;
-    public String name = "Bot";
-    public Color color = Color.RED;
-    public boolean ai = false;
-    public int alliance = -1;
-
-    public Player(Room room) {
-        this.room = room;
+    Sprite sprite;
+    static final int decorations = 10;
+    
+    public Barricade(float x, float y) {
+        super(x, y, 0);
+        sprite = new Sprite("decorations/" + Main.R.nextInt(decorations));
+        mass = 10;
+        width = 60;
+        height = 60;
     }
 
-    public boolean isEnemy(int player) {
-        //*
-        if (player == 0) {
-            return false;
-        }else
-        if (room.players[player] == this){
-            return false;
-        }else
-        if (alliance == -1) {
-            return true;
-        }else{
-            return room.players[player].alliance == alliance;
-        }
-                //*/return true;
+    @Override
+    public void kick(float dist, float angle) {
     }
 
+    @Override
+    public void render(Batch batch, float delta) {
+        sprite.x = x;
+        sprite.y = y;
+        sprite.draw(batch);
+    }
+    
 }

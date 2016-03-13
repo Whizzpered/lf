@@ -56,6 +56,8 @@ public class Room implements Layer {
     public int player = -1;
     public boolean selection;
     private final com.badlogic.gdx.graphics.g2d.Sprite terrain;
+    private final Barricade[][] barricades = new Barricade[64][64];
+    private final float barricadeSize = 360;
 
     /**
      * @param screen screen where Room will be displayed
@@ -80,6 +82,7 @@ public class Room implements Layer {
         for (int i = 1; i < 16; i++) {
             players[i] = new Player(this);
         }
+        players[2].color = Color.BLUE;
         actTimer = new Timer("Act Timer");
         tickTimer = new Timer("Tick Timer");
 
@@ -105,6 +108,33 @@ public class Room implements Layer {
         }, 25, 25);
         terrain = new com.badlogic.gdx.graphics.g2d.Sprite(
                 new Texture(Gdx.files.internal("dirt.png")));
+        for (int i = 0; i < barricades.length; i++) {
+            for (int j = 0; j < barricades[i].length; j++) {
+                if (Main.R.nextBoolean()) {
+                    barricades[i][j] = new Barricade(
+                            (i - barricades.length / 2) * barricadeSize + 35
+                            + Main.R.nextInt((int) (barricadeSize - 70)),
+                            (j - barricades.length / 2) * barricadeSize + 35
+                            + Main.R.nextInt((int) (barricadeSize - 70))
+                    );
+                }
+            }
+        }
+    }
+
+    public Barricade getBarricade(float x, float y) {
+        return getBarricade((int) (x / barricadeSize) - (x < 0 ? 1 : 0),
+                (int) (y / barricadeSize) - (y < 0 ? 1 : 0));
+    }
+
+    public Barricade getBarricade(int x, int y) {
+        x += barricades.length / 2;
+        y += barricades.length / 2;
+        if (x >= 0 && x < barricades.length
+                && y >= 0 && y < barricades[x].length) {
+            return barricades[x][y];
+        }
+        return null;
     }
 
     /**
@@ -123,7 +153,9 @@ public class Room implements Layer {
                 actors[i] = actor;
                 maxActor = Math.max(i + 1, maxActor);
                 actor.room = this;
-                actor.create();
+                if (!actor.created) {
+                    actor.create();
+                }
                 break;
             }
         }
@@ -277,7 +309,7 @@ public class Room implements Layer {
         });
         float width = screen.width - deltaSize;
         float height = (width / screen.width) * screen.height;
-        camera.setToOrtho(true, width, height);
+        camera.setToOrtho(false, width, height);
         camera.position.x = cam.x;
         camera.position.y = cam.y;
         camera.update();
@@ -289,6 +321,16 @@ public class Room implements Layer {
                     j < (int) ((cam.y + height / 2) / terrain.getHeight()) + 2; j++) {
                 terrain.setCenter(i * terrain.getWidth(), j * terrain.getHeight());
                 terrain.draw(batch);
+            }
+        }
+        for (int i = (int) ((cam.x - width / 2) / barricadeSize) - 2;
+                i < (int) ((cam.x + width / 2) / barricadeSize) + 2; i++) {
+            for (int j = (int) ((cam.y - height / 2) / barricadeSize) - 2;
+                    j < (int) ((cam.y + height / 2) / barricadeSize) + 2; j++) {
+                Barricade b = getBarricade(i, j);
+                if (b != null) {
+                    b.render(batch, delta);
+                }
             }
         }
         for (Actor a : renderActors) {
@@ -318,8 +360,14 @@ public class Room implements Layer {
      * @param delta time between tick in seconds
      */
     public void tick(float delta) {
-        for (Actor a : actors) {
-            if (a != null && !a.removed) {
+        for (int i = 0; i < actors.length; i++) {
+            Actor a = actors[i];
+            if (a == null) {
+                continue;
+            }
+            if (a.removed) {
+                actors[i] = null;
+            } else {
                 a.tick(delta);
             }
         }
@@ -405,7 +453,7 @@ public class Room implements Layer {
                 float ds = deltaSize;
                 float s = Math.abs(screen.width - deltaSize) / screen.width;
                 deltaSize = (float) Math.max(Math.min(deltaSize + d * s, screen.width / 2),
-                        -screen.width / 5 * 4);
+                        -screen.width * 2);
                 d = deltaSize - ds;
                 float fx = (screen.touches[0].x - screen.width / 2)
                         + (screen.touches[1].x - screen.width / 2);
@@ -429,7 +477,7 @@ public class Room implements Layer {
         float ds = deltaSize;
         float s = (screen.width - deltaSize) / screen.width;
         deltaSize = (float) Math.max(Math.min(deltaSize - d * s, screen.width / 2),
-                -screen.width / 5 * 4);
+                -screen.width * 2);
         d = (deltaSize - ds) / 2;
         float fx = (screen.touches[0].x - screen.width / 2);
         float fy = (screen.touches[0].y - screen.height / 2);

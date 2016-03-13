@@ -115,6 +115,7 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        screenY = (int) (height - screenY);
         if (pointer < 10) {
             Touch t = touches[pointer];
             t.x = t.lx = screenX;
@@ -135,6 +136,7 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        screenY = (int) (height - screenY);
         if (pointer < 10) {
             Touch t = touches[pointer];
             t.down = false;
@@ -149,6 +151,7 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        screenY = (int) (height - screenY);
         if (pointer < 10) {
             Touch t = touches[pointer];
             t.lx = t.x;

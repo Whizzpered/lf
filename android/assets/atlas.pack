@@ -80,30 +80,72 @@ filter: Nearest,Nearest
 repeat: none
 decorations/3
   rotate: false
-  xy: 1, 10
+  xy: 1, 20
   size: 108, 107
   orig: 108, 107
   offset: 0, 0
   index: -1
+decorations/8
+  rotate: false
+  xy: 111, 29
+  size: 100, 98
+  orig: 100, 98
+  offset: 0, 0
+  index: -1
+decorations/9
+  rotate: false
+  xy: 213, 41
+  size: 85, 86
+  orig: 85, 86
+  offset: 0, 0
+  index: -1
 decorations/1
   rotate: false
-  xy: 111, 1
+  xy: 300, 11
   size: 70, 116
   orig: 70, 116
   offset: 0, 0
   index: -1
 decorations/0
   rotate: false
-  xy: 183, 38
+  xy: 372, 48
   size: 73, 79
   orig: 73, 79
   offset: 0, 0
   index: -1
+decorations/7
+  rotate: false
+  xy: 447, 65
+  size: 61, 62
+  orig: 61, 62
+  offset: 0, 0
+  index: -1
 decorations/2
   rotate: false
-  xy: 258, 55
+  xy: 447, 1
   size: 54, 62
   orig: 54, 62
+  offset: 0, 0
+  index: -1
+decorations/6
+  rotate: false
+  xy: 510, 63
+  size: 50, 64
+  orig: 50, 64
+  offset: 0, 0
+  index: -1
+decorations/4
+  rotate: false
+  xy: 562, 66
+  size: 44, 61
+  orig: 44, 61
+  offset: 0, 0
+  index: -1
+decorations/5
+  rotate: false
+  xy: 608, 74
+  size: 33, 53
+  orig: 33, 53
   offset: 0, 0
   index: -1
 
@@ -226,5 +268,17 @@ healthbar/6
   xy: 661, 1
   size: 108, 150
   orig: 108, 150
+  offset: 0, 0
+  index: -1
+
+atlas5.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+plasma/b0
+  rotate: false
+  xy: 1, 1
+  size: 65, 25
+  orig: 65, 25
   offset: 0, 0
   index: -1
