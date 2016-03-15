@@ -38,6 +38,7 @@ public class Unit extends Actor {
     protected static final Sprite selection = new Sprite("selection");
     protected Sprite body;
     protected Sprite body_team;
+    public static Sprite MMS = new Sprite("minimap/unit");
 
     public Unit(float x, float y, float angle, int owner) {
         super(x, y, angle);
@@ -45,10 +46,18 @@ public class Unit extends Actor {
         ty = y;
         z = 10;
         this.owner = owner;
+        minimapSprite = MMS;
+    }
+
+    @Override
+    public void minimapRender(Batch batch, float delta) {
+        minimapSprite.setColor(room.players[owner].color);
+        super.minimapRender(batch, delta);
     }
 
     @Override
     public void create() {
+        room.players[owner].units++;
         super.create();
         if (weapons != null) {
             for (int i = 0; i < weapons.length; i++) {
@@ -130,6 +139,7 @@ public class Unit extends Actor {
         } else {
             deathTimer += delta / 2;
             if (deathTimer >= 1) {
+                room.players[owner].units--;
                 remove();
             }
         }

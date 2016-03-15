@@ -29,6 +29,7 @@ public class Bullet extends Actor {
     public float lifeTime = 10;
 
     public Sprite sprite;
+    public static Sprite MMS = new Sprite("minimap/bullet");
 
     public Bullet(Unit from, Unit to, float x, float y) {
         super(x, y, atan2(to.y - y, to.x - x));
@@ -36,6 +37,7 @@ public class Bullet extends Actor {
         this.to = to;
         z = 25;
         phantom = true;
+        minimapSprite = MMS;
     }
 
     public void move(float delta) {

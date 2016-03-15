@@ -29,17 +29,19 @@ public class GameScreen extends Screen {
     Room room;
 
     public GameScreen() {
-        room = new Room(this, 512, 64);
+        room = new Room(this, 1024, 64);
         room.start();
         room.player = 1;
         add(room);
-        room.add(new Base(800, 0, 1));
-        room.add(new Base(-800, 0, 1));
-        room.add(new Base(0, 800, 2));
-        room.add(new Base(0, -800, 2));
-        for (int i = 0; i < 30; i++) {
-            room.add(new Disruptor(-1000, 0, 0, 1));
-            room.add(new Disruptor(0, 1000, 0, 2));
+        room.add(new Base(300, 150, 1));
+        room.add(new Base(-300, 150, 1));
+        room.add(new Base(-0, 150, 1));
+        room.add(new Base(300, -150, 2));
+        room.add(new Base(-300, -150, 2));
+        room.add(new Base(-0, -150, 2));
+        for (int i = 0; i < 120; i++) {
+            room.add(new Disruptor(0, 300, 0, 1));
+            room.add(new Disruptor(0, -300, 0, 2));
         }
     }
 

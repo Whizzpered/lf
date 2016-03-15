@@ -28,7 +28,8 @@ public class Actor implements Comparable<Actor> {
     boolean removed, created;
     public boolean phantom;
     public Room room;
-    
+    public Sprite minimapSprite;
+
     /**
      * @param x abscissa of actor
      * @param y ordinate of actor
@@ -83,6 +84,15 @@ public class Actor implements Comparable<Actor> {
 
     }
 
+    public void minimapRender(Batch batch, float delta) {
+        if (minimapSprite != null) {
+            minimapSprite.x = room.screen.width + (x / room.size * 72f) - 86;
+            minimapSprite.y = room.screen.height + (y / room.size * 72f) - 86;
+            minimapSprite.angle = angle;
+            minimapSprite.draw(batch);
+        }
+    }
+
     /**
      * Avokes every 10 milliseconds, here must be handled movement and other
      * simple activities. Cycles here may make game slower.
@@ -100,7 +110,7 @@ public class Actor implements Comparable<Actor> {
      * @param delta time between tick in seconds
      */
     public void tick(float delta) {
-        
+
     }
 
     public void kick(float dist, float angle) {
@@ -111,7 +121,9 @@ public class Actor implements Comparable<Actor> {
     public void handleCollision(float delta) {
         for (Actor a : room.actors) {
             if (a != null && !a.phantom && a != this) {
-                if(abs(x - a.x) > width + 20 || abs(y - a.y) > height + 20)continue;
+                if (abs(x - a.x) > width + 20 || abs(y - a.y) > height + 20) {
+                    continue;
+                }
                 float d = dist(x, y, a.x, a.y);
                 float r = dist(0, 0, width + a.width, height + a.height) / 2 - 20;
                 if (d < r) {

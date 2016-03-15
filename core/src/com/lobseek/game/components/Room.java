@@ -45,7 +45,7 @@ public class Room implements Layer {
     private final OrthographicCamera camera = new OrthographicCamera();
     public final Point cam = new Point();
     public final SpriteBatch batch = new SpriteBatch();
-    public float deltaSize;
+    public float deltaSize, size = 2000;
     private int maxActor;
     private long actTime, tickTime;
     private final Timer actTimer, tickTimer;
@@ -54,10 +54,13 @@ public class Room implements Layer {
     private float fingerDistance;
     public final Player players[];
     public int player = -1;
-    public boolean selection;
+    public boolean selection, minimapSwipe;
     private final com.badlogic.gdx.graphics.g2d.Sprite terrain;
     private final Barricade[][] barricades = new Barricade[64][64];
     private final float barricadeSize = 360;
+
+    private Sprite minimapGUI = new Sprite("minimap/gui");
+    private Sprite minimapFrame = new Sprite("minimap/frame");
 
     /**
      * @param screen screen where Room will be displayed
@@ -70,7 +73,7 @@ public class Room implements Layer {
         this.renderActors = new Actor[actors];
         this.particles = new Particle[particles];
         this.players = new Player[16];
-        players[0] = new Player(this) {
+        players[0] = new Player(this, 0) {
 
             @Override
             public boolean isEnemy(int player) {
@@ -80,7 +83,7 @@ public class Room implements Layer {
         };
         players[0].name = "NPCs";
         for (int i = 1; i < 16; i++) {
-            players[i] = new Player(this);
+            players[i] = new Player(this, i);
         }
         players[2].color = Color.BLUE;
         actTimer = new Timer("Act Timer");
@@ -351,6 +354,31 @@ public class Room implements Layer {
         screen.B.begin();
         font.setColor(Color.WHITE);
         font.draw(screen.B, Main.fps + "  ---  " + Main.nanos, 20, 20);
+        minimapGUI.x = screen.width - minimapGUI.width / 2;
+        minimapGUI.y = screen.height - minimapGUI.height / 2;
+        minimapGUI.draw(screen.B);
+        for (Actor a : renderActors) {
+            if (a != null && !a.removed) {
+                a.minimapRender(screen.B, delta);
+            }
+        }
+        float sw = (width / size * 72) / 2, sh = (height / size * 72) / 2;
+        float sx = screen.width - 86 + (cam.x / size * 72);
+        float sy = screen.height - 86 + (cam.y / size * 72);
+        minimapFrame.x = sx - sw;
+        minimapFrame.y = sy + sh;
+        minimapFrame.angle = 0;
+        minimapFrame.draw(screen.B);
+        minimapFrame.x = sx + sw;
+        minimapFrame.angle = PI / 2 * 3;
+        minimapFrame.draw(screen.B);
+        minimapFrame.y = sy - sh;
+        minimapFrame.angle = PI;
+        minimapFrame.draw(screen.B);
+        minimapFrame.x = sx - sw;
+        minimapFrame.angle = PI / 2;
+        minimapFrame.draw(screen.B);
+
         screen.B.end();
     }
 
@@ -395,6 +423,16 @@ public class Room implements Layer {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (dist(screen.width - 86, screen.height - 86, screenX, screenY) < 72) {
+            float sx = screenX - screen.width + 86;
+            float sy = screenY - screen.height + 86;
+            sx *= size / 72;
+            sy *= size / 72;
+            cam.x = sx;
+            cam.y = sy;
+            minimapSwipe = true;
+            return true;
+        }
         if (!screen.touches[1].down) {
             Point p = getGlobalCoordinates(screenX, screenY);
             float s = Math.abs(screen.width - deltaSize) / screen.width;
@@ -428,6 +466,7 @@ public class Room implements Layer {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         selection = false;
+        minimapSwipe = false;
         return false;
     }
 
@@ -441,6 +480,18 @@ public class Room implements Layer {
      */
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
+        if (minimapSwipe) {
+            if (dist(screen.width - 86, screen.height - 86, screenX, screenY) < 72) {
+                float sx = screenX - screen.width + 86;
+                float sy = screenY - screen.height + 86;
+                sx *= size / 72;
+                sy *= size / 72;
+                cam.x = sx;
+                cam.y = sy;
+                minimapSwipe = true;
+            }
+            return true;
+        }
         if (!selection) {
             if (screen.touches[0].down && !screen.touches[1].down) {
                 float s = (screen.width - deltaSize) / screen.width;

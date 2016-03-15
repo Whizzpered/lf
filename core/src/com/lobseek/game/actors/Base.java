@@ -1,7 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * This program is open software.
+ * You may:
+ *  * buy this program with Google Play or App Store.
+ *  * read code, change code.
+ *  * compile and run code if you bought this program.
+ *  * share your modification with people who bought this program.
+ * You may not:
+ *  * sell this program.
+ *  * sell your modification of this program as independent product.
+ *  * share your modification with people who have no legal copy of
+ *                                                    this program.
+ *  * share compiled program with people who have no legal copy of it. 
  */
 package com.lobseek.game.actors;
 
@@ -24,6 +33,7 @@ public class Base extends Actor {
     public int owner = 1;
     float animation, animation2, timer, platformAngle;
     Unit inQueue;
+    public static Sprite MMS = new Sprite("minimap/base");
 
     Sprite sprite = new Sprite("base_hand"),
             sprite_team = new Sprite("base_hand_team"),
@@ -37,6 +47,13 @@ public class Base extends Actor {
         width = 200;
         height = 200;
         mass = 10;
+        minimapSprite = MMS;
+    }
+
+    @Override
+    public void minimapRender(Batch batch, float delta) {
+        minimapSprite.setColor(room.players[owner].color);
+        super.minimapRender(batch, delta);
     }
 
     @Override
@@ -68,9 +85,11 @@ public class Base extends Actor {
                 animation = Math.max(0, animation - delta / 2);
             } else {
                 platformAngle = Main.R.nextFloat() * PI * 2;
-                inQueue = new Disruptor(x, y, platformAngle, owner);
-                inQueue.room = room;
-                inQueue.create();
+                inQueue = room.players[owner].spawn(x, y, angle);
+                if (inQueue != null) {
+                    inQueue.room = room;
+                    inQueue.create();
+                }
             }
         }
     }

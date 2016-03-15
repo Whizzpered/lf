@@ -15,6 +15,12 @@
 package com.lobseek.game.components;
 
 import com.badlogic.gdx.graphics.Color;
+import com.lobseek.game.Main;
+import com.lobseek.game.units.Disruptor;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,30 +28,67 @@ import com.badlogic.gdx.graphics.Color;
  */
 public class Player {
 
+    private int index;
     private final Room room;
     public String name = "Bot";
     public Color color = Color.RED;
     public boolean ai = false;
     public int alliance = -1;
+    public Class types[];
+    public float produce[];
+    public int units, maxUnits = 10;
 
-    public Player(Room room) {
+    public void setTypes(Class... types) {
+        this.types = types;
+        this.produce = new float[types.length];
+        for (int i = 0; i < produce.length; i++) {
+            produce[i] = 100f / ((float) produce.length);
+        }
+    }
+
+    public Player(Room room, int index) {
         this.room = room;
+        this.index = index;
+        setTypes(Disruptor.class);
+    }
+
+    public Unit spawn(float x, float y, float angle) {
+        if (units > maxUnits) {
+            return null;
+        }
+        Class clazz = types[Main.R.nextInt(types.length)];
+        try {
+            Constructor c
+                    = clazz.getConstructor(float.class, float.class, float.class, int.class);
+            return (Unit) c.newInstance(x, y, angle, index);
+        } catch (NoSuchMethodException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SecurityException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalArgumentException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public boolean isEnemy(int player) {
         //*
         if (player == 0) {
             return false;
-        }else
-        if (room.players[player] == this){
+        } else if (room.players[player] == this) {
             return false;
-        }else
-        if (alliance == -1) {
+        } else if (alliance == -1) {
             return true;
-        }else{
+        } else {
             return room.players[player].alliance == alliance;
         }
-                //*/return true;
+        //*/return true;
     }
 
 }
