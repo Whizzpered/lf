@@ -30,12 +30,9 @@ public class Barricade extends Actor{
         super(x, y, 0);
         sprite = new Sprite("decorations/" + Main.R.nextInt(decorations));
         mass = 10;
-        width = 60;
-        height = 60;
-    }
-
-    @Override
-    public void kick(float dist, float angle) {
+        width = 70;
+        height = 70;
+        standing = true;
     }
 
     @Override

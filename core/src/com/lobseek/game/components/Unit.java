@@ -34,10 +34,10 @@ public class Unit extends Actor {
     protected float deathTimer;
     boolean selected;
     public Weapon weapons[];
+    public boolean flying;
 
     protected static final Sprite selection = new Sprite("selection");
-    protected Sprite body;
-    protected Sprite body_team;
+    protected Sprite body, body_team, body_shadow;
     public static Sprite MMS = new Sprite("minimap/unit");
 
     public Unit(float x, float y, float angle, int owner) {
@@ -100,15 +100,12 @@ public class Unit extends Actor {
                         angle = ta;
                     }
                 }
-                if (angle == ta) {
+                if (angle == ta || speed >= 200) {
                     float d = (float) sqrt(pow(tx - x, 2) + pow(ty - y, 2));
                     if (d > speed * delta) {
-                        x += speed * delta * cos(angle);
-                        y += speed * delta * sin(angle);
-                    } else {
-                        x = tx;
-                        y = ty;
+                        d = speed * delta;
                     }
+                    move(d * cos(angle), d * sin(angle));
                 }
             }
         }
@@ -117,6 +114,7 @@ public class Unit extends Actor {
     public void setSprite(String name) {
         body = new Sprite(name + "_body");
         body_team = new Sprite(name + "_body_team");
+        body_shadow = new Sprite(name + "_body_shadow");
         if (weapons != null) {
             for (int i = 0; i < weapons.length; i++) {
                 weapons[i].setSprite(name);
@@ -132,7 +130,11 @@ public class Unit extends Actor {
             selectionAlpha = Math.max(0, selectionAlpha - delta * 2);
         }
         if (hp > 0) {
+            move();
             move(delta);
+            handleCollision(delta);
+            handleBarricadeCollision(delta);
+
             for (int i = 0; i < weapons.length; i++) {
                 weapons[i].act(delta);
             }
@@ -146,7 +148,29 @@ public class Unit extends Actor {
     }
 
     public void handleBarricadeCollision(float delta) {
-        Barricade b = room.getBarricade(x, y);
+        if(!flying){
+        Barricade b1 = room.getBarricade(x, y);
+        handleBarricadeCollision(b1);
+        Barricade b2 = room.getBarricade(x + width / 2, y);
+        if (b2 != b1) {
+            handleBarricadeCollision(b2);
+        }
+        Barricade b3 = room.getBarricade(x - width / 2, y);
+        if (b3 != b1 && b3 != b2) {
+            handleBarricadeCollision(b3);
+        }
+        Barricade b4 = room.getBarricade(x, y - height / 2);
+        if (b4 != b1 && b4 != b2 && b4 != b3) {
+            handleBarricadeCollision(b4);
+        }
+        Barricade b5 = room.getBarricade(x, y + height / 2);
+        if (b5 != b1 && b5 != b2 && b5 != b3 && b5 != b4) {
+            handleBarricadeCollision(b5);
+        }
+        }
+    }
+
+    private void handleBarricadeCollision(Barricade b) {
         if (b != null) {
             if (abs(x - b.x) > width + 20 || abs(y - b.y) > height + 20) {
                 return;
@@ -164,8 +188,6 @@ public class Unit extends Actor {
 
     @Override
     public void tick(float delta) {
-        handleCollision(delta);
-        handleBarricadeCollision(delta);
         for (int i = 0; i < weapons.length; i++) {
             weapons[i].tick(delta);
         }
@@ -174,6 +196,21 @@ public class Unit extends Actor {
     @Override
     public void render(Batch batch, float delta) {
         render(batch, delta, Color.WHITE);
+    }
+
+    @Override
+    public void renderShadow(Batch batch, float delta) {
+        body_shadow.x = x;
+        body_shadow.y = y + 15;
+        body_shadow.angle = angle;
+        body_shadow.a = Math.max(0, 1 - deathTimer);
+        body_shadow.draw(batch);
+        body_shadow.y = y + 7.5f;
+        body_shadow.draw(batch);
+        if(weapons != null)
+        for (Weapon w : weapons){
+            w.renderShadow(batch, delta);
+        }
     }
 
     public void render(Batch batch, float delta, Color parentColor) {

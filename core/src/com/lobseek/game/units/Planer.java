@@ -19,38 +19,40 @@ import com.lobseek.game.components.Point;
 import com.lobseek.game.components.Sprite;
 import com.lobseek.game.components.Unit;
 import com.lobseek.game.components.Weapon;
+import static com.lobseek.utils.Math.*;
 
 /**
  *
  * @author Yew_Mentzaki
  */
-public class Disruptor extends Unit {
+public class Planer extends Unit {
 
     class PlasmaBullet extends Bullet {
 
         public PlasmaBullet(Unit from, Unit to, float x, float y) {
             super(from, to, x, y);
-            speed = 1200;
-            sprite = new Sprite("plasma/b0");
-            detonationDistance = 80;
+            speed = 1600;
+            sprite = new Sprite("laser");
+            detonationDistance = 45;
         }
 
         @Override
         public void explode(Unit to) {
-            to.hit(10, from);
+            to.hit(2, from);
         }
     }
 
     class DisruptorWeapon extends Weapon {
 
-        public DisruptorWeapon() {
-            x = 5;
-            y = 0;
-            turnSpeed = 3;
+        public DisruptorWeapon(float x, float y) {
+            this.x = x;
+            this.y = y;
+            cx = 50;
+            turnSpeed = 6;
             range = 1000;
-            ammo = maxAmmo = 10;
-            reloadTime = 0.8f;
-            reloadAmmoTime = 10;
+            ammo = maxAmmo = 5;
+            reloadTime = 0.3f;
+            reloadAmmoTime = 1;
         }
 
         @Override
@@ -60,17 +62,31 @@ public class Disruptor extends Unit {
 
     }
 
-    public Disruptor(float xcord, float ycord, float angle, int owner) {
+    @Override
+    public void move(float delta) {
+        angle += turnSpeed * delta;
+        if (x != tx && y != ty) {
+            float d = dist(x, y, tx, ty);
+            d = Math.min(speed * delta, d);
+            float a = atan2(ty - y, tx - x);
+            move(cos(a) * d, sin(a) * d);
+        }
+    }
+
+    public Planer(float xcord, float ycord, float angle, int owner) {
         super(xcord, ycord, angle, owner);
         weapons = new Weapon[]{
-            new DisruptorWeapon()
+            new DisruptorWeapon(28, -22),
+            new DisruptorWeapon(-5, 34),
+            new DisruptorWeapon(-31, -28)
         };
-        setSprite("disruptor");
+        setSprite("planer");
         width = height = 75;
         mass = 40;
         hp = maxHp = 250;
-        speed = 100;
+        speed = 170;
         turnSpeed = 2;
+        flying = true;
     }
 
 }

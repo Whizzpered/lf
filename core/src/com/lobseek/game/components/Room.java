@@ -22,8 +22,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.lobseek.game.Main;
+import com.lobseek.game.ProjectLogger;
 import com.lobseek.game.actors.Test;
 import com.lobseek.game.screens.Screen;
+import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,17 +47,17 @@ public class Room implements Layer {
     private final OrthographicCamera camera = new OrthographicCamera();
     public final Point cam = new Point();
     public final SpriteBatch batch = new SpriteBatch();
-    public float deltaSize, size = 2000;
+    public float deltaSize, size = 4500;
     private int maxActor;
     private long actTime, tickTime;
     private final Timer actTimer, tickTimer;
     private BitmapFont font = new BitmapFont();
     private boolean running;
-    private float fingerDistance;
+    private float fingerDistance, minimapColor;
     public final Player players[];
     public int player = -1;
-    public boolean selection, minimapSwipe;
-    private final com.badlogic.gdx.graphics.g2d.Sprite terrain;
+    public boolean selection, minimapSwipe, minimapEnabled = true;
+    private final com.badlogic.gdx.graphics.g2d.Sprite terrain, terrain_small;
     private final Barricade[][] barricades = new Barricade[64][64];
     private final float barricadeSize = 360;
 
@@ -81,6 +83,12 @@ public class Room implements Layer {
             }
 
         };
+        try {
+            Object o = null;
+            o.toString();
+        } catch (Exception e) {
+            ProjectLogger.println(e);
+        }
         players[0].name = "NPCs";
         for (int i = 1; i < 16; i++) {
             players[i] = new Player(this, i);
@@ -111,6 +119,9 @@ public class Room implements Layer {
         }, 25, 25);
         terrain = new com.badlogic.gdx.graphics.g2d.Sprite(
                 new Texture(Gdx.files.internal("dirt.png")));
+        terrain_small = new com.badlogic.gdx.graphics.g2d.Sprite(
+                new Texture(Gdx.files.internal("dirt_small.png")));
+        terrain_small.setScale(2);
         for (int i = 0; i < barricades.length; i++) {
             for (int j = 0; j < barricades[i].length; j++) {
                 if (Main.R.nextBoolean()) {
@@ -241,6 +252,11 @@ public class Room implements Layer {
      * @param delta time between acts in seconds
      */
     public void act(float delta) {
+        if (minimapEnabled) {
+            minimapColor = Math.min(1, minimapColor + delta);
+        } else {
+            minimapColor = Math.max(0, minimapColor - delta);
+        }
         int cur = 0, max = 0;
         for (Actor a : actors) {
             cur++;
@@ -318,6 +334,12 @@ public class Room implements Layer {
         camera.update();
         batch.begin();
         batch.setProjectionMatrix(camera.combined);
+        com.badlogic.gdx.graphics.g2d.Sprite terrain;
+        if (width / screen.width < 1.5) {
+            terrain = this.terrain;
+        } else {
+            terrain = this.terrain_small;
+        }
         for (int i = (int) ((cam.x - width / 2) / terrain.getWidth()) - 2;
                 i < (int) ((cam.x + width / 2) / terrain.getWidth()) + 2; i++) {
             for (int j = (int) ((cam.y - height / 2) / terrain.getHeight()) - 2;
@@ -333,6 +355,22 @@ public class Room implements Layer {
                 Barricade b = getBarricade(i, j);
                 if (b != null) {
                     b.render(batch, delta);
+                }
+            }
+        }
+        if (width < 2000) {
+            for (Actor a : renderActors) {
+                if (a != null && !a.removed) {
+                    if (a.x + a.width / 2
+                            >= camera.position.x - camera.viewportWidth / 2
+                            && a.y + a.height / 2
+                            >= camera.position.y - camera.viewportHeight / 2
+                            && a.x - a.width / 2
+                            <= camera.position.x + camera.viewportWidth / 2
+                            && a.y - a.height / 2
+                            <= camera.position.y + camera.viewportHeight / 2) {
+                        a.renderShadow(batch, delta);
+                    }
                 }
             }
         }
@@ -354,30 +392,52 @@ public class Room implements Layer {
         screen.B.begin();
         font.setColor(Color.WHITE);
         font.draw(screen.B, Main.fps + "  ---  " + Main.nanos, 20, 20);
+        if (false) {
+            for (int i = 0; i < (screen.height / 20); i++) {
+                if (ProjectLogger.internalLog[i] != null) {
+                    font.draw(screen.B, ProjectLogger.internalLog[i], 20, 40 + 20 * i);
+                }
+            }
+        }
         minimapGUI.x = screen.width - minimapGUI.width / 2;
         minimapGUI.y = screen.height - minimapGUI.height / 2;
+        minimapGUI.setColor(ColorFabricator.neon(minimapColor));
         minimapGUI.draw(screen.B);
         for (Actor a : renderActors) {
             if (a != null && !a.removed) {
-                a.minimapRender(screen.B, delta);
+                if (dist(a.x, a.y, 0, 0) <= size) {
+                    a.minimapRender(screen.B, delta);
+                }
             }
         }
-        float sw = (width / size * 72) / 2, sh = (height / size * 72) / 2;
-        float sx = screen.width - 86 + (cam.x / size * 72);
-        float sy = screen.height - 86 + (cam.y / size * 72);
+        float sw = (width / size * 78) / 2, sh = (height / size * 78) / 2;
+        float sx = screen.width - 86 + (cam.x / size * 78);
+        float sy = screen.height - 86 + (cam.y / size * 78);
         minimapFrame.x = sx - sw;
         minimapFrame.y = sy + sh;
         minimapFrame.angle = 0;
-        minimapFrame.draw(screen.B);
+        if (dist(minimapFrame.x, minimapFrame.y,
+                screen.width - 86, screen.height - 86) <= 78) {
+            minimapFrame.draw(screen.B);
+        }
         minimapFrame.x = sx + sw;
         minimapFrame.angle = PI / 2 * 3;
-        minimapFrame.draw(screen.B);
+        if (dist(minimapFrame.x, minimapFrame.y,
+                screen.width - 86, screen.height - 86) <= 78) {
+            minimapFrame.draw(screen.B);
+        }
         minimapFrame.y = sy - sh;
         minimapFrame.angle = PI;
-        minimapFrame.draw(screen.B);
+        if (dist(minimapFrame.x, minimapFrame.y,
+                screen.width - 86, screen.height - 86) <= 78) {
+            minimapFrame.draw(screen.B);
+        }
         minimapFrame.x = sx - sw;
         minimapFrame.angle = PI / 2;
-        minimapFrame.draw(screen.B);
+        if (dist(minimapFrame.x, minimapFrame.y,
+                screen.width - 86, screen.height - 86) <= 78) {
+            minimapFrame.draw(screen.B);
+        }
 
         screen.B.end();
     }
@@ -423,13 +483,22 @@ public class Room implements Layer {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (dist(screen.width - 86, screen.height - 86, screenX, screenY) < 72) {
-            float sx = screenX - screen.width + 86;
-            float sy = screenY - screen.height + 86;
-            sx *= size / 72;
-            sy *= size / 72;
-            cam.x = sx;
-            cam.y = sy;
+        if (dist(screen.width - 86, screen.height - 86, screenX, screenY) < 78) {
+            float camx = screenX - screen.width + 86;
+            float camy = screenY - screen.height + 86;
+            camx *= size / 78;
+            camy *= size / 78;
+            float cama = atan2(camy, camx);
+            float camd = dist(camx, camy, 0, 0);
+            float camr = size - dist(cos(cama) * (screen.width - deltaSize) / 2,
+                    sin(cama) * (screen.height * ((screen.width - deltaSize) / screen.width)) / 2, 0, 0);
+            if (camd < camr) {
+                cam.x = camx;
+                cam.y = camy;
+            } else {
+                cam.x = cos(cama) * camr;
+                cam.y = sin(cama) * camr;
+            }
             minimapSwipe = true;
             return true;
         }
@@ -481,22 +550,40 @@ public class Room implements Layer {
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
         if (minimapSwipe) {
-            if (dist(screen.width - 86, screen.height - 86, screenX, screenY) < 72) {
-                float sx = screenX - screen.width + 86;
-                float sy = screenY - screen.height + 86;
-                sx *= size / 72;
-                sy *= size / 72;
-                cam.x = sx;
-                cam.y = sy;
-                minimapSwipe = true;
+            float camx = screenX - screen.width + 86;
+            float camy = screenY - screen.height + 86;
+            camx *= size / 78;
+            camy *= size / 78;
+            float cama = atan2(camy, camx);
+            float camd = dist(camx, camy, 0, 0);
+            float camr = size - dist(cos(cama) * (screen.width - deltaSize) / 2,
+                    sin(cama) * (screen.height * ((screen.width - deltaSize) / screen.width)) / 2, 0, 0);
+            if (camd < camr) {
+                cam.x = camx;
+                cam.y = camy;
+            } else {
+                cam.x = cos(cama) * camr;
+                cam.y = sin(cama) * camr;
             }
+            minimapSwipe = true;
             return true;
         }
         if (!selection) {
             if (screen.touches[0].down && !screen.touches[1].down) {
                 float s = (screen.width - deltaSize) / screen.width;
-                cam.x -= screen.touches[0].dx * s;
-                cam.y -= screen.touches[0].dy * s;
+                float camx = cam.x - screen.touches[0].dx * s;
+                float camy = cam.y - screen.touches[0].dy * s;
+                float cama = atan2(camy, camx);
+                float camd = dist(camx, camy, 0, 0);
+                float camr = size - dist(cos(cama) * (screen.width - deltaSize) / 2,
+                        sin(cama) * (screen.height * ((screen.width - deltaSize) / screen.width)) / 2, 0, 0);
+                if (camd < camr) {
+                    cam.x = camx;
+                    cam.y = camy;
+                } else {
+                    cam.x = cos(cama) * camr;
+                    cam.y = sin(cama) * camr;
+                }
             } else if (screen.touches[0].down && screen.touches[1].down) {
                 float fd = dist(screen.touches[1].x, screen.touches[1].y,
                         screen.touches[0].x, screen.touches[0].y);
@@ -513,10 +600,22 @@ public class Room implements Layer {
                 float a = atan2(fy, fx);
                 fx = abs(fx) / screen.width;
                 fy = abs(fy) / screen.height;
-                cam.x += cos(a) * d * fx * s;
-                cam.y += sin(a) * d * fy * s;
+                if ((screen.width - deltaSize) < size * 2) {
+                    float camx = cam.x + cos(a) * d * fx * s;
+                    float camy = cam.y + sin(a) * d * fy * s;
+                    float cama = atan2(camy, camx);
+                    float camd = dist(camx, camy, 0, 0);
+                    float camr = size - dist(cos(cama) * (screen.width - deltaSize) / 2,
+                            sin(cama) * (screen.height * ((screen.width - deltaSize) / screen.width)) / 2, 0, 0);
+                    if (camd < camr) {
+                        cam.x = camx;
+                        cam.y = camy;
+                    } else {
+                        cam.x = cos(cama) * camr;
+                        cam.y = sin(cama) * camr;
+                    }
+                }
                 fingerDistance = fd;
-
             }
         }
         return false;
@@ -536,7 +635,7 @@ public class Room implements Layer {
         fx = abs(fx) / screen.width * 2;
         fy = abs(fy) / screen.height * 2;
         cam.x += cos(a) * d * fx * s;
-        cam.y += sin(a) * d * fy * s;
+        cam.y -= sin(a) * d * fy * s;
         return true;
     }
 

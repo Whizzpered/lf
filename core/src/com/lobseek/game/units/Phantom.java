@@ -24,7 +24,7 @@ import com.lobseek.game.components.Weapon;
  *
  * @author Yew_Mentzaki
  */
-public class Disruptor extends Unit {
+public class Phantom extends Unit {
 
     class PlasmaBullet extends Bullet {
 
@@ -47,6 +47,7 @@ public class Disruptor extends Unit {
             x = 5;
             y = 0;
             turnSpeed = 3;
+            speed = 300;
             range = 1000;
             ammo = maxAmmo = 10;
             reloadTime = 0.8f;
@@ -60,16 +61,16 @@ public class Disruptor extends Unit {
 
     }
 
-    public Disruptor(float xcord, float ycord, float angle, int owner) {
+    public Phantom(float xcord, float ycord, float angle, int owner) {
         super(xcord, ycord, angle, owner);
         weapons = new Weapon[]{
-            new DisruptorWeapon()
+            //new DisruptorWeapon()
         };
-        setSprite("disruptor");
-        width = height = 75;
-        mass = 40;
-        hp = maxHp = 250;
-        speed = 100;
+        setSprite("phantom");
+        width = height = 50;
+        mass = 15;
+        hp = maxHp = 100;
+        speed = 350;
         turnSpeed = 2;
     }
 

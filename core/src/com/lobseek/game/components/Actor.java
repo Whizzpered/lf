@@ -23,10 +23,10 @@ import static com.lobseek.utils.Math.*;
  */
 public class Actor implements Comparable<Actor> {
 
-    public float x, y, z, angle;
+    public float x, y, z, vx, vy, angle;
     public float width, height, mass;
     boolean removed, created;
-    public boolean phantom;
+    public boolean phantom, standing;
     public Room room;
     public Sprite minimapSprite;
 
@@ -54,6 +54,20 @@ public class Actor implements Comparable<Actor> {
     public void create() {
         created = true;
     }
+    
+    /**
+     * Handles movement.
+     */
+    public void move(){
+        x += vx;
+        y += vy;
+        vx = vy = 0;
+    }
+    
+    public void move(float x, float y){
+        vx += x;
+        vy += y;
+    }
 
     /**
      * Compares this actor to other one to sort them by Z position.
@@ -72,6 +86,19 @@ public class Actor implements Comparable<Actor> {
             return 0;
         }
     }
+    
+
+    /**
+     * Renders shadow this actor in his room. Can be avoked only when actor of part of
+     * actor is on the screen.
+     *
+     * @param batch instance of SpriteBatch with all camera projections
+     * @param delta time between frames in seconds
+     */
+    public void renderShadow(Batch batch, float delta) {
+
+    }
+
 
     /**
      * Renders this actor in his room. Can be avoked only when actor of part of
@@ -114,24 +141,27 @@ public class Actor implements Comparable<Actor> {
     }
 
     public void kick(float dist, float angle) {
-        x += cos(angle) * dist;
-        y += sin(angle) * dist;
+        if (!standing) {
+            vx += cos(angle) * dist;
+            vy += sin(angle) * dist;
+        }
     }
 
     public void handleCollision(float delta) {
         for (Actor a : room.actors) {
             if (a != null && !a.phantom && a != this) {
-                if (abs(x - a.x) > width + 20 || abs(y - a.y) > height + 20) {
+                float size = (Math.max(width, height) + Math.max(a.width, a.height));
+                if (abs(x + vx - a.x - a.vx) > size || abs(y + vx - a.y - a.vy) > size) {
                     continue;
                 }
-                float d = dist(x, y, a.x, a.y);
+                float d = dist(x + vx, y + vy, a.x + a.vx, a.y + a.vy);
                 float r = dist(0, 0, width + a.width, height + a.height) / 2 - 20;
                 if (d < r) {
                     r -= d;
-                    float angle = atan2(a.y - y, a.x - x);
-                    if (a.mass == 0) {
+                    float angle = atan2(a.y + a.vy - y - vy, a.x + a.vx - x - vx);
+                    if (a.mass == 0 || standing) {
                         a.kick(r, angle);
-                    } else if (mass == 0) {
+                    } else if (mass == 0 || a.standing) {
                         kick(r, angle + PI);
                     } else {
                         r /= 2;

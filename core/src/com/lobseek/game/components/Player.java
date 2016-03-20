@@ -16,7 +16,8 @@ package com.lobseek.game.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.lobseek.game.Main;
-import com.lobseek.game.units.Disruptor;
+import com.lobseek.game.ProjectLogger;
+import com.lobseek.game.units.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
@@ -49,7 +50,7 @@ public class Player {
     public Player(Room room, int index) {
         this.room = room;
         this.index = index;
-        setTypes(Disruptor.class);
+        setTypes(Disruptor.class, Phantom.class, Planer.class);
     }
 
     public Unit spawn(float x, float y, float angle) {
@@ -61,18 +62,8 @@ public class Player {
             Constructor c
                     = clazz.getConstructor(float.class, float.class, float.class, int.class);
             return (Unit) c.newInstance(x, y, angle, index);
-        } catch (NoSuchMethodException ex) {
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SecurityException ex) {
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalArgumentException ex) {
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(Player.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            ProjectLogger.println(ex);
         }
         return null;
     }

@@ -33,16 +33,12 @@ public class GameScreen extends Screen {
         room.start();
         room.player = 1;
         add(room);
-        room.add(new Base(300, 150, 1));
-        room.add(new Base(-300, 150, 1));
-        room.add(new Base(-0, 150, 1));
-        room.add(new Base(300, -150, 2));
-        room.add(new Base(-300, -150, 2));
-        room.add(new Base(-0, -150, 2));
-        for (int i = 0; i < 120; i++) {
-            room.add(new Disruptor(0, 300, 0, 1));
-            room.add(new Disruptor(0, -300, 0, 2));
-        }
+        room.add(new Base(600, 3000, 1));
+        room.add(new Base(-600, 3000, 1));
+        room.add(new Base(-0, 3000, 1));
+        room.add(new Base(600, -3000, 2));
+        room.add(new Base(-600, -3000, 2));
+        room.add(new Base(-0, -3000, 2));
     }
 
     @Override

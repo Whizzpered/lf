@@ -39,10 +39,11 @@ public class Weapon {
     public void create() {
     }
 
-    Sprite sprite;
+    Sprite sprite, sprite_shadow;
 
     public void setSprite(String name) {
         sprite = new Sprite(name + "_head");
+        sprite_shadow = new Sprite(name + "_head_shadow");
     }
 
     public void act(float delta) {
@@ -117,6 +118,22 @@ public class Weapon {
 
     public void shoot(Unit to, Point from) {
 
+    }
+
+    public void renderShadow(Batch batch, float delta) {
+        Point p = new Point(x, y);
+        float an = on.angle;
+        p.x = x * cos(an) - y * sin(an);
+        p.y = x * sin(an) + y * cos(an);
+        p.x += on.x;
+        p.y += on.y;
+        sprite_shadow.x = p.x;
+        sprite_shadow.y = p.y + 25;
+        sprite_shadow.angle = angle;
+        sprite_shadow.a = Math.max(0, 1 - on.deathTimer);
+        sprite_shadow.draw(batch);
+        sprite_shadow.y = p.y + 17.5f;
+        sprite_shadow.draw(batch);
     }
 
     public final void render(Batch batch, float delta, Color parentColor) {

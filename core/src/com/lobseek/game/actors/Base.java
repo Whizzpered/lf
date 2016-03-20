@@ -36,9 +36,11 @@ public class Base extends Actor {
     public static Sprite MMS = new Sprite("minimap/base");
 
     Sprite sprite = new Sprite("base_hand"),
+            sprite_shadow = new Sprite("base_hand_shadow"),
             sprite_team = new Sprite("base_hand_team"),
             underground = new Sprite("base_underground"),
-            platform = new Sprite("base_platform");
+            platform = new Sprite("base_platform"),
+            platform_shadow = new Sprite("base_platform_shadow");
 
     public Base(float x, float y, int owner) {
         super(x, y, Main.R.nextFloat() * 6.28f);
@@ -48,17 +50,13 @@ public class Base extends Actor {
         height = 200;
         mass = 10;
         minimapSprite = MMS;
+        standing = true;
     }
 
     @Override
     public void minimapRender(Batch batch, float delta) {
         minimapSprite.setColor(room.players[owner].color);
         super.minimapRender(batch, delta);
-    }
-
-    @Override
-    public void kick(float dist, float angle) {
-        //Base is the fucking building, it may not move. Nope, tornado.
     }
 
     @Override
@@ -100,6 +98,24 @@ public class Base extends Actor {
     }
 
     @Override
+    public void renderShadow(Batch batch, float delta) {
+        float hands = 16;
+        float sp = PI * 2 / hands;
+        if (inQueue != null) {
+            inQueue.renderShadow(batch, delta);
+        }
+        for (int i = 0; i < hands; i++) {
+            sprite_shadow.x = x - cos(sp * ((float) i) + angle + animation)
+                    * (90 + 20 * sqrt(animation));
+            sprite_shadow.y = y - sin(sp * ((float) i) + angle + animation)
+                    * (90 + 20 * sqrt(animation)) + 15 - animation * 12.5f;
+            sprite_shadow.angle = sp * ((float) i + animation)
+                    + animation * PI / 2 + angle;
+            sprite_shadow.draw(batch);
+        }
+    }
+
+    @Override
     public void render(Batch batch, float delta) {
         float hands = 16;
         float sp = PI * 2 / hands;
@@ -138,6 +154,18 @@ public class Base extends Actor {
             sprite.draw(batch);
         }
         if (animation == 1) {
+
+            platform_shadow.x = x + cos(platformAngle) * (animation2 * 80);
+            platform_shadow.y = y + sin(platformAngle) * (animation2 * 80)
+                    + animation2 * 20;
+            platform_shadow.angle = platformAngle;
+            platform_shadow.r = platform_shadow.g = platform_shadow.b = 1;
+            platform_shadow.draw(batch);
+            platform_shadow.x = x + cos(platformAngle) * animation2 * 160;
+            platform_shadow.y = y + sin(platformAngle) * animation2 * 160
+                    + 20 - animation2 * 20;
+            platform_shadow.draw(batch);
+
             platform.x = x + cos(platformAngle) * (animation2 * 80);
             platform.y = y + sin(platformAngle) * (animation2 * 80);
             platform.angle = platformAngle;
