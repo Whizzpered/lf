@@ -31,7 +31,7 @@ public class Planer extends Unit {
 
         public PlasmaBullet(Unit from, Unit to, float x, float y) {
             super(from, to, x, y);
-            speed = 1600;
+            speed = 2000;
             sprite = new Sprite("laser");
             detonationDistance = 45;
         }
@@ -49,10 +49,11 @@ public class Planer extends Unit {
             this.y = y;
             cx = 50;
             turnSpeed = 6;
-            range = 1000;
+            range = 750;
             ammo = maxAmmo = 5;
             reloadTime = 0.3f;
             reloadAmmoTime = 1;
+            speed = 1600;
         }
 
         @Override

@@ -80,67 +80,74 @@ planer_body_shadow
   orig: 120, 113
   offset: 0, 0
   index: -1
+rocket
+  rotate: false
+  xy: 399, 433
+  size: 147, 10
+  orig: 147, 10
+  offset: 0, 0
+  index: -1
 disruptor_body_shadow
   rotate: false
-  xy: 399, 351
+  xy: 399, 339
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
-planer_body_team
-  rotate: false
-  xy: 521, 350
-  size: 100, 93
-  orig: 100, 93
-  offset: 0, 0
-  index: -1
 disruptor_head_shadow
   rotate: false
-  xy: 623, 396
+  xy: 621, 396
   size: 120, 67
   orig: 120, 67
   offset: 0, 0
   index: -1
 disruptor_body
   rotate: false
-  xy: 745, 391
+  xy: 743, 391
   size: 100, 72
   orig: 100, 72
   offset: 0, 0
   index: -1
 disruptor_body_team
   rotate: false
-  xy: 847, 391
+  xy: 845, 391
   size: 100, 72
   orig: 100, 72
   offset: 0, 0
   index: -1
+sand
+  rotate: false
+  xy: 947, 388
+  size: 75, 75
+  orig: 75, 75
+  offset: 0, 0
+  index: -1
+planer_body_team
+  rotate: false
+  xy: 310, 174
+  size: 100, 93
+  orig: 100, 93
+  offset: 0, 0
+  index: -1
 phantom_body_shadow
   rotate: false
-  xy: 623, 334
+  xy: 350, 277
   size: 105, 60
   orig: 105, 60
   offset: 0, 0
   index: -1
 disruptor_head
   rotate: false
-  xy: 730, 342
+  xy: 457, 290
   size: 100, 47
   orig: 100, 47
   offset: 0, 0
   index: -1
 planer_head_shadow
   rotate: false
-  xy: 832, 347
+  xy: 457, 246
   size: 100, 42
   orig: 100, 42
-  offset: 0, 0
-  index: -1
-sand
-  rotate: false
-  xy: 310, 192
-  size: 75, 75
-  orig: 75, 75
   offset: 0, 0
   index: -1
 planer_head
@@ -152,35 +159,35 @@ planer_head
   index: -1
 phantom_body
   rotate: false
-  xy: 730, 300
+  xy: 335, 132
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
 phantom_body_invisible
   rotate: false
-  xy: 832, 305
+  xy: 335, 90
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
 phantom_body_team
   rotate: false
-  xy: 350, 309
+  xy: 335, 48
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
 phantom_body_terrain
   rotate: false
-  xy: 817, 263
+  xy: 335, 6
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
 laser
   rotate: false
-  xy: 949, 453
+  xy: 350, 395
   size: 40, 10
   orig: 40, 10
   offset: 0, 0
@@ -272,6 +279,81 @@ atlas3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+fog/0
+  rotate: false
+  xy: 1, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+fog/1
+  rotate: false
+  xy: 35, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+fog/2
+  rotate: false
+  xy: 69, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+fog/3
+  rotate: false
+  xy: 103, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+fog/4
+  rotate: false
+  xy: 137, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+fog/5
+  rotate: false
+  xy: 171, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+fog/6
+  rotate: false
+  xy: 205, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+fog/7
+  rotate: false
+  xy: 239, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+fog/8
+  rotate: false
+  xy: 273, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+fog/9
+  rotate: false
+  xy: 307, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+
+atlas4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 frame/cb
   rotate: false
   xy: 1, 1
@@ -336,7 +418,7 @@ frame/rt
   offset: 0, 0
   index: -1
 
-atlas4.png
+atlas5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -390,7 +472,7 @@ healthbar/6
   offset: 0, 0
   index: -1
 
-atlas5.png
+atlas6.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -437,7 +519,7 @@ minimap/bullet
   offset: 0, 0
   index: -1
 
-atlas6.png
+atlas7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none

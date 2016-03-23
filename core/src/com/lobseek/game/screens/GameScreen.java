@@ -33,12 +33,12 @@ public class GameScreen extends Screen {
         room.start();
         room.player = 1;
         add(room);
-        room.add(new Base(600, 3000, 1));
-        room.add(new Base(-600, 3000, 1));
-        room.add(new Base(-0, 3000, 1));
-        room.add(new Base(600, -3000, 2));
-        room.add(new Base(-600, -3000, 2));
-        room.add(new Base(-0, -3000, 2));
+        room.add(new Base(600, 1250, 1));
+        room.add(new Base(-600, 1250, 1));
+        room.add(new Base(-0, 1250, 1));
+        room.add(new Base(600, -1250, 2));
+        room.add(new Base(-600, -1250, 2));
+        room.add(new Base(-0, -1250, 2));
     }
 
     @Override

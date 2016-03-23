@@ -47,10 +47,11 @@ public class Disruptor extends Unit {
             x = 5;
             y = 0;
             turnSpeed = 3;
-            range = 1000;
+            range = 800;
             ammo = maxAmmo = 10;
             reloadTime = 0.8f;
             reloadAmmoTime = 10;
+            speed = 1200;
         }
 
         @Override

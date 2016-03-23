@@ -27,6 +27,7 @@ public class Weapon {
     public Unit on;
     public float x, y, cx, cy, angle;
     public float turnSpeed, range;
+    public float speed;
     public Room room;
     public Unit target;
 
@@ -55,9 +56,11 @@ public class Weapon {
         float y = this.x * sin(an) + this.y * cos(an);
         x += on.x;
         y += on.y;
-        float ta = (float) atan2(on.ty - y, on.tx - x);
+        float ta = (float) on.angle;
         if (target != null) {
-            ta = (float) atan2(target.y - y, target.x - x);
+            float d = dist(x, y, target.x, target.y);
+            d /= speed;
+            ta = (float) atan2(target.y + target.vy * d - y,target.x + target.vx * d - x);
         }
         if (angle < -PI) {
             angle += 2 * PI;

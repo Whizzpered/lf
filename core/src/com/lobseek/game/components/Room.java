@@ -136,11 +136,27 @@ public class Room implements Layer {
         }
     }
 
+    /**
+     * Getting barricade that may be touched it this coordinates. Yep, just may
+     * be.
+     * 
+     * @param x coordinate
+     * @param y coordinate
+     * @return this barricade
+     */
     public Barricade getBarricade(float x, float y) {
         return getBarricade((int) (x / barricadeSize) - (x < 0 ? 1 : 0),
                 (int) (y / barricadeSize) - (y < 0 ? 1 : 0));
     }
 
+    /**
+     * Barricade index in array. Don't care about it, just use first method (with
+     * float parameters), k?
+     * 
+     * @param x index
+     * @param y index
+     * @return Barricade. But I already told you that you mustn't use it.
+     */
     public Barricade getBarricade(int x, int y) {
         x += barricades.length / 2;
         y += barricades.length / 2;

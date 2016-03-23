@@ -30,7 +30,7 @@ public class Unit extends Actor {
     public int owner;
     public float speed, turnSpeed, selectionAlpha;
     public float tx, ty, experience = 10;
-    public float hp, maxHp;
+    public float hp, maxHp, visiblity = 1;
     protected float deathTimer;
     boolean selected;
     public Weapon weapons[];
@@ -49,12 +49,23 @@ public class Unit extends Actor {
         minimapSprite = MMS;
     }
 
+    /**
+     * Renders this unit on minimap. Overrided, 'cause color must be changed and
+     * sprite must not.
+     * 
+     * @param batch
+     * @param delta 
+     */
     @Override
     public void minimapRender(Batch batch, float delta) {
         minimapSprite.setColor(room.players[owner].color);
         super.minimapRender(batch, delta);
     }
 
+    /**
+     * Called when unit created. Not spawned: it could be called from base to
+     * make some animations, to do a barrel roll or to do anything other.
+     */
     @Override
     public void create() {
         room.players[owner].units++;
@@ -69,7 +80,17 @@ public class Unit extends Actor {
         }
     }
 
+    /**
+     * Called when unit must be hurted. By someone, exacly.
+     * 
+     * @param hp healthpoints that must be removed. Armor or shield wasn't
+     * calculated, do it yourself it this method.
+     * @param from unit that attacked.
+     */
     public void hit(float hp, Unit from) {
+        /**
+         * @todo make angle of attack. Powershell animation will be soon.
+         */
         if (this.hp > 0 && this.hp - hp <= 0) {
             from.experience += this.experience / 2;
             this.experience = 0;
@@ -77,6 +98,11 @@ public class Unit extends Actor {
         this.hp = max(0, this.hp - hp);
     }
 
+    /**
+     * Handles movement and all turns. Can be overrided.
+     * 
+     * @param delta 
+     */
     public void move(float delta) {
         if (speed > 0 && turnSpeed > 0) {
             if (x != tx && y != ty) {
@@ -111,6 +137,12 @@ public class Unit extends Actor {
         }
     }
 
+    /**
+     * Sets all sprites for this unit. Also calls sprites for weapons.
+     * 
+     * @param name first part of sprite name. "_body" et cetera shall be added
+     * automatically.
+     */
     public void setSprite(String name) {
         body = new Sprite(name + "_body");
         body_team = new Sprite(name + "_body_team");
@@ -122,6 +154,11 @@ public class Unit extends Actor {
         }
     }
 
+    /**
+     * Acts unit.
+     * 
+     * @param delta 
+     */
     @Override
     public void act(float delta) {
         if (selected && hp > 0) {
@@ -147,6 +184,12 @@ public class Unit extends Actor {
         }
     }
 
+    /**
+     * Handles collision with barricade. Won't be handled if unit is flying.
+     * (Remember, "flying" is boolean field)
+     * 
+     * @param delta 
+     */
     public void handleBarricadeCollision(float delta) {
         if(!flying){
         Barricade b1 = room.getBarricade(x, y);
@@ -170,6 +213,11 @@ public class Unit extends Actor {
         }
     }
 
+    /**
+     * Internal method, don't give a fuck.
+     * 
+     * @param b barricade
+     */
     private void handleBarricadeCollision(Barricade b) {
         if (b != null) {
             if (abs(x - b.x) > width + 20 || abs(y - b.y) > height + 20) {
@@ -186,6 +234,11 @@ public class Unit extends Actor {
         }
     }
 
+    /**
+     * Ticks weapons, searching enemies and making coffee.
+     * 
+     * @param delta 
+     */
     @Override
     public void tick(float delta) {
         for (int i = 0; i < weapons.length; i++) {
@@ -193,11 +246,22 @@ public class Unit extends Actor {
         }
     }
 
+    /**
+     * Called from the Room, renders unit like white one.
+     * 
+     * @param batch SpriteBatch
+     * @param delta 
+     */
     @Override
     public void render(Batch batch, float delta) {
         render(batch, delta, Color.WHITE);
     }
 
+    /**
+     * Renders shadow. Or light. I don't care, it will be on the background.
+     * @param batch
+     * @param delta 
+     */
     @Override
     public void renderShadow(Batch batch, float delta) {
         body_shadow.x = x;

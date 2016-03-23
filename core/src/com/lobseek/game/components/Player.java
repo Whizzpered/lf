@@ -43,7 +43,7 @@ public class Player {
         this.types = types;
         this.produce = new float[types.length];
         for (int i = 0; i < produce.length; i++) {
-            produce[i] = 100f / ((float) produce.length);
+            produce[i] = 1f / ((float) produce.length);
         }
     }
 
@@ -57,7 +57,20 @@ public class Player {
         if (units > maxUnits) {
             return null;
         }
-        Class clazz = types[Main.R.nextInt(types.length)];
+        float rand = Main.R.nextFloat();
+        float value = 0;
+        Class clazz = null;
+        for (int i = 0; i < types.length; i++) {
+            value += produce[i];
+            if (rand <= value) {
+                clazz = types[i];
+                break;
+            }
+        }
+        if (clazz == null) {
+            ProjectLogger.println("clazz == null");
+            clazz = types[Main.R.nextInt(types.length)];
+        }
         try {
             Constructor c
                     = clazz.getConstructor(float.class, float.class, float.class, int.class);
@@ -67,7 +80,6 @@ public class Player {
         }
         return null;
     }
-
     public boolean isEnemy(int player) {
         //*
         if (player == 0) {

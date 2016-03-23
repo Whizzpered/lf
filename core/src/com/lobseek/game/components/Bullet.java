@@ -40,6 +40,13 @@ public class Bullet extends Actor {
         minimapSprite = MMS;
     }
 
+    @Override
+    public void create() {
+        float d = dist(x, y, to.x, to.y);
+        d /= speed / 100;
+        angle = (float) atan2(to.y + to.vy * d - y, to.x + to.vx * d - x);
+    }
+
     public void move(float delta) {
         x += cos(angle) * speed * delta;
         y += sin(angle) * speed * delta;
