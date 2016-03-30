@@ -107,7 +107,7 @@ public class Weapon {
         for (Actor a : room.actors) {
             if (a != on && (a instanceof Unit)) {
                 Unit u = (Unit) a;
-                if (u.hp > 0 && room.players[on.owner].isEnemy(u.owner)) {
+                if (u.hp > 0 && u.visiblity > 0 && room.players[on.owner].isEnemy(u.owner)) {
                     float d = dist(u.x, u.y, on.x, on.y);
                     if (d < dist) {
                         dist = d;
@@ -133,7 +133,7 @@ public class Weapon {
         sprite_shadow.x = p.x;
         sprite_shadow.y = p.y + 25;
         sprite_shadow.angle = angle;
-        sprite_shadow.a = Math.max(0, 1 - on.deathTimer);
+        sprite_shadow.a = Math.max(0, 1 - on.deathTimer) * on.visiblity;
         sprite_shadow.draw(batch);
         sprite_shadow.y = p.y + 17.5f;
         sprite_shadow.draw(batch);

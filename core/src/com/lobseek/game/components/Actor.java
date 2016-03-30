@@ -111,6 +111,17 @@ public class Actor implements Comparable<Actor> {
 
     }
 
+    /**
+     * Renders GUI elements for this actor in his room. Can be avoked only when actor of part of
+     * actor is on the screen.
+     *
+     * @param batch instance of SpriteBatch with all camera projections
+     * @param delta time between frames in seconds
+     */
+    public void renderInterface(Batch batch, float delta) {
+
+    }
+
     public void minimapRender(Batch batch, float delta) {
         if (minimapSprite != null) {
             minimapSprite.x = room.screen.width + (x / room.size * 72f) - 86;

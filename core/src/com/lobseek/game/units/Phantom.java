@@ -23,6 +23,7 @@ import com.lobseek.game.components.Point;
 import com.lobseek.game.components.Sprite;
 import com.lobseek.game.components.Unit;
 import com.lobseek.game.components.Weapon;
+import com.lobseek.game.particles.Explosion;
 import static com.lobseek.utils.Math.*;
 
 /**
@@ -31,6 +32,9 @@ import static com.lobseek.utils.Math.*;
  */
 public class Phantom extends Unit {
 
+    private static Sprite
+            explosion_0 = new Sprite("plasma/explosion0");
+    
     class PlasmaBullet extends Bullet {
 
         public PlasmaBullet(Unit from, Unit to, float x, float y) {
@@ -41,13 +45,14 @@ public class Phantom extends Unit {
             vy = sin(angle) * speed;
             sprite = new Sprite("rocket");
             sprite.setScale(0.5f);
-            detonationDistance = 80;
+            detonationDistance = 50;
             lifeTime = 5 + Main.R.nextInt(10);
         }
 
         @Override
         public void explode(Unit to) {
-            to.hit(10, from);
+            to.hit(35, from);
+            room.add(new Explosion(x, y, 300, explosion_0, 20, 100));
         }
 
         @Override
@@ -81,8 +86,8 @@ public class Phantom extends Unit {
             this.angle = atan2(vy, vx);
             x += delta * vx;
             y += delta * vy;
-            x += cos(angle) * 30 * delta;
-            y += sin(angle) * 30 * delta;
+            x += cos(angle) * 70 * delta;
+            y += sin(angle) * 70 * delta;
         }
     }
 
@@ -103,6 +108,7 @@ public class Phantom extends Unit {
         @Override
         public void shoot(Unit to, Point from) {
             room.add(new PlasmaBullet(on, to, from.x, from.y));
+            on.visiblity = 1;
         }
 
         @Override
@@ -131,9 +137,17 @@ public class Phantom extends Unit {
         setSprite("phantom");
         width = height = 50;
         mass = 15;
-        hp = maxHp = 100;
+        hp = maxHp = 250;
         speed = 350;
         turnSpeed = 2;
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        if(visiblity > 0){
+            visiblity = Math.max(0, visiblity - 0.1f * delta);
+        }
     }
 
 }

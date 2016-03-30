@@ -37,35 +37,47 @@ public class Particle {
     public Particle(float x, float y, int lifeTime) {
         this.x = x;
         this.y = y;
-        this.lifeTime = Math.max(lifeTime, 10000);
+        this.lifeTime = Math.min(lifeTime, 10000);
     }
 
     /**
      * Count time that left for this particle.
+     *
      * @return time in milliseconds that particle will be alive.
      */
     public int timeLeft() {
-        if(removed)return -1000;
+        if (removed) {
+            return -1000;
+        }
         return (int) (creationTime + lifeTime - System.currentTimeMillis());
     }
-    
+
+    public float lightness() {
+        if (timeLeft() <= 0) {
+            return 0;
+        } else {
+            return (float) timeLeft() / (float) lifeTime;
+        }
+    }
+
     /**
      * Called when particle is added to its room.
      */
-    public void create(){
-        
+    public void create() {
+
     }
-    
+
     /**
      * Called if particle must be removed immidiately.
      */
-    public void remove(){
+    public void remove() {
         removed = true;
     }
 
     /**
      * Avokes every 10 milliseconds, here must be handled movement and other
-     * simple activities. Remember, this is fucking particle and it <b>must not</b>
+     * simple activities. Remember, this is fucking particle and it <b>must
+     * not</b>
      * count factorial function, write files or make coffee. It's just particle:
      * piece of dirt, smoke cloud, rocket trace or anything other, simple object
      * that must be handled quickly.
@@ -75,7 +87,7 @@ public class Particle {
     public void act(float delta) {
 
     }
-    
+
     /**
      * Renders particle when it's on screen.
      *

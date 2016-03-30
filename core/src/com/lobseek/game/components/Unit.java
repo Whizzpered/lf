@@ -267,7 +267,7 @@ public class Unit extends Actor {
         body_shadow.x = x;
         body_shadow.y = y + 15;
         body_shadow.angle = angle;
-        body_shadow.a = Math.max(0, 1 - deathTimer);
+        body_shadow.a = Math.max(0, 1 - deathTimer) * visiblity;
         body_shadow.draw(batch);
         body_shadow.y = y + 7.5f;
         body_shadow.draw(batch);
@@ -284,6 +284,7 @@ public class Unit extends Actor {
         body.y = y;
         body.angle = angle;
         body.setColor(parentColor);
+        body.a *= visiblity;
         body.draw(batch);
         body_team.x = x;
         body_team.y = y;
@@ -293,16 +294,23 @@ public class Unit extends Actor {
         body_team.g *= parentColor.g;
         body_team.b *= parentColor.b;
         body_team.a *= parentColor.a;
+        if(owner != room.player){
+            body_team.a *= visiblity;
+        }
         body_team.draw(batch);
+        for (int i = 0; i < weapons.length; i++) {
+            weapons[i].render(batch, delta, parentColor);
+        }
+    }
+    
+    @Override
+    public void renderInterface(Batch batch, float delta){
         if (selectionAlpha > 0) {
             selection.x = x;
             selection.y = y;
             selection.angle = atan2(ty - y, tx - x);
             selection.setColor(ColorFabricator.neon(selectionAlpha));
             selection.draw(batch);
-        }
-        for (int i = 0; i < weapons.length; i++) {
-            weapons[i].render(batch, delta, parentColor);
         }
     }
 }

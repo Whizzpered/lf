@@ -54,8 +54,10 @@ public class Room implements Layer {
     private BitmapFont font = new BitmapFont();
     private boolean running;
     private float fingerDistance, minimapColor;
+    private Unit selectedUnit;
     public final Player players[];
-    public int player = -1;
+    public int player = -1, selectedUnits;
+    public float unitRadius;
     public boolean selection, minimapSwipe, minimapEnabled = true;
     private final com.badlogic.gdx.graphics.g2d.Sprite terrain, terrain_small;
     private final Barricade[][] barricades = new Barricade[64][64];
@@ -139,7 +141,7 @@ public class Room implements Layer {
     /**
      * Getting barricade that may be touched it this coordinates. Yep, just may
      * be.
-     * 
+     *
      * @param x coordinate
      * @param y coordinate
      * @return this barricade
@@ -150,9 +152,9 @@ public class Room implements Layer {
     }
 
     /**
-     * Barricade index in array. Don't care about it, just use first method (with
-     * float parameters), k?
-     * 
+     * Barricade index in array. Don't care about it, just use first method
+     * (with float parameters), k?
+     *
      * @param x index
      * @param y index
      * @return Barricade. But I already told you that you mustn't use it.
@@ -206,17 +208,22 @@ public class Room implements Layer {
         int min = -1, time = 10001;
         for (int i = 0; i < particles.length; i++) {
             Particle p = particles[i];
-            int tl = p.timeLeft();
-            if (tl <= 0) {
+            if (p != null) {
+                int tl = p.timeLeft();
+                if (tl <= 0) {
+                    particles[i] = particle;
+                    particle.room = this;
+                    particle.create();
+                    return particle;
+                } else if (time < tl) {
+                    time = tl;
+                    min = i;
+                }
+            } else {
                 particles[i] = particle;
                 particle.room = this;
                 particle.create();
                 return particle;
-            } else {
-                if (time < tl) {
-                    time = tl;
-                    min = i;
-                }
             }
         }
         if (min != -1) {
@@ -287,6 +294,11 @@ public class Room implements Layer {
                 }
             }
         }
+        for (Particle p : particles) {
+            if (p != null) {
+                p.act(delta);
+            }
+        }
         if (selection) {
             Point p = getGlobalCoordinates(
                     screen.touches[0].x,
@@ -300,7 +312,8 @@ public class Room implements Layer {
             for (Actor a : actors) {
                 if (a != null && (a instanceof Unit)) {
                     Unit u = (Unit) a;
-                    if (u.owner == player) {
+                    if (u.owner == player && (selectedUnit != null
+                            ? (u.getClass() == selectedUnit.getClass()) : (true))) {
                         if (dist(p.x, p.y, u.x, u.y) < 100f * s) {
                             u.selected = true;
                             selection = true;
@@ -374,33 +387,59 @@ public class Room implements Layer {
                 }
             }
         }
-        if (width < 2000) {
-            for (Actor a : renderActors) {
-                if (a != null && !a.removed) {
-                    if (a.x + a.width / 2
-                            >= camera.position.x - camera.viewportWidth / 2
-                            && a.y + a.height / 2
-                            >= camera.position.y - camera.viewportHeight / 2
-                            && a.x - a.width / 2
-                            <= camera.position.x + camera.viewportWidth / 2
-                            && a.y - a.height / 2
-                            <= camera.position.y + camera.viewportHeight / 2) {
-                        a.renderShadow(batch, delta);
-                    }
+        for (Actor a : renderActors) {
+            if (a != null && !a.removed) {
+                if (a.x + a.width / 2
+                        >= camera.position.x - camera.viewportWidth / 2
+                        && a.y + a.height
+                        >= camera.position.y - camera.viewportHeight / 2
+                        && a.x - a.width
+                        <= camera.position.x + camera.viewportWidth / 2
+                        && a.y - a.height
+                        <= camera.position.y + camera.viewportHeight / 2) {
+                    a.renderShadow(batch, delta);
                 }
             }
         }
         for (Actor a : renderActors) {
             if (a != null && !a.removed) {
-                if (a.x + a.width / 2
+                if (a.x + a.width
                         >= camera.position.x - camera.viewportWidth / 2
-                        && a.y + a.height / 2
+                        && a.y + a.height
                         >= camera.position.y - camera.viewportHeight / 2
-                        && a.x - a.width / 2
+                        && a.x - a.width
                         <= camera.position.x + camera.viewportWidth / 2
-                        && a.y - a.height / 2
+                        && a.y - a.height
                         <= camera.position.y + camera.viewportHeight / 2) {
                     a.render(batch, delta);
+                }
+            }
+        }
+        for (Particle a : particles) {
+            if (a != null && !a.removed) {
+                if (a.x + a.radius
+                        >= camera.position.x - camera.viewportWidth / 2
+                        && a.y + a.radius
+                        >= camera.position.y - camera.viewportHeight / 2
+                        && a.x - a.radius
+                        <= camera.position.x + camera.viewportWidth / 2
+                        && a.y - a.radius
+                        <= camera.position.y + camera.viewportHeight / 2) {
+                    a.render(batch, delta);
+                }
+            }
+        }
+        for (Actor a : renderActors) {
+            if (a != null && !a.removed) {
+                if (a.x + a.width
+                        >= camera.position.x - camera.viewportWidth / 2
+                        && a.y + a.height
+                        >= camera.position.y - camera.viewportHeight / 2
+                        && a.x - a.width
+                        <= camera.position.x + camera.viewportWidth / 2
+                        && a.y - a.height
+                        <= camera.position.y + camera.viewportHeight / 2) {
+                    a.renderInterface(batch, delta);
                 }
             }
         }
@@ -521,6 +560,7 @@ public class Room implements Layer {
         if (!screen.touches[1].down) {
             Point p = getGlobalCoordinates(screenX, screenY);
             float s = Math.abs(screen.width - deltaSize) / screen.width;
+            boolean army = false;
             for (Actor a : actors) {
                 if (a != null && (a instanceof Unit)) {
                     Unit u = (Unit) a;
@@ -528,6 +568,13 @@ public class Room implements Layer {
                         if (dist(p.x, p.y, u.x, u.y) < 100f * s) {
                             u.selected = true;
                             selection = true;
+                            if (!army) {
+                                selectedUnit = u;
+                                army = true;
+                            } else if (selectedUnit != null
+                                    && u.getClass() != selectedUnit.getClass()) {
+                                selectedUnit = null;
+                            }
                         }
                     }
                 }

@@ -19,6 +19,7 @@ import com.lobseek.game.components.Point;
 import com.lobseek.game.components.Sprite;
 import com.lobseek.game.components.Unit;
 import com.lobseek.game.components.Weapon;
+import com.lobseek.game.particles.Explosion;
 
 /**
  *
@@ -26,6 +27,10 @@ import com.lobseek.game.components.Weapon;
  */
 public class Disruptor extends Unit {
 
+    private static Sprite
+            explosion_1 = new Sprite("plasma/explosion1"),
+            explosion_2 = new Sprite("plasma/explosion2"); 
+    
     class PlasmaBullet extends Bullet {
 
         public PlasmaBullet(Unit from, Unit to, float x, float y) {
@@ -37,7 +42,9 @@ public class Disruptor extends Unit {
 
         @Override
         public void explode(Unit to) {
-            to.hit(10, from);
+            to.hit(60, from);
+            room.add(new Explosion(x, y, 300, explosion_1, 35, 400));
+            room.add(new Explosion(x, y, 600, explosion_2, 35, 120));
         }
     }
 
@@ -48,9 +55,9 @@ public class Disruptor extends Unit {
             y = 0;
             turnSpeed = 3;
             range = 800;
-            ammo = maxAmmo = 10;
-            reloadTime = 0.8f;
-            reloadAmmoTime = 10;
+            ammo = maxAmmo = 1;
+            reloadTime = 5f;
+            reloadAmmoTime = 5;
             speed = 1200;
         }
 
@@ -69,7 +76,7 @@ public class Disruptor extends Unit {
         setSprite("disruptor");
         width = height = 75;
         mass = 40;
-        hp = maxHp = 250;
+        hp = maxHp = 600;
         speed = 100;
         turnSpeed = 2;
     }

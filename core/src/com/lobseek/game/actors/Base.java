@@ -66,28 +66,27 @@ public class Base extends Actor {
             inQueue.angle = platformAngle;
             if (animation < 1) {
                 animation = Math.min(1, animation + delta / 2);
-            } else if (animation2 < 1) {
+            } else if (animation2 <= 1) {
                 animation2 = Math.min(1, animation2 + delta / 2);
                 inQueue.x = x + cos(platformAngle) * animation2 * 200;
                 inQueue.y = y + sin(platformAngle) * animation2 * 200;
-            } else {
+            }
+            if (animation2 == 1) {
                 inQueue.tx = x + cos(platformAngle) * 300;
                 inQueue.ty = y + sin(platformAngle) * 300;
                 room.add(inQueue);
                 inQueue = null;
             }
+        } else if (animation2 > 0) {
+            animation2 = Math.max(0, animation2 - delta / 2);
+        } else if (animation > 0) {
+            animation = Math.max(0, animation - delta / 2);
         } else {
-            if (animation2 > 0) {
-                animation2 = Math.max(0, animation2 - delta / 2);
-            } else if (animation > 0) {
-                animation = Math.max(0, animation - delta / 2);
-            } else {
-                platformAngle = Main.R.nextFloat() * PI * 2;
-                inQueue = room.players[owner].spawn(x, y, angle);
-                if (inQueue != null) {
-                    inQueue.room = room;
-                    inQueue.create();
-                }
+            platformAngle = Main.R.nextFloat() * PI * 2;
+            inQueue = room.players[owner].spawn(x, y, angle);
+            if (inQueue != null) {
+                inQueue.room = room;
+                inQueue.create();
             }
         }
     }

@@ -14,6 +14,8 @@
  */
 package com.lobseek.game.units;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.lobseek.game.components.Bullet;
 import com.lobseek.game.components.Point;
 import com.lobseek.game.components.Sprite;
@@ -27,6 +29,10 @@ import static com.lobseek.utils.Math.*;
  */
 public class Planer extends Unit {
 
+    public float power = 0, shield = 0;
+    private static Sprite power_sprite = new Sprite("planer_power"),
+             shield_sprite = new Sprite("planer_shield");
+    
     class PlasmaBullet extends Bullet {
 
         public PlasmaBullet(Unit from, Unit to, float x, float y) {
@@ -64,6 +70,20 @@ public class Planer extends Unit {
     }
 
     @Override
+    public void act(float delta) {
+        super.act(delta);
+        if(hp > 0){
+        if(shield == 0){
+            power = Math.min(power + delta, 20);
+        }else{
+            shield = Math.max(shield - delta, 0);
+        }
+        }else{
+            shield = power = 0;
+        }
+    }
+
+    @Override
     public void move(float delta) {
         angle += turnSpeed * delta;
         if (x != tx && y != ty) {
@@ -72,6 +92,34 @@ public class Planer extends Unit {
             float a = atan2(ty - y, tx - x);
             move(cos(a) * d, sin(a) * d);
         }
+    }
+
+    @Override
+    public void hit(float hp, Unit from) {
+        if(shield >= 1){
+            return;
+        }else if(shield > 0){
+            super.hit(hp * (1 - shield), from);
+        }else{
+            super.hit(hp, from);
+            shield = power / 2;
+            power = 0;
+        }
+    }
+
+    @Override
+    public void render(Batch batch, float delta, Color parentColor) {
+        super.render(batch, delta, parentColor);
+        power_sprite.a = power / 20;
+        power_sprite.x = x;
+        power_sprite.y = y;
+        power_sprite.angle = angle;
+        power_sprite.draw(batch);
+        shield_sprite.a = Math.min(shield / 2, 1);
+        shield_sprite.x = x;
+        shield_sprite.y = y;
+        shield_sprite.angle = angle;
+        shield_sprite.draw(batch);
     }
 
     public Planer(float xcord, float ycord, float angle, int owner) {
@@ -84,7 +132,7 @@ public class Planer extends Unit {
         setSprite("planer");
         width = height = 75;
         mass = 40;
-        hp = maxHp = 250;
+        hp = maxHp = 350;
         speed = 170;
         turnSpeed = 2;
         flying = true;
