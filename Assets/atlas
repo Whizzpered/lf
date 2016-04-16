@@ -1,7 +1,7 @@
 name=atlas
 filename=
 input=textures
-output=..\android\assets
+output=../android/assets
 
 alias=true
 alphaThreshold=0

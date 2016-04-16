@@ -220,51 +220,51 @@ filter: Nearest,Nearest
 repeat: none
 healthbar/4
   rotate: false
-  xy: 1, 1
-  size: 108, 150
-  orig: 108, 150
+  xy: 1, 252
+  size: 250, 249
+  orig: 250, 249
   offset: 0, 0
   index: -1
 healthbar/1
   rotate: false
-  xy: 111, 1
-  size: 108, 150
-  orig: 108, 150
+  xy: 1, 1
+  size: 250, 249
+  orig: 250, 249
   offset: 0, 0
   index: -1
 healthbar/0
   rotate: false
-  xy: 221, 1
-  size: 108, 150
-  orig: 108, 150
+  xy: 253, 252
+  size: 250, 249
+  orig: 250, 249
   offset: 0, 0
   index: -1
 healthbar/5
   rotate: false
-  xy: 331, 1
-  size: 108, 150
-  orig: 108, 150
+  xy: 253, 1
+  size: 250, 249
+  orig: 250, 249
   offset: 0, 0
   index: -1
 healthbar/3
   rotate: false
-  xy: 441, 1
-  size: 108, 150
-  orig: 108, 150
+  xy: 505, 252
+  size: 250, 249
+  orig: 250, 249
   offset: 0, 0
   index: -1
 healthbar/6
   rotate: false
-  xy: 551, 1
-  size: 108, 150
-  orig: 108, 150
+  xy: 505, 1
+  size: 250, 249
+  orig: 250, 249
   offset: 0, 0
   index: -1
 healthbar/2
   rotate: false
-  xy: 661, 1
-  size: 108, 150
-  orig: 108, 150
+  xy: 757, 252
+  size: 250, 249
+  orig: 250, 249
   offset: 0, 0
   index: -1
 
