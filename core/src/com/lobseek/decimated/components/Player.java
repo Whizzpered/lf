@@ -39,7 +39,7 @@ public class Player {
     public int alliance = -1;
     public Class types[];
     public float produce[];
-    public int units, maxUnits = 30;
+    public int units, maxUnits = 15;
 
     public void setTypes(Class... types) {
         this.types = types;

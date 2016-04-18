@@ -44,7 +44,7 @@ public class Phantom extends Unit {
             vy = sin(angle) * speed;
             sprite = new Sprite("rocket");
             sprite.setScale(0.5f);
-            detonationDistance = 50;
+            detonationDistance = 100;
             lifeTime = 5 + Main.R.nextInt(10);
         }
 
@@ -103,7 +103,7 @@ public class Phantom extends Unit {
             cx = 20;
             turnSpeed = 3;
             speed = 500;
-            range = 650;
+            range = 500;
             ammo = maxAmmo = 3;
             reloadTime = 0.1f;
             reloadAmmoTime = 5;

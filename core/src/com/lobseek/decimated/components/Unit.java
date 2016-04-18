@@ -36,6 +36,7 @@ public class Unit extends Actor {
     public boolean selected, immortal;
     public Weapon weapons[];
     public boolean flying;
+    public Unit target;
 
     protected static final Sprite selection = new Sprite("selection");
     protected Sprite body, body_team, body_shadow;

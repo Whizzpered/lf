@@ -24,6 +24,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.lobseek.decimated.Main;
 import com.lobseek.decimated.ProjectLogger;
 import com.lobseek.decimated.actors.Test;
+import com.lobseek.decimated.gui.Font;
 import com.lobseek.decimated.screens.Screen;
 import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
@@ -54,7 +55,7 @@ public class Room implements Layer {
     private BitmapFont font = new BitmapFont();
     private boolean running;
     private float fingerDistance, minimapColor;
-    private Unit selectedUnit;
+    private Unit selectedUnit, targetedUnit;
     public final Player players[];
     public int player = -1, selectedUnits;
     public float unitRadius;
@@ -62,9 +63,11 @@ public class Room implements Layer {
     private final com.badlogic.gdx.graphics.g2d.Sprite terrain, terrain_small;
     private final Barricade[][] barricades = new Barricade[64][64];
     private final float barricadeSize = 360;
+    private float targetX, targetY, targetAngle, targetSpeed, targetColor;
 
     private Sprite minimapGUI = new Sprite("minimap/gui");
     private Sprite minimapFrame = new Sprite("minimap/frame");
+    private Sprite targetSprite = new Sprite("target");
 
     /**
      * @param screen screen where Room will be displayed
@@ -85,12 +88,6 @@ public class Room implements Layer {
             }
 
         };
-        try {
-            Object o = null;
-            o.toString();
-        } catch (Exception e) {
-            ProjectLogger.println(e);
-        }
         players[0].name = "NPCs";
         for (int i = 1; i < 16; i++) {
             players[i] = new Player(this, i);
@@ -277,6 +274,16 @@ public class Room implements Layer {
      * @param delta time between acts in seconds
      */
     public void act(float delta) {
+        if(targetedUnit != null){
+            targetColor = Math.min(1, targetColor + delta);
+            targetX = (12 * targetX + targetedUnit.x) / 13;
+            targetY = (12 * targetY + targetedUnit.y) / 13;
+        } else {
+            targetColor = Math.max(0, targetColor - delta);
+        }
+        targetAngle -= targetSpeed * delta;
+        targetSpeed = Math.max(1, targetSpeed - delta * 10);
+        
         if (minimapEnabled) {
             minimapColor = Math.min(1, minimapColor + delta);
         } else {
@@ -311,6 +318,12 @@ public class Room implements Layer {
             cam.x += fx * delta * s / 2;
             cam.y += fy * delta * s / 2;
 
+            Unit t = null;
+            double dis = 150;
+            if (targetedUnit != null && (targetedUnit.visiblity == 0
+                    || targetedUnit.hp == 0)) {
+                targetedUnit = null;
+            }
             for (Actor a : actors) {
                 if (a != null && (a instanceof Unit)) {
                     Unit u = (Unit) a;
@@ -320,13 +333,31 @@ public class Room implements Layer {
                             u.selected = true;
                             selection = true;
                         }
+                    } else if (players[player].isEnemy(u.owner) && u.hp > 0
+                            && u.visiblity > 0 && !u.immortal) {
+                        double d = dist(p.x, p.y, u.x, u.y);
+                        if (dis > d) {
+                            t = u;
+                            dis = d;
+                        }
                     }
                     if (u.selected) {
                         u.tx = p.x;
                         u.ty = p.y;
+                        u.target = targetedUnit;
                     }
                 }
             }
+            if (t != null && t != targetedUnit) {
+                if(targetedUnit == null){
+                    targetX = t.x;
+                    targetY = t.y;
+                }
+                targetSpeed = 10;
+                targetedUnit = t;
+            }
+        } else {
+            targetedUnit = null;
         }
         maxActor = max;
     }
@@ -371,11 +402,11 @@ public class Room implements Layer {
         } else {
             terrain = this.terrain_small;
         }
-        for (int i = (int) ((cam.x - width / 2) / terrain.getWidth()) - 2;
-                i < (int) ((cam.x + width / 2) / terrain.getWidth()) + 2; i++) {
-            for (int j = (int) ((cam.y - height / 2) / terrain.getHeight()) - 2;
-                    j < (int) ((cam.y + height / 2) / terrain.getHeight()) + 2; j++) {
-                terrain.setCenter(i * terrain.getWidth(), j * terrain.getHeight());
+        for (int i = (int) ((cam.x - width / 2) / this.terrain.getWidth()) - 2;
+                i < (int) ((cam.x + width / 2) / this.terrain.getWidth()) + 2; i++) {
+            for (int j = (int) ((cam.y - height / 2) / this.terrain.getHeight()) - 2;
+                    j < (int) ((cam.y + height / 2) / this.terrain.getHeight()) + 2; j++) {
+                terrain.setCenter(i * this.terrain.getWidth(), j * this.terrain.getHeight());
                 terrain.draw(batch);
             }
         }
@@ -431,6 +462,11 @@ public class Room implements Layer {
                 }
             }
         }
+        targetSprite.setColor(ColorFabricator.neon(targetColor));
+        targetSprite.x = targetX;
+        targetSprite.y = targetY;
+        targetSprite.angle = targetAngle;
+        targetSprite.draw(batch);
         for (Actor a : renderActors) {
             if (a != null && !a.removed) {
                 if (a.x + a.width
@@ -445,10 +481,11 @@ public class Room implements Layer {
                 }
             }
         }
+        
         batch.end();
         screen.B.begin();
-        font.setColor(Color.WHITE);
-        font.draw(screen.B, Main.fps + "  ---  " + Main.nanos, 20, 20);
+        Font.draw(Main.fps + "fps, Съешь ещё этих мягких французских булок, да выпей чаю!",
+                48, 20, 0, ColorFabricator.neon(minimapColor), screen.B);
         if (false) {
             for (int i = 0; i < (screen.height / 20); i++) {
                 if (ProjectLogger.internalLog[i] != null) {

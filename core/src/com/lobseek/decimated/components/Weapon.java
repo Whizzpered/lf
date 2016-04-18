@@ -60,7 +60,7 @@ public class Weapon {
         if (target != null) {
             float d = dist(x, y, target.x, target.y);
             d /= speed;
-            ta = (float) atan2(target.y + target.vy * d - y,target.x + target.vx * d - x);
+            ta = (float) atan2(target.y + target.vy * d - y, target.x + target.vx * d - x);
         }
         if (angle < -PI) {
             angle += 2 * PI;
@@ -82,7 +82,7 @@ public class Weapon {
             }
         }
         if (angle == ta && target != null) {
-            if (reload == 0) {
+            if (reload == 0 && (on.visiblity == 1 || !on.selected || on.target == target)) {
                 ammo--;
                 if (ammo == 0) {
                     reload = reloadAmmoTime;
@@ -107,13 +107,19 @@ public class Weapon {
         for (Actor a : room.actors) {
             if (a != on && (a instanceof Unit)) {
                 Unit u = (Unit) a;
-                if (u.hp > 0 && !u.immortal && u.visiblity > 0 &&
-                        room.players[on.owner].isEnemy(u.owner)) {
-                    float d = dist(u.x, u.y, on.tx, on.ty);
+                if (u.hp > 0 && !u.immortal && u.visiblity > 0
+                        && room.players[on.owner].isEnemy(u.owner)) {
                     float d2 = dist(u.x, u.y, on.x, on.y);
-                    if (d2 <= range && d < dist) {
-                        dist = d;
-                        t = u;
+                    float d = dist(u.x, u.y, on.tx, on.ty);
+                    if (d2 <= range) {
+                        if (d < dist) {
+                            dist = d;
+                            t = u;
+                        }
+                        if (on.target == u) {
+                            t = u;
+                            break;
+                        }
                     }
                 }
             }

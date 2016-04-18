@@ -123,9 +123,6 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
             t.y = t.ly = screenY;
             t.dx = t.dy = 0;
             t.down = true;
-            ProjectLogger.println("Pointer " + pointer);
-            ProjectLogger.println("   x: " + t.x);
-            ProjectLogger.println("   y: " + t.y);
         }
         for (int i = layers.size() - 1; i >= 0; i--) {
             if (layers.get(i).touchDown(screenX, screenY, pointer, button)) {

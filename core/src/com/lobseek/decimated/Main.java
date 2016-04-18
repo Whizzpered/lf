@@ -17,6 +17,7 @@ package com.lobseek.decimated;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.lobseek.decimated.gui.Font;
 import com.lobseek.decimated.screens.GameScreen;
 import com.lobseek.decimated.screens.SplashScreen;
 import java.util.Random;
@@ -48,8 +49,10 @@ public class Main extends Game {
         }
         loaded = true;
         AM.load("atlas.pack", TextureAtlas.class);
+        AM.load("font.pack", TextureAtlas.class);
         AM.finishLoading();
         atlas = main.AM.get("atlas.pack");
+        Font.atlas = main.AM.get("font.pack");
         screen = null;
         setScreen(new GameScreen());
     }

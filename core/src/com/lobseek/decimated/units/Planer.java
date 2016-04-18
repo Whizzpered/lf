@@ -55,7 +55,7 @@ public class Planer extends Unit {
             this.y = y;
             cx = 50;
             turnSpeed = 6;
-            range = 750;
+            range = 650;
             ammo = maxAmmo = 5;
             reloadTime = 0.3f;
             reloadAmmoTime = 1;
