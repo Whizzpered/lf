@@ -1,5 +1,5 @@
 
-atlas.png
+gui.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -214,7 +214,7 @@ bullet
   offset: 0, 0
   index: -1
 
-atlas2.png
+gui2.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -268,7 +268,7 @@ healthbar/2
   offset: 0, 0
   index: -1
 
-atlas3.png
+gui3.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -322,7 +322,7 @@ minimap/bullet
   offset: 0, 0
   index: -1
 
-atlas4.png
+gui4.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -397,7 +397,7 @@ fog/2
   offset: 0, 0
   index: -1
 
-atlas5.png
+gui5.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -430,7 +430,7 @@ plasma/b0
   offset: 0, 0
   index: -1
 
-atlas6.png
+gui6.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -470,7 +470,7 @@ gui/button_right
   offset: 0, 0
   index: -1
 
-atlas7.png
+gui7.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
@@ -538,7 +538,7 @@ frame/lt
   offset: 0, 0
   index: -1
 
-atlas8.png
+gui8.png
 format: RGBA8888
 filter: Linear,Linear
 repeat: none

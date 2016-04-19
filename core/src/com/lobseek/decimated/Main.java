@@ -53,8 +53,6 @@ public class Main extends Game {
         AM.finishLoading();
         atlas = main.AM.get("atlas.pack");
         Font.atlas = main.AM.get("font.pack");
-        screen = null;
-        setScreen(new GameScreen());
     }
 
     /**

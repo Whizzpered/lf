@@ -17,7 +17,7 @@ public class Font {
     public static TextureAtlas atlas;
     
 
-    public static void draw(Object text, float size, float x, float y, Color color, Batch batch) {
+    public static void draw(Object text, float x, float y, Color color, Batch batch) {
         if (text == null) {
             return;
         }
@@ -39,14 +39,13 @@ public class Font {
             Sprite sp = letters[c];
             sp.setPosition(x, y);
             float width = sp.getWidth();
-            sp.setScale(size / 32f);
             sp.setColor(color);
             sp.draw(batch);
-            x += width * size / 32f;
+            x += width;
         }
     }
 
-    public static void draw(Object text, float size, float x, float y, float width, Color color, Batch batch) {
+    public static void draw(Object text, float x, float y, float width, Color color, Batch batch) {
         if (text == null) {
             return;
         }
@@ -72,29 +71,28 @@ public class Font {
                 space = i;
             }
             Sprite sp = letters[c];
-            sp.setScale(size / 48f);
             cw += sp.getWidth();
             line += c;
             if (cw > width) {
                 if (space != 0) {
-                    draw(line.substring(0, space), size, x, y, color, batch);
+                    draw(line.substring(0, space), x, y, color, batch);
                     i -= space;
                     line = line.substring(space);
                     space = 0;
                 } else {
-                    draw(line, size, x, y, color, batch);
+                    draw(line, x, y, color, batch);
                     i = 0;
                     line = new String();
                 }
-                y -= size;
-                cw = width(line, size);
+                y -= 48;
+                cw = width(line);
             }
             i++;
         }
-        draw(line, size, x, y, color, batch);
+        draw(line, x, y, color, batch);
     }
 
-    public static float width(Object text, float size) {
+    public static float width(Object text) {
         float ww = 0;
         if (text == null) {
             return 0;

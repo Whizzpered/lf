@@ -25,6 +25,7 @@ import com.lobseek.decimated.Main;
 import com.lobseek.decimated.ProjectLogger;
 import com.lobseek.decimated.actors.Test;
 import com.lobseek.decimated.gui.Font;
+import com.lobseek.decimated.screens.GameScreen;
 import com.lobseek.decimated.screens.Screen;
 import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
@@ -44,7 +45,7 @@ public class Room implements Layer {
     private final Particle[] particles;
     public final Actor[] actors;
     private final Actor[] renderActors;
-    public final Screen screen;
+    public final GameScreen screen;
     private final OrthographicCamera camera = new OrthographicCamera();
     public final Point cam = new Point();
     public final SpriteBatch batch = new SpriteBatch();
@@ -74,7 +75,7 @@ public class Room implements Layer {
      * @param actors maximal number of actors in room
      * @param particles maximal number of particles in room
      */
-    public Room(Screen screen, int actors, int particles) {
+    public Room(GameScreen screen, int actors, int particles) {
         this.screen = screen;
         this.actors = new Actor[actors];
         this.renderActors = new Actor[actors];
@@ -484,8 +485,8 @@ public class Room implements Layer {
         
         batch.end();
         screen.B.begin();
-        Font.draw(Main.fps + "fps, Съешь ещё этих мягких французских булок, да выпей чаю!",
-                48, 20, 0, ColorFabricator.neon(minimapColor), screen.B);
+        Font.draw(Main.fps + "fps", 20,
+                0, ColorFabricator.neon(minimapColor), screen.B);
         if (false) {
             for (int i = 0; i < (screen.height / 20); i++) {
                 if (ProjectLogger.internalLog[i] != null) {
@@ -669,6 +670,10 @@ public class Room implements Layer {
             }
             minimapSwipe = true;
             return true;
+        }
+        if (screenX < 10 && screen.touches[0].dx > 0){
+            screen.menu.show();
+            pause();
         }
         if (!selection) {
             if (screen.touches[0].down && !screen.touches[1].down) {

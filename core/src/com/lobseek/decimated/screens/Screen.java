@@ -25,6 +25,7 @@ import com.lobseek.decimated.Main;
 import com.lobseek.decimated.ProjectLogger;
 import com.lobseek.decimated.components.Layer;
 import com.lobseek.decimated.components.Touch;
+import com.lobseek.widgets.LWContainer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -33,12 +34,11 @@ import java.util.Random;
  *
  * @author Yew_Mentzaki
  */
-public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
+public class Screen extends LWContainer implements com.badlogic.gdx.Screen, InputProcessor {
 
     public static final SpriteBatch B = new SpriteBatch();
     protected static final Random R = Main.R;
     protected Main main = Main.main;
-    public float width, height;
     public OrthographicCamera camera = new OrthographicCamera(960, 540);
     private List<Layer> layers = new ArrayList<Layer>();
     public final Touch[] touches = new Touch[10];
@@ -73,13 +73,18 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
         for (int i = 0; i < layers.size(); i++) {
             layers.get(i).render(delta);
         }
+        B.begin();
+        draw(B);
+        B.end();
+        act(delta);
     }
 
     @Override
     public void resize(int width, int height) {
         this.width = width;
         this.height = height;
-
+        x = width / 2;
+        y = height / 2;
     }
 
     @Override
@@ -88,10 +93,6 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
 
     @Override
     public void resume() {
-    }
-
-    @Override
-    public void hide() {
     }
 
     @Override
@@ -123,6 +124,9 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
             t.y = t.ly = screenY;
             t.dx = t.dy = 0;
             t.down = true;
+            if (checkTapDown(t)) {
+                return true;
+            }
         }
         for (int i = layers.size() - 1; i >= 0; i--) {
             if (layers.get(i).touchDown(screenX, screenY, pointer, button)) {
@@ -138,6 +142,9 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
         if (pointer < 10) {
             Touch t = touches[pointer];
             t.down = false;
+            if (checkTapUp(t)) {
+                return true;
+            }
         }
         for (int i = layers.size() - 1; i >= 0; i--) {
             if (layers.get(i).touchUp(screenX, screenY, pointer, button)) {
@@ -159,6 +166,9 @@ public class Screen implements com.badlogic.gdx.Screen, InputProcessor {
             t.dx = t.x - t.lx;
             t.dy = t.y - t.ly;
             t.down = true;
+            if (checkSwipe(t)) {
+                return true;
+            }
         }
         for (int i = layers.size() - 1; i >= 0; i--) {
             if (layers.get(i).touchDragged(screenX, screenY, pointer)) {
