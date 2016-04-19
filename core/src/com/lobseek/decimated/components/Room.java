@@ -671,9 +671,10 @@ public class Room implements Layer {
             minimapSwipe = true;
             return true;
         }
-        if (screenX < 10 && screen.touches[0].dx > 0){
+        if (screenX > screen.width - 30 && screen.touches[0].dx < 0){
             screen.menu.show();
             pause();
+            return true;
         }
         if (!selection) {
             if (screen.touches[0].down && !screen.touches[1].down) {

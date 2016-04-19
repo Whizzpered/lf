@@ -53,7 +53,7 @@ public class GameScreen extends Screen {
             room.add(new Base(-2000, -600, 4));
             room.add(new Base(-2000, 0, 4));
         }
-        room.start();
+        room.pause();
     }
 
     public GameScreen() {
@@ -84,7 +84,7 @@ public class GameScreen extends Screen {
         menu.add(i);
         Button play = new Button("menu.play") {
             @Override
-            public void tapDown(Touch t) {
+            public void tapUp(Touch t) {
                 beginGame();
             }
 
@@ -100,7 +100,7 @@ public class GameScreen extends Screen {
         menu.add(play);
         play = new Button("menu.exit") {
             @Override
-            public void tapDown(Touch t) {
+            public void tapUp(Touch t) {
                 System.exit(0);
             }
 
