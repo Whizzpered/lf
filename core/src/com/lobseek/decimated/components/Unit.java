@@ -20,6 +20,7 @@ import com.lobseek.decimated.Main;
 import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
 import static java.lang.Math.max;
+import static java.lang.Math.max;
 
 /**
  *
@@ -40,7 +41,7 @@ public class Unit extends Actor {
 
     protected static final Sprite selection = new Sprite("selection");
     protected Sprite body, body_team, body_shadow;
-    public static Sprite MMS = new Sprite("minimap/unit");
+    public static Sprite MMS = new Sprite("minimap/unit", true);
     public static final Sprite HEALTHBAR[] = new Sprite[]{
         new Sprite("healthbar/0"),
         new Sprite("healthbar/1"),
@@ -334,15 +335,16 @@ public class Unit extends Actor {
             }
             hpNumber = hp_index;
         }
-        Sprite hp = HEALTHBAR[hp_index];
+        if (hpColor > 0) {
+            Sprite hp = HEALTHBAR[hp_index];
 
-        hp.setScale(sqrt(0.6f - Math.abs(1 - hpColor) * 0.3f) * 0.5f);
-        hp.x = x;
-        hp.y = y + height / 3;
-        hp.setColor(new Color(0, 0, 0, 1 - Math.abs(1 - hpColor)));
-        hp.draw(batch);
-        hp.setColor(ColorFabricator.neon(1 - Math.abs(1 - hpColor)));
-        hp.draw(batch);
-
+            hp.setScale(sqrt(0.6f - Math.abs(1 - hpColor) * 0.3f) * 0.5f);
+            hp.x = x;
+            hp.y = y + height / 3;
+            hp.setColor(new Color(0, 0, 0, 1 - Math.abs(1 - hpColor)));
+            hp.draw(batch);
+            hp.setColor(ColorFabricator.neon(1 - Math.abs(1 - hpColor)));
+            hp.draw(batch);
+        }
     }
 }

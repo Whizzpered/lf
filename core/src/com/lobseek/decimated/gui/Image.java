@@ -29,7 +29,7 @@ public class Image extends LWidget{
     private float lightness;
 
     public Image(String image) {
-        this.image = new Sprite(image);
+        this.image = new Sprite(image, true);
         this.width = this.image.width;
         this.height = this.image.height;
     }

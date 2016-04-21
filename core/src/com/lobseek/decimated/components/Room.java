@@ -66,8 +66,8 @@ public class Room implements Layer {
     private final float barricadeSize = 360;
     private float targetX, targetY, targetAngle, targetSpeed, targetColor;
 
-    private Sprite minimapGUI = new Sprite("minimap/gui");
-    private Sprite minimapFrame = new Sprite("minimap/frame");
+    private Sprite minimapGUI = new Sprite("minimap/gui", true);
+    private Sprite minimapFrame = new Sprite("minimap/frame", true);
     private Sprite targetSprite = new Sprite("target");
 
     /**
@@ -275,7 +275,7 @@ public class Room implements Layer {
      * @param delta time between acts in seconds
      */
     public void act(float delta) {
-        if(targetedUnit != null){
+        if (targetedUnit != null) {
             targetColor = Math.min(1, targetColor + delta);
             targetX = (12 * targetX + targetedUnit.x) / 13;
             targetY = (12 * targetY + targetedUnit.y) / 13;
@@ -284,7 +284,7 @@ public class Room implements Layer {
         }
         targetAngle -= targetSpeed * delta;
         targetSpeed = Math.max(1, targetSpeed - delta * 10);
-        
+
         if (minimapEnabled) {
             minimapColor = Math.min(1, minimapColor + delta);
         } else {
@@ -350,7 +350,7 @@ public class Room implements Layer {
                 }
             }
             if (t != null && t != targetedUnit) {
-                if(targetedUnit == null){
+                if (targetedUnit == null) {
                     targetX = t.x;
                     targetY = t.y;
                 }
@@ -369,8 +369,7 @@ public class Room implements Layer {
      * @param delta time between frames in seconds
      */
     @Override
-    public void render(float delta
-    ) {
+    public void render(float delta) {
         for (int i = 0; i < actors.length; i++) {
             renderActors[i] = actors[i];
         }
@@ -391,6 +390,8 @@ public class Room implements Layer {
         });
         float width = screen.width - deltaSize;
         float height = (width / screen.width) * screen.height;
+        Sprite.worldScale = (screen.width / width);
+        
         camera.setToOrtho(false, width, height);
         camera.position.x = cam.x;
         camera.position.y = cam.y;
@@ -482,7 +483,7 @@ public class Room implements Layer {
                 }
             }
         }
-        
+
         batch.end();
         screen.B.begin();
         Font.draw(Main.fps + "fps", 20,
@@ -671,7 +672,7 @@ public class Room implements Layer {
             minimapSwipe = true;
             return true;
         }
-        if (screenX > screen.width - 30 && screen.touches[0].dx < 0){
+        if (screenX > screen.width - 30 && screen.touches[0].dx < 0) {
             screen.menu.show();
             pause();
             return true;

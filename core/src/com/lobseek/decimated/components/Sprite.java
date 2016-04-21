@@ -23,10 +23,14 @@ import com.lobseek.decimated.Main;
  */
 public class Sprite {
 
+    static float worldScale;
+
     public float x, y, width, height, angle;
     public float originalWidth, originalHeight;
     public final String name;
+    public final boolean qual;
     private com.badlogic.gdx.graphics.g2d.Sprite sprite;
+    private com.badlogic.gdx.graphics.g2d.Sprite small_sprite;
     boolean loaded, broken;
     public float r = 1, g = 1, b = 1, a = 1;
 
@@ -35,15 +39,25 @@ public class Sprite {
      */
     public Sprite(String name) {
         this.name = name;
+        qual = false;
         load();
     }
-    
-    public void setScale(float scale){
+
+    /**
+     * @param name path of image in "atlas.pack"
+     */
+    public Sprite(String name, boolean quality) {
+        this.name = name;
+        qual = quality;
+        load();
+    }
+
+    public void setScale(float scale) {
         width = scale * originalWidth;
         height = scale * originalHeight;
     }
-    
-    public void setColor(Color color){
+
+    public void setColor(Color color) {
         r = color.r;
         g = color.g;
         b = color.b;
@@ -59,6 +73,7 @@ public class Sprite {
                 loaded = true;
                 sprite = Main.atlas.createSprite(name);
                 if (sprite != null) {
+                    small_sprite = Main.small_atlas.createSprite(name);
                     originalWidth = sprite.getWidth();
                     originalHeight = sprite.getHeight();
 
@@ -83,6 +98,10 @@ public class Sprite {
         load();
         if (broken) {
             return;
+        }
+        com.badlogic.gdx.graphics.g2d.Sprite sprite = this.sprite;
+        if (!qual && width * worldScale <= originalWidth / 2 && height * worldScale <= originalHeight / 2) {
+            sprite = small_sprite;
         }
         sprite.setSize(width, height);
         sprite.setOrigin(width / 2, height / 2);

@@ -34,7 +34,7 @@ public class Main extends Game {
     public static Main main;
     public static int fps;
     public static long nanos;
-    public static TextureAtlas atlas;
+    public static TextureAtlas atlas, small_atlas;
     private boolean loaded;
     private static long time;
     private static int frames;
@@ -49,9 +49,11 @@ public class Main extends Game {
         }
         loaded = true;
         AM.load("atlas.pack", TextureAtlas.class);
+        AM.load("small_atlas.pack", TextureAtlas.class);
         AM.load("font.pack", TextureAtlas.class);
         AM.finishLoading();
         atlas = main.AM.get("atlas.pack");
+        small_atlas = main.AM.get("small_atlas.pack");
         Font.atlas = main.AM.get("font.pack");
     }
 

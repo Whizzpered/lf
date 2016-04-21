@@ -28,9 +28,9 @@ public class Button extends LWidget {
 
     String code;
     private float lightness;
-    private static Sprite button_left = new Sprite("gui/button_left"),
-            button_center = new Sprite("gui/button_center"),
-            button_right = new Sprite("gui/button_right");
+    private static Sprite button_left = new Sprite("gui/button_left", true),
+            button_center = new Sprite("gui/button_center", true),
+            button_right = new Sprite("gui/button_right", true);
 
     public Button(String code) {
         this.code = code;

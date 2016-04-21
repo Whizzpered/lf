@@ -1,614 +1,614 @@
 
-atlas.png
+small_atlas.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 target
   rotate: false
-  xy: 1, 296
-  size: 200, 215
-  orig: 200, 215
+  xy: 1, 148
+  size: 100, 107
+  orig: 100, 107
   offset: 0, 0
   index: -1
 base_underground
   rotate: false
-  xy: 1, 114
-  size: 180, 180
-  orig: 180, 180
-  offset: 0, 0
-  index: -1
-selection
-  rotate: false
-  xy: 203, 411
-  size: 194, 100
-  orig: 194, 100
-  offset: 0, 0
-  index: -1
-base_hand_shadow
-  rotate: false
-  xy: 399, 449
-  size: 220, 62
-  orig: 220, 62
-  offset: 0, 0
-  index: -1
-planer_shield
-  rotate: false
-  xy: 203, 269
-  size: 150, 140
-  orig: 150, 140
-  offset: 0, 0
-  index: -1
-base_platform_shadow
-  rotate: false
-  xy: 183, 131
-  size: 145, 136
-  orig: 145, 136
-  offset: 0, 0
-  index: -1
-base_hand
-  rotate: false
-  xy: 621, 469
-  size: 200, 42
-  orig: 200, 42
-  offset: 0, 0
-  index: -1
-base_hand_team
-  rotate: false
-  xy: 823, 469
-  size: 200, 42
-  orig: 200, 42
+  xy: 1, 56
+  size: 90, 90
+  orig: 90, 90
   offset: 0, 0
   index: -1
 crater
   rotate: false
-  xy: 1, 5
-  size: 108, 107
-  orig: 108, 107
+  xy: 1, 1
+  size: 54, 53
+  orig: 54, 53
   offset: 0, 0
   index: -1
-planer_body
+selection
   rotate: false
-  xy: 111, 19
-  size: 100, 93
-  orig: 100, 93
+  xy: 103, 205
+  size: 97, 50
+  orig: 97, 50
   offset: 0, 0
   index: -1
-planer_body_shadow
+base_hand_shadow
   rotate: false
-  xy: 213, 16
-  size: 120, 113
-  orig: 120, 113
+  xy: 202, 224
+  size: 110, 31
+  orig: 110, 31
+  offset: 0, 0
+  index: -1
+planer_shield
+  rotate: false
+  xy: 103, 133
+  size: 75, 70
+  orig: 75, 70
+  offset: 0, 0
+  index: -1
+base_platform_shadow
+  rotate: false
+  xy: 93, 63
+  size: 72, 68
+  orig: 72, 68
+  offset: 0, 0
+  index: -1
+base_hand
+  rotate: false
+  xy: 314, 234
+  size: 100, 21
+  orig: 100, 21
+  offset: 0, 0
+  index: -1
+base_hand_team
+  rotate: false
+  xy: 202, 201
+  size: 100, 21
+  orig: 100, 21
   offset: 0, 0
   index: -1
 base_platform
   rotate: false
-  xy: 399, 331
-  size: 125, 116
-  orig: 125, 116
+  xy: 180, 141
+  size: 62, 58
+  orig: 62, 58
   offset: 0, 0
   index: -1
-planer_body_team
+planer_body_shadow
   rotate: false
-  xy: 526, 354
-  size: 100, 93
-  orig: 100, 93
+  xy: 244, 143
+  size: 60, 56
+  orig: 60, 56
   offset: 0, 0
   index: -1
 disruptor_body_shadow
   rotate: false
-  xy: 628, 375
-  size: 120, 92
-  orig: 120, 92
+  xy: 416, 209
+  size: 60, 46
+  orig: 60, 46
   offset: 0, 0
   index: -1
-planer_power
+planer_body
   rotate: false
-  xy: 750, 374
-  size: 100, 93
-  orig: 100, 93
-  offset: 0, 0
-  index: -1
-disruptor_head_shadow
-  rotate: false
-  xy: 852, 400
-  size: 120, 67
-  orig: 120, 67
+  xy: 57, 8
+  size: 50, 46
+  orig: 50, 46
   offset: 0, 0
   index: -1
 rocket
   rotate: false
-  xy: 852, 388
-  size: 147, 10
-  orig: 147, 10
+  xy: 57, 1
+  size: 73, 5
+  orig: 73, 5
   offset: 0, 0
   index: -1
-phantom_body_shadow
+planer_body_team
   rotate: false
-  xy: 628, 313
-  size: 105, 60
-  orig: 105, 60
+  xy: 109, 15
+  size: 50, 46
+  orig: 50, 46
   offset: 0, 0
   index: -1
-disruptor_head
+disruptor_head_shadow
   rotate: false
-  xy: 526, 305
-  size: 100, 47
-  orig: 100, 47
+  xy: 314, 199
+  size: 60, 33
+  orig: 60, 33
   offset: 0, 0
   index: -1
-disruptor_body_team
+planer_power
   rotate: false
-  xy: 735, 300
-  size: 100, 72
-  orig: 100, 72
-  offset: 0, 0
-  index: -1
-disruptor_body
-  rotate: false
-  xy: 355, 257
-  size: 100, 72
-  orig: 100, 72
+  xy: 306, 151
+  size: 50, 46
+  orig: 50, 46
   offset: 0, 0
   index: -1
 sand
   rotate: false
-  xy: 330, 180
-  size: 75, 75
-  orig: 75, 75
+  xy: 376, 195
+  size: 37, 37
+  orig: 37, 37
+  offset: 0, 0
+  index: -1
+disruptor_body_team
+  rotate: false
+  xy: 358, 157
+  size: 50, 36
+  orig: 50, 36
+  offset: 0, 0
+  index: -1
+phantom_body_shadow
+  rotate: false
+  xy: 415, 177
+  size: 52, 30
+  orig: 52, 30
+  offset: 0, 0
+  index: -1
+disruptor_head
+  rotate: false
+  xy: 410, 152
+  size: 50, 23
+  orig: 50, 23
   offset: 0, 0
   index: -1
 planer_head_shadow
   rotate: false
-  xy: 330, 136
-  size: 100, 42
-  orig: 100, 42
+  xy: 358, 134
+  size: 50, 21
+  orig: 50, 21
+  offset: 0, 0
+  index: -1
+disruptor_body
+  rotate: false
+  xy: 306, 113
+  size: 50, 36
+  orig: 50, 36
   offset: 0, 0
   index: -1
 phantom_body
   rotate: false
-  xy: 335, 94
-  size: 85, 40
-  orig: 85, 40
+  xy: 358, 112
+  size: 42, 20
+  orig: 42, 20
   offset: 0, 0
   index: -1
 phantom_body_terrain
   rotate: false
-  xy: 335, 52
-  size: 85, 40
-  orig: 85, 40
+  xy: 410, 130
+  size: 42, 20
+  orig: 42, 20
   offset: 0, 0
   index: -1
 phantom_body_invisible
   rotate: false
-  xy: 335, 10
-  size: 85, 40
-  orig: 85, 40
+  xy: 402, 108
+  size: 42, 20
+  orig: 42, 20
   offset: 0, 0
   index: -1
 phantom_body_team
   rotate: false
-  xy: 852, 346
-  size: 85, 40
-  orig: 85, 40
+  xy: 469, 187
+  size: 42, 20
+  orig: 42, 20
   offset: 0, 0
   index: -1
 planer_head
   rotate: false
-  xy: 837, 322
-  size: 80, 22
-  orig: 80, 22
+  xy: 469, 174
+  size: 40, 11
+  orig: 40, 11
   offset: 0, 0
   index: -1
 laser
   rotate: false
-  xy: 111, 7
-  size: 40, 10
-  orig: 40, 10
+  xy: 109, 8
+  size: 20, 5
+  orig: 20, 5
   offset: 0, 0
   index: -1
 bullet
   rotate: false
-  xy: 111, 1
-  size: 4, 4
-  orig: 4, 4
-  offset: 0, 0
-  index: -1
-
-atlas2.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-healthbar/4
-  rotate: false
-  xy: 1, 252
-  size: 250, 249
-  orig: 250, 249
-  offset: 0, 0
-  index: -1
-healthbar/1
-  rotate: false
-  xy: 1, 1
-  size: 250, 249
-  orig: 250, 249
-  offset: 0, 0
-  index: -1
-healthbar/0
-  rotate: false
-  xy: 253, 252
-  size: 250, 249
-  orig: 250, 249
-  offset: 0, 0
-  index: -1
-healthbar/5
-  rotate: false
-  xy: 253, 1
-  size: 250, 249
-  orig: 250, 249
-  offset: 0, 0
-  index: -1
-healthbar/3
-  rotate: false
-  xy: 505, 252
-  size: 250, 249
-  orig: 250, 249
-  offset: 0, 0
-  index: -1
-healthbar/6
-  rotate: false
-  xy: 505, 1
-  size: 250, 249
-  orig: 250, 249
-  offset: 0, 0
-  index: -1
-healthbar/2
-  rotate: false
-  xy: 757, 252
-  size: 250, 249
-  orig: 250, 249
-  offset: 0, 0
-  index: -1
-
-atlas3.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-minimap/gui
-  rotate: false
-  xy: 1, 29
-  size: 250, 322
-  orig: 250, 322
-  offset: 0, 0
-  index: -1
-minimap/head
-  rotate: false
-  xy: 1, 20
-  size: 15, 7
-  orig: 15, 7
-  offset: 0, 0
-  index: -1
-minimap/base
-  rotate: false
-  xy: 1, 8
-  size: 9, 10
-  orig: 9, 10
-  offset: 0, 0
-  index: -1
-minimap/planer
-  rotate: false
-  xy: 18, 22
-  size: 6, 5
-  orig: 6, 5
-  offset: 0, 0
-  index: -1
-minimap/frame
-  rotate: false
-  xy: 1, 1
-  size: 5, 5
-  orig: 5, 5
-  offset: 0, 0
-  index: -1
-minimap/unit
-  rotate: false
-  xy: 26, 24
-  size: 6, 3
-  orig: 6, 3
-  offset: 0, 0
-  index: -1
-minimap/bullet
-  rotate: false
-  xy: 253, 349
+  xy: 180, 201
   size: 2, 2
   orig: 2, 2
   offset: 0, 0
   index: -1
 
-atlas4.png
+small_atlas2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+healthbar/4
+  rotate: false
+  xy: 1, 127
+  size: 125, 124
+  orig: 125, 124
+  offset: 0, 0
+  index: -1
+healthbar/1
+  rotate: false
+  xy: 1, 1
+  size: 125, 124
+  orig: 125, 124
+  offset: 0, 0
+  index: -1
+healthbar/0
+  rotate: false
+  xy: 128, 127
+  size: 125, 124
+  orig: 125, 124
+  offset: 0, 0
+  index: -1
+healthbar/5
+  rotate: false
+  xy: 128, 1
+  size: 125, 124
+  orig: 125, 124
+  offset: 0, 0
+  index: -1
+healthbar/3
+  rotate: false
+  xy: 255, 127
+  size: 125, 124
+  orig: 125, 124
+  offset: 0, 0
+  index: -1
+healthbar/6
+  rotate: false
+  xy: 255, 1
+  size: 125, 124
+  orig: 125, 124
+  offset: 0, 0
+  index: -1
+healthbar/2
+  rotate: false
+  xy: 382, 127
+  size: 125, 124
+  orig: 125, 124
+  offset: 0, 0
+  index: -1
+
+small_atlas3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+minimap/gui
+  rotate: false
+  xy: 1, 16
+  size: 125, 161
+  orig: 125, 161
+  offset: 0, 0
+  index: -1
+minimap/head
+  rotate: false
+  xy: 1, 11
+  size: 7, 3
+  orig: 7, 3
+  offset: 0, 0
+  index: -1
+minimap/base
+  rotate: false
+  xy: 1, 4
+  size: 4, 5
+  orig: 4, 5
+  offset: 0, 0
+  index: -1
+minimap/planer
+  rotate: false
+  xy: 10, 12
+  size: 3, 2
+  orig: 3, 2
+  offset: 0, 0
+  index: -1
+minimap/unit
+  rotate: false
+  xy: 1, 1
+  size: 3, 1
+  orig: 3, 1
+  offset: 0, 0
+  index: -1
+minimap/frame
+  rotate: false
+  xy: 15, 12
+  size: 2, 2
+  orig: 2, 2
+  offset: 0, 0
+  index: -1
+minimap/bullet
+  rotate: false
+  xy: 7, 8
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+
+small_atlas4.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 fog/9
   rotate: false
   xy: 1, 1
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-fog/7
-  rotate: false
-  xy: 35, 1
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-fog/4
-  rotate: false
-  xy: 69, 1
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-fog/1
-  rotate: false
-  xy: 103, 1
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-fog/0
-  rotate: false
-  xy: 137, 1
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-fog/5
-  rotate: false
-  xy: 171, 1
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-fog/8
-  rotate: false
-  xy: 205, 1
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-fog/3
-  rotate: false
-  xy: 239, 1
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-fog/6
-  rotate: false
-  xy: 273, 1
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-fog/2
-  rotate: false
-  xy: 307, 1
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-
-atlas5.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-plasma/explosion1
-  rotate: false
-  xy: 1, 38
-  size: 200, 200
-  orig: 200, 200
-  offset: 0, 0
-  index: -1
-plasma/explosion2
-  rotate: false
-  xy: 203, 88
-  size: 150, 150
-  orig: 150, 150
-  offset: 0, 0
-  index: -1
-plasma/explosion0
-  rotate: false
-  xy: 355, 95
-  size: 149, 143
-  orig: 149, 143
-  offset: 0, 0
-  index: -1
-plasma/b0
-  rotate: false
-  xy: 1, 1
-  size: 65, 35
-  orig: 65, 35
-  offset: 0, 0
-  index: -1
-
-atlas6.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-gui/logo
-  rotate: false
-  xy: 1, 159
-  size: 482, 297
-  orig: 482, 297
-  offset: 0, 0
-  index: -1
-gui/example
-  rotate: false
-  xy: 1, 1
-  size: 600, 156
-  orig: 600, 156
-  offset: 0, 0
-  index: -1
-gui/button_center
-  rotate: false
-  xy: 485, 310
-  size: 447, 146
-  orig: 447, 146
-  offset: 0, 0
-  index: -1
-gui/button_left
-  rotate: false
-  xy: 934, 300
-  size: 87, 156
-  orig: 87, 156
-  offset: 0, 0
-  index: -1
-gui/button_right
-  rotate: false
-  xy: 603, 152
-  size: 87, 156
-  orig: 87, 156
-  offset: 0, 0
-  index: -1
-
-atlas7.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-frame/lb
-  rotate: false
-  xy: 1, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-frame/cb
+fog/7
   rotate: false
   xy: 19, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-frame/rc
+fog/4
   rotate: false
   xy: 37, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-frame/cc
+fog/1
   rotate: false
   xy: 55, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-frame/ct
+fog/0
   rotate: false
   xy: 73, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-frame/lc
+fog/5
   rotate: false
   xy: 91, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-frame/rt
+fog/8
   rotate: false
   xy: 109, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-frame/rb
+fog/3
   rotate: false
   xy: 127, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
-frame/lt
+fog/6
   rotate: false
   xy: 145, 1
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: -1
+fog/2
+  rotate: false
+  xy: 163, 1
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
 
-atlas8.png
+small_atlas5.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+plasma/explosion1
+  rotate: false
+  xy: 1, 20
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+plasma/explosion2
+  rotate: false
+  xy: 103, 45
+  size: 75, 75
+  orig: 75, 75
+  offset: 0, 0
+  index: -1
+plasma/explosion0
+  rotate: false
+  xy: 180, 49
+  size: 74, 71
+  orig: 74, 71
+  offset: 0, 0
+  index: -1
+plasma/b0
+  rotate: false
+  xy: 1, 1
+  size: 32, 17
+  orig: 32, 17
+  offset: 0, 0
+  index: -1
+
+small_atlas6.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+gui/logo
+  rotate: false
+  xy: 1, 81
+  size: 241, 148
+  orig: 241, 148
+  offset: 0, 0
+  index: -1
+gui/example
+  rotate: false
+  xy: 1, 1
+  size: 300, 78
+  orig: 300, 78
+  offset: 0, 0
+  index: -1
+gui/button_center
+  rotate: false
+  xy: 244, 156
+  size: 223, 73
+  orig: 223, 73
+  offset: 0, 0
+  index: -1
+gui/button_left
+  rotate: false
+  xy: 303, 76
+  size: 43, 78
+  orig: 43, 78
+  offset: 0, 0
+  index: -1
+gui/button_right
+  rotate: false
+  xy: 348, 76
+  size: 43, 78
+  orig: 43, 78
+  offset: 0, 0
+  index: -1
+
+small_atlas7.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+frame/lb
+  rotate: false
+  xy: 1, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+frame/cb
+  rotate: false
+  xy: 11, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+frame/rc
+  rotate: false
+  xy: 21, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+frame/cc
+  rotate: false
+  xy: 31, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+frame/ct
+  rotate: false
+  xy: 41, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+frame/lc
+  rotate: false
+  xy: 51, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+frame/rt
+  rotate: false
+  xy: 61, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+frame/rb
+  rotate: false
+  xy: 71, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+frame/lt
+  rotate: false
+  xy: 81, 1
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+
+small_atlas8.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 decorations/3
   rotate: false
-  xy: 1, 20
-  size: 108, 107
-  orig: 108, 107
+  xy: 1, 6
+  size: 54, 53
+  orig: 54, 53
   offset: 0, 0
   index: -1
 decorations/8
   rotate: false
-  xy: 111, 29
-  size: 100, 98
-  orig: 100, 98
+  xy: 57, 10
+  size: 50, 49
+  orig: 50, 49
   offset: 0, 0
   index: -1
 decorations/9
   rotate: false
-  xy: 213, 41
-  size: 85, 86
-  orig: 85, 86
+  xy: 109, 16
+  size: 42, 43
+  orig: 42, 43
   offset: 0, 0
   index: -1
 decorations/1
   rotate: false
-  xy: 300, 11
-  size: 70, 116
-  orig: 70, 116
+  xy: 153, 1
+  size: 35, 58
+  orig: 35, 58
   offset: 0, 0
   index: -1
 decorations/0
   rotate: false
-  xy: 372, 48
-  size: 73, 79
-  orig: 73, 79
+  xy: 190, 20
+  size: 36, 39
+  orig: 36, 39
   offset: 0, 0
   index: -1
 decorations/7
   rotate: false
-  xy: 447, 65
-  size: 61, 62
-  orig: 61, 62
+  xy: 228, 28
+  size: 30, 31
+  orig: 30, 31
   offset: 0, 0
   index: -1
 decorations/2
   rotate: false
-  xy: 447, 1
-  size: 54, 62
-  orig: 54, 62
+  xy: 260, 28
+  size: 27, 31
+  orig: 27, 31
   offset: 0, 0
   index: -1
 decorations/6
   rotate: false
-  xy: 510, 63
-  size: 50, 64
-  orig: 50, 64
+  xy: 289, 27
+  size: 25, 32
+  orig: 25, 32
   offset: 0, 0
   index: -1
 decorations/4
   rotate: false
-  xy: 562, 66
-  size: 44, 61
-  orig: 44, 61
+  xy: 316, 29
+  size: 22, 30
+  orig: 22, 30
   offset: 0, 0
   index: -1
 decorations/5
   rotate: false
-  xy: 608, 74
-  size: 33, 53
-  orig: 33, 53
+  xy: 340, 33
+  size: 16, 26
+  orig: 16, 26
   offset: 0, 0
   index: -1
