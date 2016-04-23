@@ -30,8 +30,9 @@ import static com.lobseek.utils.Math.*;
  */
 public class Base extends Actor {
 
-    public int owner = 1;
+    public int owner = 1, unitsPerBase = 5;
     float animation, animation2, timer, platformAngle;
+    float power = 20, maxPower = 20, captureDistance = 400;
     Unit inQueue;
     public static Sprite MMS = new Sprite("minimap/base");
 
@@ -54,9 +55,9 @@ public class Base extends Actor {
     }
 
     @Override
-    public void minimapRender(Batch batch, float delta) {
+    public void minimapRender(Batch batch, float delta, float alpha) {
         minimapSprite.setColor(room.players[owner].color);
-        super.minimapRender(batch, delta);
+        super.minimapRender(batch, delta, alpha);
     }
 
     @Override
@@ -94,6 +95,25 @@ public class Base extends Actor {
     @Override
     public void tick(float delta) {
         handleCollision(delta);
+
+        for (Actor a : room.actors) {
+            if (a instanceof Unit) {
+                Unit u = (Unit) a;
+                float d = dist(x, y, u.x, u.y);
+                if (u.hp > 0 && d < captureDistance) {
+                    if (u.owner == this.owner) {
+                        power = Math.min(maxPower, power + delta * (captureDistance - d) / captureDistance);
+                    } else if (room.players[owner].isEnemy(u.owner)) {
+                        power = Math.max(0, power - delta * (captureDistance - d) / captureDistance);
+                        if (power == 0) {
+                            room.players[owner].maxUnits -= unitsPerBase;
+                            owner = u.owner;
+                            room.players[owner].maxUnits += unitsPerBase;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @Override
@@ -141,6 +161,9 @@ public class Base extends Actor {
             if (i == hands - 1) {
                 sprite = sprite_team;
                 sprite.setColor(room.players[owner].color);
+                sprite.r = sprite.r + (1 - sprite.r) * (1 - power / maxPower);
+                sprite.g = sprite.g + (1 - sprite.g) * (1 - power / maxPower);
+                sprite.b = sprite.b + (1 - sprite.b) * (1 - power / maxPower);
             } else {
                 sprite = this.sprite;
             }

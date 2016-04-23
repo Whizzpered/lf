@@ -16,15 +16,20 @@ package com.lobseek.decimated.screens;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.lobseek.decimated.Main;
 import com.lobseek.decimated.ProjectLogger;
 import com.lobseek.decimated.components.Layer;
 import com.lobseek.decimated.components.Touch;
+import com.lobseek.utils.ScreenshotFactory;
 import com.lobseek.widgets.LWContainer;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +107,9 @@ public class Screen extends LWContainer implements com.badlogic.gdx.Screen, Inpu
 
     @Override
     public boolean keyDown(int keycode) {
+        if (keycode == Keys.S) {
+            ScreenshotFactory.saveScreenshot();
+        }
         return false;
     }
 

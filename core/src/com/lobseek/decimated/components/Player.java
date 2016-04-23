@@ -14,9 +14,7 @@
  */
 package com.lobseek.decimated.components;
 
-import com.lobseek.decimated.units.Phantom;
-import com.lobseek.decimated.units.Disruptor;
-import com.lobseek.decimated.units.Planer;
+import com.lobseek.decimated.units.*;
 import com.badlogic.gdx.graphics.Color;
 import com.lobseek.decimated.Main;
 import com.lobseek.decimated.ProjectLogger;
@@ -39,7 +37,7 @@ public class Player {
     public int alliance = -1;
     public Class types[];
     public float produce[];
-    public int units, maxUnits = 15;
+    public int units, maxUnits = 20;
 
     public void setTypes(Class... types) {
         this.types = types;
@@ -52,7 +50,7 @@ public class Player {
     public Player(Room room, int index) {
         this.room = room;
         this.index = index;
-        setTypes(Disruptor.class, Phantom.class, Planer.class);
+        setTypes(Disruptor.class, Phantom.class, Planer.class, Controller.class);
     }
 
     public Unit spawn(float x, float y, float angle) {

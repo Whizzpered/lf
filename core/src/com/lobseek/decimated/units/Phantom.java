@@ -36,6 +36,8 @@ public class Phantom extends Unit {
 
     class PlasmaBullet extends Bullet {
 
+        float waiter = 0.25f;
+
         public PlasmaBullet(Unit from, Unit to, float x, float y) {
             super(from, to, x, y);
             speed = 500;
@@ -72,8 +74,11 @@ public class Phantom extends Unit {
                     }
                 }
                 if (lto == to) {
-                    room.add(new Explosion(x, y, 300, explosion_0, 20, 100));
-                    lifeTime = -1000;
+                    waiter -= delta;
+                    if (waiter < 0) {
+                        room.add(new Explosion(x, y, 300, explosion_0, 20, 100));
+                        lifeTime = -1000;
+                    }
                 }
             }
             super.act(delta);

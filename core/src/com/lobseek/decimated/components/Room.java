@@ -252,6 +252,9 @@ public class Room implements Layer {
      * Pauses or unpauses game.
      */
     public void pause() {
+        if (!running) {
+            actTime = tickTime = System.currentTimeMillis();
+        }
         running = !running;
     }
 
@@ -259,6 +262,7 @@ public class Room implements Layer {
      * Starting game in it's stoped or not began yet.
      */
     public void start() {
+        actTime = tickTime = System.currentTimeMillis();
         running = true;
     }
 
@@ -284,12 +288,6 @@ public class Room implements Layer {
         }
         targetAngle -= targetSpeed * delta;
         targetSpeed = Math.max(1, targetSpeed - delta * 10);
-
-        if (minimapEnabled) {
-            minimapColor = Math.min(1, minimapColor + delta);
-        } else {
-            minimapColor = Math.max(0, minimapColor - delta);
-        }
         int cur = 0, max = 0;
         for (Actor a : actors) {
             cur++;
@@ -370,6 +368,11 @@ public class Room implements Layer {
      */
     @Override
     public void render(float delta) {
+        if(running && minimapEnabled){
+            minimapColor = Math.min(minimapColor + delta, 1);
+        }else{
+            minimapColor = Math.max(minimapColor - delta, 0);
+        }
         for (int i = 0; i < actors.length; i++) {
             renderActors[i] = actors[i];
         }
@@ -391,7 +394,7 @@ public class Room implements Layer {
         float width = screen.width - deltaSize;
         float height = (width / screen.width) * screen.height;
         Sprite.worldScale = (screen.width / width);
-        
+
         camera.setToOrtho(false, width, height);
         camera.position.x = cam.x;
         camera.position.y = cam.y;
@@ -464,7 +467,8 @@ public class Room implements Layer {
                 }
             }
         }
-        targetSprite.setColor(ColorFabricator.neon(targetColor));
+        Color c = ColorFabricator.neon(targetColor);
+        targetSprite.setColor(c);
         targetSprite.x = targetX;
         targetSprite.y = targetY;
         targetSprite.angle = targetAngle;
@@ -495,17 +499,19 @@ public class Room implements Layer {
                 }
             }
         }
+        c = ColorFabricator.neon(minimapColor);
         minimapGUI.x = screen.width - minimapGUI.width / 2;
         minimapGUI.y = screen.height - minimapGUI.height / 2;
-        minimapGUI.setColor(ColorFabricator.neon(minimapColor));
+        minimapGUI.setColor(c);
         minimapGUI.draw(screen.B);
         for (Actor a : renderActors) {
             if (a != null && !a.removed) {
                 if (dist(a.x, a.y, 0, 0) <= size) {
-                    a.minimapRender(screen.B, delta);
+                    a.minimapRender(screen.B, delta, minimapColor);
                 }
             }
         }
+        minimapFrame.setColor(c);
         float sw = (width / size * 78) / 2, sh = (height / size * 78) / 2;
         float sx = screen.width - 86 + (cam.x / size * 78);
         float sy = screen.height - 86 + (cam.y / size * 78);

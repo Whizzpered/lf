@@ -122,10 +122,11 @@ public class Actor implements Comparable<Actor> {
 
     }
 
-    public void minimapRender(Batch batch, float delta) {
+    public void minimapRender(Batch batch, float delta, float alpha) {
         if (minimapSprite != null) {
             minimapSprite.x = room.screen.width + (x / room.size * 72f) - 86;
             minimapSprite.y = room.screen.height + (y / room.size * 72f) - 86;
+            minimapSprite.a = alpha;
             minimapSprite.angle = angle;
             minimapSprite.draw(batch);
         }

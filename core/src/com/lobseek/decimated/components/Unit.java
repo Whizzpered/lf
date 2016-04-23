@@ -17,6 +17,7 @@ package com.lobseek.decimated.components;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.lobseek.decimated.Main;
+import com.lobseek.decimated.particles.Explosion;
 import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
 import static java.lang.Math.max;
@@ -51,6 +52,7 @@ public class Unit extends Actor {
         new Sprite("healthbar/5"),
         new Sprite("healthbar/6")
     };
+    private static Sprite deathExplosion = new Sprite("plasma/explosion3");
 
     public Unit(float x, float y, float angle, int owner) {
         super(x, y, angle);
@@ -69,9 +71,9 @@ public class Unit extends Actor {
      * @param delta
      */
     @Override
-    public void minimapRender(Batch batch, float delta) {
+    public void minimapRender(Batch batch, float delta, float alpha) {
         minimapSprite.setColor(room.players[owner].color);
-        super.minimapRender(batch, delta);
+        super.minimapRender(batch, delta, alpha);
     }
 
     /**
@@ -104,8 +106,30 @@ public class Unit extends Actor {
          * @todo make angle of attack. Powershell animation will be soon.
          */
         if (this.hp > 0 && this.hp - hp <= 0) {
-            from.experience += this.experience / 2;
-            this.experience = 0;
+            if (from != null) {
+                from.experience += this.experience / 2;
+                this.experience = 0;
+            }
+            for (int i = 0; i < Main.R.nextInt(5) + 6; i++) {
+                room.add(
+                        new Explosion(
+                                x + Main.R.nextInt((int) width) - width / 2,
+                                y + Main.R.nextInt((int) width) - width / 2,
+                                300 + Main.R.nextInt(200),
+                                deathExplosion, 20, 100 + Main.R.nextInt(100)
+                        )
+                );
+            }
+            for (int i = 0; i < Main.R.nextInt(3) + 2; i++) {
+                room.add(
+                        new Explosion(
+                                x + Main.R.nextInt((int) width * 2) - width,
+                                y + Main.R.nextInt((int) width * 2) - width,
+                                300 + Main.R.nextInt(300),
+                                deathExplosion, 20, 300 + Main.R.nextInt(100)
+                        )
+                );
+            }
         }
         this.hp = max(0, this.hp - hp);
     }
@@ -189,7 +213,7 @@ public class Unit extends Actor {
                 weapons[i].act(delta);
             }
         } else {
-            deathTimer += delta / 2;
+            deathTimer += delta * 2;
             if (deathTimer >= 1) {
                 room.players[owner].units--;
                 remove();

@@ -37,7 +37,7 @@ public class Disruptor extends Unit {
             super(from, to, x, y);
             speed = 1200;
             sprite = new Sprite("plasma/b0");
-            detonationDistance = 120;
+            detonationDistance = 80;
         }
 
         @Override

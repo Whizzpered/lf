@@ -5,212 +5,289 @@ filter: Nearest,Nearest
 repeat: none
 target
   rotate: false
-  xy: 1, 296
+  xy: 1, 292
   size: 200, 215
   orig: 200, 215
   offset: 0, 0
   index: -1
 base_underground
   rotate: false
-  xy: 1, 114
+  xy: 1, 110
   size: 180, 180
   orig: 180, 180
   offset: 0, 0
   index: -1
 selection
   rotate: false
-  xy: 203, 411
+  xy: 203, 407
   size: 194, 100
   orig: 194, 100
   offset: 0, 0
   index: -1
 base_hand_shadow
   rotate: false
-  xy: 399, 449
+  xy: 399, 445
   size: 220, 62
   orig: 220, 62
   offset: 0, 0
   index: -1
 planer_shield
   rotate: false
-  xy: 203, 269
+  xy: 203, 265
   size: 150, 140
   orig: 150, 140
   offset: 0, 0
   index: -1
 base_platform_shadow
   rotate: false
-  xy: 183, 131
+  xy: 183, 127
   size: 145, 136
   orig: 145, 136
   offset: 0, 0
   index: -1
+controller_body_shadow
+  rotate: false
+  xy: 1, 1
+  size: 139, 107
+  orig: 139, 107
+  offset: 0, 0
+  index: -1
 base_hand
   rotate: false
-  xy: 621, 469
+  xy: 621, 465
   size: 200, 42
   orig: 200, 42
   offset: 0, 0
   index: -1
 base_hand_team
   rotate: false
-  xy: 823, 469
+  xy: 823, 465
   size: 200, 42
   orig: 200, 42
   offset: 0, 0
   index: -1
-crater
-  rotate: false
-  xy: 1, 5
-  size: 108, 107
-  orig: 108, 107
-  offset: 0, 0
-  index: -1
-planer_body
-  rotate: false
-  xy: 111, 19
-  size: 100, 93
-  orig: 100, 93
-  offset: 0, 0
-  index: -1
-planer_body_shadow
-  rotate: false
-  xy: 213, 16
-  size: 120, 113
-  orig: 120, 113
-  offset: 0, 0
-  index: -1
 base_platform
   rotate: false
-  xy: 399, 331
+  xy: 399, 327
   size: 125, 116
   orig: 125, 116
   offset: 0, 0
   index: -1
-planer_body_team
+planer_body_shadow
   rotate: false
-  xy: 526, 354
-  size: 100, 93
-  orig: 100, 93
+  xy: 526, 330
+  size: 120, 113
+  orig: 120, 113
+  offset: 0, 0
+  index: -1
+crater
+  rotate: false
+  xy: 648, 356
+  size: 108, 107
+  orig: 108, 107
   offset: 0, 0
   index: -1
 disruptor_body_shadow
   rotate: false
-  xy: 628, 375
+  xy: 758, 371
   size: 120, 92
   orig: 120, 92
   offset: 0, 0
   index: -1
-planer_power
+controller_body
   rotate: false
-  xy: 750, 374
+  xy: 880, 378
+  size: 110, 85
+  orig: 110, 85
+  offset: 0, 0
+  index: -1
+rocket
+  rotate: false
+  xy: 183, 115
+  size: 147, 10
+  orig: 147, 10
+  offset: 0, 0
+  index: -1
+smoke
+  rotate: false
+  xy: 142, 8
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+planer_body
+  rotate: false
+  xy: 244, 20
   size: 100, 93
   orig: 100, 93
   offset: 0, 0
   index: -1
 disruptor_head_shadow
   rotate: false
-  xy: 852, 400
+  xy: 355, 258
   size: 120, 67
   orig: 120, 67
   offset: 0, 0
   index: -1
-rocket
+missile_body_team
   rotate: false
-  xy: 852, 388
-  size: 147, 10
-  orig: 147, 10
+  xy: 330, 171
+  size: 110, 85
+  orig: 110, 85
   offset: 0, 0
   index: -1
-phantom_body_shadow
+controller_body_team
   rotate: false
-  xy: 628, 313
-  size: 105, 60
-  orig: 105, 60
+  xy: 330, 171
+  size: 110, 85
+  orig: 110, 85
   offset: 0, 0
   index: -1
-disruptor_head
+planer_head_shadow
   rotate: false
-  xy: 526, 305
-  size: 100, 47
-  orig: 100, 47
+  xy: 330, 127
+  size: 100, 42
+  orig: 100, 42
+  offset: 0, 0
+  index: -1
+planer_body_team
+  rotate: false
+  xy: 346, 32
+  size: 100, 93
+  orig: 100, 93
+  offset: 0, 0
+  index: -1
+missile_body_shadow
+  rotate: false
+  xy: 648, 269
+  size: 110, 85
+  orig: 110, 85
+  offset: 0, 0
+  index: -1
+planer_power
+  rotate: false
+  xy: 760, 276
+  size: 100, 93
+  orig: 100, 93
   offset: 0, 0
   index: -1
 disruptor_body_team
   rotate: false
-  xy: 735, 300
+  xy: 477, 253
   size: 100, 72
   orig: 100, 72
   offset: 0, 0
   index: -1
 disruptor_body
   rotate: false
-  xy: 355, 257
+  xy: 442, 179
   size: 100, 72
   orig: 100, 72
   offset: 0, 0
   index: -1
+drone_shadow
+  rotate: false
+  xy: 579, 277
+  size: 65, 51
+  orig: 65, 51
+  offset: 0, 0
+  index: -1
+phantom_body_shadow
+  rotate: false
+  xy: 880, 316
+  size: 105, 60
+  orig: 105, 60
+  offset: 0, 0
+  index: -1
+disruptor_head
+  rotate: false
+  xy: 862, 267
+  size: 100, 47
+  orig: 100, 47
+  offset: 0, 0
+  index: -1
 sand
   rotate: false
-  xy: 330, 180
+  xy: 544, 176
   size: 75, 75
   orig: 75, 75
   offset: 0, 0
   index: -1
-planer_head_shadow
-  rotate: false
-  xy: 330, 136
-  size: 100, 42
-  orig: 100, 42
-  offset: 0, 0
-  index: -1
 phantom_body
   rotate: false
-  xy: 335, 94
+  xy: 442, 137
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
 phantom_body_terrain
   rotate: false
-  xy: 335, 52
+  xy: 448, 95
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
 phantom_body_invisible
   rotate: false
-  xy: 335, 10
+  xy: 448, 53
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
 phantom_body_team
   rotate: false
-  xy: 852, 346
+  xy: 448, 11
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
 planer_head
   rotate: false
-  xy: 837, 322
+  xy: 346, 8
   size: 80, 22
   orig: 80, 22
   offset: 0, 0
   index: -1
+drone_wing
+  rotate: false
+  xy: 992, 423
+  size: 22, 40
+  orig: 22, 40
+  offset: 0, 0
+  index: -1
+drone_wing2
+  rotate: false
+  xy: 355, 365
+  size: 22, 40
+  orig: 22, 40
+  offset: 0, 0
+  index: -1
+drone
+  rotate: false
+  xy: 579, 255
+  size: 35, 20
+  orig: 35, 20
+  offset: 0, 0
+  index: -1
 laser
   rotate: false
-  xy: 111, 7
+  xy: 244, 8
   size: 40, 10
   orig: 40, 10
   offset: 0, 0
   index: -1
 bullet
   rotate: false
-  xy: 111, 1
+  xy: 183, 286
   size: 4, 4
   orig: 4, 4
+  offset: 0, 0
+  index: -1
+missile_body
+  rotate: false
+  xy: 526, 327
+  size: 1, 1
+  orig: 1, 1
   offset: 0, 0
   index: -1
 
@@ -403,28 +480,35 @@ filter: Nearest,Nearest
 repeat: none
 plasma/explosion1
   rotate: false
-  xy: 1, 38
+  xy: 1, 53
   size: 200, 200
   orig: 200, 200
   offset: 0, 0
   index: -1
 plasma/explosion2
   rotate: false
-  xy: 203, 88
+  xy: 203, 103
   size: 150, 150
   orig: 150, 150
   offset: 0, 0
   index: -1
 plasma/explosion0
   rotate: false
-  xy: 355, 95
+  xy: 355, 110
   size: 149, 143
   orig: 149, 143
   offset: 0, 0
   index: -1
+plasma/explosion3
+  rotate: false
+  xy: 203, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
 plasma/b0
   rotate: false
-  xy: 1, 1
+  xy: 1, 16
   size: 65, 35
   orig: 65, 35
   offset: 0, 0
