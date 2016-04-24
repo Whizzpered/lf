@@ -1,10 +1,10 @@
-
 package com.lobseek.decimated.gui;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.lobseek.utils.ColorFabricator;
 
 /**
  *
@@ -13,9 +13,10 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class Font {
 
     private static Sprite[] letters = new Sprite[Character.MAX_VALUE];
+    private static Sprite[] letters_simple = new Sprite[Character.MAX_VALUE];
     private static boolean[] loaded = new boolean[Character.MAX_VALUE];
     public static TextureAtlas atlas;
-    
+    public static TextureAtlas atlas_simple;
 
     public static void draw(Object text, float x, float y, Color color, Batch batch) {
         if (text == null) {
@@ -29,6 +30,7 @@ public class Font {
                     continue;
                 }
                 letters[c] = atlas.createSprite(String.valueOf((int) c));
+                letters_simple[c] = atlas_simple.createSprite(String.valueOf((int) c));
                 loaded[c] = true;
                 if (letters[c] == null) {
                     System.out.println("\"" + (int) c + "\" hasn't been loaded!");
@@ -36,7 +38,7 @@ public class Font {
                 }
             }
 
-            Sprite sp = letters[c];
+            Sprite sp = (ColorFabricator.highContrast ? letters_simple[c] : letters[c]);
             sp.setPosition(x, y);
             float width = sp.getWidth();
             sp.setColor(color);
@@ -61,16 +63,18 @@ public class Font {
                     continue;
                 }
                 letters[c] = atlas.createSprite(String.valueOf((int) c));
+                letters_simple[c] = atlas_simple.createSprite(String.valueOf((int) c));
                 loaded[c] = true;
                 if (letters[c] == null) {
                     System.out.println("\"" + (int) c + "\" hasn't been loaded!");
                     continue;
                 }
             }
+
+            Sprite sp = (ColorFabricator.highContrast ? letters_simple[c] : letters[c]);
             if (c == ' ' || c == '\t' || c == '\n') {
                 space = i;
             }
-            Sprite sp = letters[c];
             cw += sp.getWidth();
             line += c;
             if (cw > width) {
@@ -104,13 +108,15 @@ public class Font {
                     continue;
                 }
                 letters[c] = atlas.createSprite(String.valueOf((int) c));
+                letters_simple[c] = atlas_simple.createSprite(String.valueOf((int) c));
                 loaded[c] = true;
                 if (letters[c] == null) {
                     System.out.println("\"" + (int) c + "\" hasn't been loaded!");
                     continue;
                 }
             }
-            Sprite sp = letters[c];
+
+            Sprite sp = (ColorFabricator.highContrast ? letters_simple[c] : letters[c]);
             ww += sp.getWidth();
         }
         return ww;

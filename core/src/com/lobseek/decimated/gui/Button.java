@@ -61,6 +61,7 @@ public class Button extends LWidget {
         button_center.x = x;
         button_center.y = y;
         button_center.draw(b);
+        String code = LWLocale.get(this.code);
         Font.draw(code, x - Font.width(code) / 2, y - 35, c, b);
         c = ColorFabricator.neon((float) (Math.min(0.5, lightness) * 2));
         button_right.setColor(c);

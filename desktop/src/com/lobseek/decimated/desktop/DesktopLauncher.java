@@ -10,7 +10,7 @@ public class DesktopLauncher {
                 config.width = 960;
                 config.height = 540;
                 config.resizable = true;
-                config.title = "Decimated";
+                config.title = "Decimare";
 		new LwjglApplication(new Main(), config);
 	}
 }

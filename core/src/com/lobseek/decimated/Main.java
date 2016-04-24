@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.lobseek.decimated.gui.Font;
 import com.lobseek.decimated.screens.GameScreen;
 import com.lobseek.decimated.screens.SplashScreen;
+import com.lobseek.widgets.LWLocale;
 import java.util.Random;
 
 /**
@@ -51,10 +52,13 @@ public class Main extends Game {
         AM.load("atlas.pack", TextureAtlas.class);
         AM.load("small_atlas.pack", TextureAtlas.class);
         AM.load("font.pack", TextureAtlas.class);
+        AM.load("font_simple.pack", TextureAtlas.class);
         AM.finishLoading();
+        LWLocale.init();
         atlas = main.AM.get("atlas.pack");
         small_atlas = main.AM.get("small_atlas.pack");
         Font.atlas = main.AM.get("font.pack");
+        Font.atlas_simple = main.AM.get("font_simple.pack");
     }
 
     /**

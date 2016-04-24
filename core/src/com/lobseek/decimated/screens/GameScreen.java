@@ -14,6 +14,9 @@
  */
 package com.lobseek.decimated.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.lobseek.decimated.actors.Base;
 import com.lobseek.decimated.actors.Test;
 import com.lobseek.decimated.components.Room;
@@ -21,6 +24,7 @@ import com.lobseek.decimated.components.Touch;
 import com.lobseek.decimated.gui.Button;
 import com.lobseek.decimated.gui.Image;
 import com.lobseek.decimated.units.Disruptor;
+import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
 import com.lobseek.widgets.LWAlignment;
 import com.lobseek.widgets.LWContainer;
@@ -55,9 +59,35 @@ public class GameScreen extends Screen {
         }
         room.pause();
     }
+    com.badlogic.gdx.graphics.g2d.Sprite background;
 
     public GameScreen() {
+        background = new com.badlogic.gdx.graphics.g2d.Sprite(
+                new Texture(Gdx.files.internal("background.png")));
+        background.getTexture().setFilter(Texture.TextureFilter.Linear, 
+                Texture.TextureFilter.Linear);
         menu = new LWContainer() {
+            float alpha = 0;
+
+            @Override
+            public void act(float delta) {
+                if (isVisible()) {
+                    alpha = Math.min(1, alpha + delta);
+                } else {
+                    alpha = Math.max(0, alpha - delta);
+                }
+                super.act(delta);
+            }
+
+            @Override
+            public void draw(Batch b) {
+                background.setSize(parent.width, parent.height);
+                background.setPosition(0, 0);
+                background.setColor(ColorFabricator.neon(alpha));
+                background.draw(b);
+                super.draw(b);
+            }
+
             @Override
             public boolean checkSwipe(Touch t) {
 

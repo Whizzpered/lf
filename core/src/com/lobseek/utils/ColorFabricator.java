@@ -23,12 +23,19 @@ import static java.lang.Math.*;
  */
 public class ColorFabricator {
 
+    public static boolean highContrast = false;
+
     public static Color neon(float alpha) {
-        return new Color(
-                max(0, alpha - 0.7f) * 0.5f,
-                min(1, alpha * 2),
-                min(1, max(0, alpha * 2 - 0.5f)) * 0.5f,
-                alpha
-        );
+        if (!highContrast) {
+            return new Color(
+                    max(0, alpha - 0.7f) * 0.5f,
+                    min(1, alpha * 2),
+                    min(1, max(0, alpha * 2 - 0.5f)) * 0.5f,
+                    alpha
+            );
+        } else {
+            float a = max(0, min(1, alpha));
+            return new Color(a, a, a, a);
+        }
     }
 }
