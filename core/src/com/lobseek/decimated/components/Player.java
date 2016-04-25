@@ -50,7 +50,13 @@ public class Player {
     public Player(Room room, int index) {
         this.room = room;
         this.index = index;
-        setTypes(Disruptor.class, Phantom.class, Planer.class, Controller.class);
+        setTypes(
+                Disruptor.class,
+                Phantom.class,
+                Planer.class, 
+                Dragoon.class,
+                Controller.class
+        );
     }
 
     public Unit spawn(float x, float y, float angle) {

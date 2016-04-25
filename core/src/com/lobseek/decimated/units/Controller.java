@@ -194,6 +194,7 @@ public class Controller extends Unit {
         boolean b = true;
         if (drones != null) {
             for (Drone d : drones) {
+                
                 if (d.target == controller) {
                     b = false;
                     break;
@@ -233,12 +234,13 @@ public class Controller extends Unit {
     @Override
     public void act(float delta) {
         if (drones == null) {
-            drones = new Drone[4];
+            Drone[] drones = new Drone[4];
             for (int i = 0; i < 4; i++) {
                 Point p = getPlace(i);
                 drones[i] = new Drone(p.x, p.y, angle, i);
                 room.add(drones[i]);
             }
+            this.drones = drones;
         }
         super.act(delta);
     }

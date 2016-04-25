@@ -208,9 +208,10 @@ public class Unit extends Actor {
             move(delta);
             handleCollision(delta);
             handleBarricadeCollision(delta);
-
-            for (int i = 0; i < weapons.length; i++) {
-                weapons[i].act(delta);
+            if (weapons != null) {
+                for (int i = 0; i < weapons.length; i++) {
+                    weapons[i].act(delta);
+                }
             }
         } else {
             deathTimer += delta * 2;
@@ -278,9 +279,12 @@ public class Unit extends Actor {
      */
     @Override
     public void tick(float delta) {
-        for (int i = 0; i < weapons.length; i++) {
-            weapons[i].tick(delta);
+        if (weapons != null) {
+            for (int i = 0; i < weapons.length; i++) {
+                weapons[i].tick(delta);
+            }
         }
+        handleTargetCollision(delta);
     }
 
     /**
@@ -339,6 +343,33 @@ public class Unit extends Actor {
         body_team.draw(batch);
         for (int i = 0; i < weapons.length; i++) {
             weapons[i].render(batch, delta, parentColor);
+        }
+    }
+
+    public void handleTargetCollision(float delta) {
+        for (Actor a : room.actors) {
+            if (a != null && a instanceof Unit) {
+                Unit u = (Unit) a;
+                if (u.owner == this.owner && !a.phantom && u != this) {
+
+                    float size = (Math.max(width, height) + Math.max(u.width, u.height));
+                    if (abs(tx - u.tx) > size || abs(ty - u.ty) > size) {
+                        continue;
+                    }
+                    float d = dist(tx, ty, u.tx, u.ty);
+                    float r = dist(0, 0, width + u.width, height + u.height) / 2 + 30;
+                    if (d < r) {
+                        r -= d;
+                        r *= delta * 5;
+                        float an = atan2(u.y - y, u.x - x);
+                        //System.out.println(an + ":" + u.y + "-" + y);
+                        u.tx += cos(an) * r;
+                        u.tx += sin(an) * r;
+                        tx -= cos(an) * r;
+                        tx -= sin(an) * r;
+                    }
+                }
+            }
         }
     }
 

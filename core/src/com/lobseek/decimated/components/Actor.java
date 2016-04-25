@@ -163,7 +163,7 @@ public class Actor implements Comparable<Actor> {
         for (Actor a : room.actors) {
             if (a != null && !a.phantom && a != this) {
                 float size = (Math.max(width, height) + Math.max(a.width, a.height));
-                if (abs(x + vx - a.x - a.vx) > size || abs(y + vx - a.y - a.vy) > size) {
+                if (abs(x + vx - a.x - a.vx) > size || abs(y + vy - a.y - a.vy) > size) {
                     continue;
                 }
                 float d = dist(x + vx, y + vy, a.x + a.vx, a.y + a.vy);
