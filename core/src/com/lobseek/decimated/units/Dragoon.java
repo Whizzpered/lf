@@ -29,11 +29,10 @@ import static com.lobseek.utils.Math.*;
  * @author Yew_Mentzaki
  */
 public class Dragoon extends Unit {
-    
-    private static Sprite
-            explosion_1 = new Sprite("plasma/explosion1"),
-            explosion_2 = new Sprite("plasma/explosion2"); 
-    
+
+    private static Sprite explosion_1 = new Sprite("plasma/explosion1"),
+            explosion_2 = new Sprite("plasma/explosion2");
+
     class PlasmaBullet extends Bullet {
 
         public PlasmaBullet(Unit from, Unit to, float x, float y) {
@@ -45,7 +44,7 @@ public class Dragoon extends Unit {
 
         @Override
         public void explode(Unit to) {
-            to.hit(60, from);
+            to.hit(100, from);
             room.add(new Explosion(x, y, 300, explosion_1, 35, 400));
             room.add(new Explosion(x, y, 600, explosion_2, 35, 120));
         }
@@ -93,27 +92,27 @@ public class Dragoon extends Unit {
     public void act(float delta) {
         thingAngle += delta * 3;
         super.act(delta);
-        if(weapons[0].target != null && weapons[0].reload < 0.3f){
+        if (weapons[0].target != null && weapons[0].reload < 0.3f) {
             doorAngle = Math.min(2, doorAngle + delta * 8);
-        }else{
+        } else {
             doorAngle = Math.max(0, doorAngle - delta * 4);
         }
     }
 
     @Override
-    public void move(float delta) {
-        if (x != tx && y != ty) {
-            float speed = this.speed * abs(cos(thingAngle * 2)) * 2;
-            float d = dist(x, y, tx, ty);
-            d = Math.min(speed * delta, d);
-            float a = atan2(ty - y, tx - x);
-            move(cos(a) * d, sin(a) * d);
-            float s = cos(thingAngle * 2) > 0 ? 1 : -1;
-            for (int i = 0; i < legTarget.length; i++) {
-                float s1 = s * (i % 2 == 0 ? 1 : -1);
-                legTarget[i].x += s1 * cos(a) * d / 2;
-                legTarget[i].y += s1 * sin(a) * d / 2;
-            }
+    public void move() {
+        angle = PI / 2;
+        float d = dist(0, 0, vx, vy);
+        float a = atan2(vy, vx);
+        float s = cos(thingAngle * 2) > 0 ? 1 : -1;
+        x += vx;
+        y += vy;
+        vx = 0;
+        vy = 0;
+        for (int i = 0; i < legTarget.length; i++) {
+            float s1 = s * (i % 2 == 0 ? 1 : -1);
+            legTarget[i].x += s1 * cos(a) * d;
+            legTarget[i].y += s1 * sin(a) * d;
         }
         float a1 = PI / 4, a2 = PI * 2 / ((float) legTarget.length);
         for (int i = 0; i < legTarget.length; i++) {
@@ -121,6 +120,17 @@ public class Dragoon extends Unit {
             float ly = height / 2 * sin(a1 + a2 * i);
             legTarget[i].x = (19 * legTarget[i].x + lx) / 20;
             legTarget[i].y = (19 * legTarget[i].y + ly) / 20;
+        }
+    }
+
+    @Override
+    public void move(float delta) {
+        if (x != tx && y != ty) {
+            float speed = this.speed * abs(cos(thingAngle * 2)) * 1.333f;
+            float d = dist(x, y, tx, ty);
+            d = Math.min(speed * delta, d);
+            float a = atan2(ty - y, tx - x);
+            move(cos(a) * d, sin(a) * d);
         }
     }
 
@@ -191,9 +201,9 @@ public class Dragoon extends Unit {
         };
         width = 100;
         height = 120;
-        mass = 40;
-        hp = maxHp = 750;
-        speed = 150;
+        mass = 100;
+        hp = maxHp = 1250;
+        speed = 85;
         turnSpeed = 2;
         flying = true;
         float a1 = PI / 4, a2 = PI * 2 / ((float) legTarget.length);

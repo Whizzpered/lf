@@ -347,6 +347,7 @@ public class Unit extends Actor {
     }
 
     public void handleTargetCollision(float delta) {
+        /*
         for (Actor a : room.actors) {
             if (a != null && a instanceof Unit) {
                 Unit u = (Unit) a;
@@ -370,7 +371,7 @@ public class Unit extends Actor {
                     }
                 }
             }
-        }
+        }*/
     }
 
     @Override
