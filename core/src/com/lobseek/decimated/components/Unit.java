@@ -116,7 +116,7 @@ public class Unit extends Actor {
                                 x + Main.R.nextInt((int) width) - width / 2,
                                 y + Main.R.nextInt((int) width) - width / 2,
                                 300 + Main.R.nextInt(200),
-                                deathExplosion, 20, 100 + Main.R.nextInt(100)
+                                deathExplosion, 60, 150 + Main.R.nextInt(100)
                         )
                 );
             }
@@ -126,7 +126,7 @@ public class Unit extends Actor {
                                 x + Main.R.nextInt((int) width * 2) - width,
                                 y + Main.R.nextInt((int) width * 2) - width,
                                 300 + Main.R.nextInt(300),
-                                deathExplosion, 20, 300 + Main.R.nextInt(100)
+                                deathExplosion, 60, 350 + Main.R.nextInt(100)
                         )
                 );
             }

@@ -541,25 +541,25 @@ plasma/explosion4
   orig: 100, 92
   offset: 0, 0
   index: -1
+plasma/explosion3
+  rotate: false
+  xy: 205, 38
+  size: 82, 82
+  orig: 82, 82
+  offset: 0, 0
+  index: -1
 plasma/explosion2
   rotate: false
-  xy: 205, 45
+  xy: 289, 45
   size: 75, 75
   orig: 75, 75
   offset: 0, 0
   index: -1
 plasma/explosion0
   rotate: false
-  xy: 282, 49
+  xy: 366, 49
   size: 74, 71
   orig: 74, 71
-  offset: 0, 0
-  index: -1
-plasma/explosion3
-  rotate: false
-  xy: 358, 70
-  size: 50, 50
-  orig: 50, 50
   offset: 0, 0
   index: -1
 plasma/b0
@@ -595,18 +595,39 @@ gui/button_center
   orig: 223, 73
   offset: 0, 0
   index: -1
+gui/spawn_bar_bottom
+  rotate: false
+  xy: 244, 101
+  size: 60, 53
+  orig: 60, 53
+  offset: 0, 0
+  index: -1
 gui/button_left
   rotate: false
-  xy: 303, 76
+  xy: 306, 76
   size: 43, 78
   orig: 43, 78
   offset: 0, 0
   index: -1
 gui/button_right
   rotate: false
-  xy: 348, 76
+  xy: 351, 76
   size: 43, 78
   orig: 43, 78
+  offset: 0, 0
+  index: -1
+gui/spawn_bar_top
+  rotate: false
+  xy: 244, 93
+  size: 60, 6
+  orig: 60, 6
+  offset: 0, 0
+  index: -1
+gui/spawn_bar_center
+  rotate: false
+  xy: 244, 90
+  size: 60, 1
+  orig: 60, 1
   offset: 0, 0
   index: -1
 

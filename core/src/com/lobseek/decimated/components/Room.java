@@ -303,7 +303,7 @@ public class Room implements Layer {
             }
         }
         for (Particle p : particles) {
-            if (p != null) {
+            if (p != null && p.timeLeft() >= 0) {
                 p.act(delta);
             }
         }
