@@ -23,6 +23,7 @@ import com.lobseek.decimated.components.Room;
 import com.lobseek.decimated.components.Touch;
 import com.lobseek.decimated.gui.Button;
 import com.lobseek.decimated.gui.Image;
+import com.lobseek.decimated.gui.SpawnBar;
 import com.lobseek.decimated.units.Disruptor;
 import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
@@ -85,6 +86,8 @@ public class GameScreen extends Screen {
                 background.setPosition(0, 0);
                 background.setColor(ColorFabricator.neon(alpha));
                 background.draw(b);
+                width = parent.width;
+                height = parent.height;
                 super.draw(b);
             }
 
@@ -138,6 +141,11 @@ public class GameScreen extends Screen {
         play.setAlign(LWAlignment.CENTER);
         play.y = 90 - 140 * 2;
         menu.add(play);
+        SpawnBar bar = new SpawnBar();
+        bar.setAlign(LWAlignment.LEFT);
+        bar.x = 60;
+        bar.value = 1;
+        menu.add(bar);
         add(menu);
     }
 
