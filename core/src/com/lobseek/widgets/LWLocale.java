@@ -36,7 +36,7 @@ public class LWLocale {
         }
         if (localeEn == null) {
             FileHandle fh = Gdx.files.internal("locale/en.locale");
-            String s = fh.readString();
+            String s = fh.readString("utf8");
             localeEn = DataNotation.fromString(s);
         }
     }
