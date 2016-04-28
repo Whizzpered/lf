@@ -46,9 +46,14 @@ public class SpawnBar extends LWidget {
         setValue(value + (t.dy/height));
     }
 
+    public void valueChanged() {
+        //PIS'KA PIS'KA PIS'KA
+    }
+    
     public void setValue(float value) {
         if (value <= 1 && value >= 0) {
             this.value = value;
+            valueChanged();
         }
     }
 
