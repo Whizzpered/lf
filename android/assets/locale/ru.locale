@@ -2,3 +2,10 @@ menu
     play = Играть
     settings = Настройки
     exit = Выход
+unit
+    name = Вестник
+    dragoon = Огня
+    planer = Потопа
+    devastator = Труб
+    phantom = Башни
+    controller = Слепней
