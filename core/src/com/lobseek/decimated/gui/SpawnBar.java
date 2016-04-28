@@ -18,6 +18,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.lobseek.widgets.*;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.lobseek.decimated.components.Sprite;
+import com.lobseek.decimated.components.Touch;
 import com.lobseek.utils.ColorFabricator;
 
 /**
@@ -26,7 +27,7 @@ import com.lobseek.utils.ColorFabricator;
  */
 public class SpawnBar extends LWidget {
 
-    public float value = 1;
+    private float value = 1;
     private float lightness;
     private static Sprite spawn_bar_top = new Sprite("gui/spawn_bar_top", true),
             spawn_bar_center = new Sprite("gui/spawn_bar_center", true),
@@ -34,6 +35,21 @@ public class SpawnBar extends LWidget {
 
     public SpawnBar() {
         width = 120;
+    }
+
+    public float getValue() {
+        return value;
+    }
+
+    @Override
+    public void swipe(Touch t) {
+        setValue(value + (t.dy/height));
+    }
+
+    public void setValue(float value) {
+        if (value <= 1 && value >= 0) {
+            this.value = value;
+        }
     }
 
     @Override

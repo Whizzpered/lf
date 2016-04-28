@@ -31,12 +31,12 @@ public class LWLocale {
         if (locale == null) {
             String l = Locale.getDefault().getLanguage();
             FileHandle fh = Gdx.files.internal("locale/" + l + ".locale");
-            String s = fh.readString();
+            String s = fh.readString("UTF-8");
             locale = DataNotation.fromString(s);
         }
         if (localeEn == null) {
             FileHandle fh = Gdx.files.internal("locale/en.locale");
-            String s = fh.readString("utf8");
+            String s = fh.readString("UTF-8");
             localeEn = DataNotation.fromString(s);
         }
     }

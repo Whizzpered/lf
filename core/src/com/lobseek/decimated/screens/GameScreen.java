@@ -65,7 +65,7 @@ public class GameScreen extends Screen {
     public GameScreen() {
         background = new com.badlogic.gdx.graphics.g2d.Sprite(
                 new Texture(Gdx.files.internal("background.png")));
-        background.getTexture().setFilter(Texture.TextureFilter.Linear, 
+        background.getTexture().setFilter(Texture.TextureFilter.Linear,
                 Texture.TextureFilter.Linear);
         menu = new LWContainer() {
             float alpha = 0;
@@ -93,7 +93,6 @@ public class GameScreen extends Screen {
 
             @Override
             public boolean checkSwipe(Touch t) {
-
                 super.checkSwipe(t);
                 return isVisible();
             }
@@ -144,7 +143,7 @@ public class GameScreen extends Screen {
         SpawnBar bar = new SpawnBar();
         bar.setAlign(LWAlignment.LEFT);
         bar.x = 60;
-        bar.value = 1;
+        bar.setValue(0.5f);
         menu.add(bar);
         add(menu);
     }
