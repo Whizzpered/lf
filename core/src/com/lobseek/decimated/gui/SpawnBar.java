@@ -42,14 +42,23 @@ public class SpawnBar extends LWidget {
     }
 
     @Override
+    public void tapDown(Touch t) {
+        float rh = (height - spawn_bar_bottom.height - spawn_bar_top.height);
+       t.y -= (spawn_bar_bottom.height);
+        setValue(t.y / rh);
+    }
+
+    @Override
     public void swipe(Touch t) {
-        setValue(value + (t.dy/height));
+        float rh = (height - spawn_bar_bottom.height - spawn_bar_top.height);
+        t.y -= (spawn_bar_bottom.height);
+        setValue(t.y / rh);
     }
 
     public void valueChanged() {
         //PIS'KA PIS'KA PIS'KA
     }
-    
+
     public void setValue(float value) {
         if (value <= 1 && value >= 0) {
             this.value = value;
