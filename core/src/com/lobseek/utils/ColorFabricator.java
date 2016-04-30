@@ -15,6 +15,7 @@
 package com.lobseek.utils;
 
 import com.badlogic.gdx.graphics.Color;
+import com.lobseek.decimated.Main;
 import static java.lang.Math.*;
 
 /**
@@ -23,10 +24,8 @@ import static java.lang.Math.*;
  */
 public class ColorFabricator {
 
-    public static boolean highContrast = false;
-
     public static Color neon(float alpha) {
-        if (!highContrast) {
+        if (!Main.contrast) {
             return new Color(
                     max(0, alpha - 0.7f) * 0.5f,
                     min(1, alpha * 2),

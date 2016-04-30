@@ -15,7 +15,9 @@
 package com.lobseek.decimated;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.lobseek.decimated.gui.Font;
 import com.lobseek.decimated.screens.GameScreen;
@@ -37,8 +39,10 @@ public class Main extends Game {
     public static long nanos;
     public static TextureAtlas atlas, small_atlas;
     private boolean loaded;
+    public static boolean simple, contrast;
     private static long time;
     private static int frames;
+    public static Texture laser;
 
     /**
      * Called when application is loading. Handle load of all textures, sounds,
@@ -49,14 +53,22 @@ public class Main extends Game {
             return;
         }
         loaded = true;
+        if (!simple) {
         AM.load("atlas.pack", TextureAtlas.class);
+        }
         AM.load("small_atlas.pack", TextureAtlas.class);
         AM.load("font.pack", TextureAtlas.class);
         AM.load("font_simple.pack", TextureAtlas.class);
+        laser = new Texture(Gdx.files.internal("laser.png"));
+        System.out.println("laser " + laser);
         AM.finishLoading();
         LWLocale.init();
-        atlas = main.AM.get("atlas.pack");
-        small_atlas = main.AM.get("small_atlas.pack");
+        if (!simple) {
+            atlas = main.AM.get("atlas.pack");
+            small_atlas = main.AM.get("small_atlas.pack");
+        } else {
+            atlas = small_atlas = main.AM.get("small_atlas.pack");
+        }
         Font.atlas = main.AM.get("font.pack");
         Font.atlas_simple = main.AM.get("font_simple.pack");
     }
@@ -78,7 +90,7 @@ public class Main extends Game {
         frames++;
         long t = System.currentTimeMillis();
         long n = System.nanoTime();
-        if(t - time > 1000){
+        if (t - time > 1000) {
             time = t;
             fps = frames;
             frames = 0;

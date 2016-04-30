@@ -101,6 +101,20 @@ public class Weapon {
         }
     }
 
+    public Point getWeaponPosition() {
+        float x = this.x * cos(angle) - this.y * sin(angle);
+        float y = this.x * sin(angle) + this.y * cos(angle);
+        x += on.x;
+        y += on.y;
+        Point p = new Point(cx, cy);
+        float ang = angle;
+        p.x = cx * cos(ang) - cy * sin(ang);
+        p.y = cx * sin(ang) + cy * cos(ang);
+        p.x += x;
+        p.y += y;
+        return p;
+    }
+
     public void tick(float delta) {
         float dist = Float.MAX_VALUE;
         Unit t = null;
@@ -149,12 +163,14 @@ public class Weapon {
 
     public final void render(Batch batch, float delta, Color parentColor) {
         Point p = new Point(x, y);
-        float an = on.angle;
-        p.x = x * cos(an) - y * sin(an);
-        p.y = x * sin(an) + y * cos(an);
-        p.x += on.x;
-        p.y += on.y;
-        render(batch, delta, p, parentColor);
+        if (on != null) {
+            float an = on.angle;
+            p.x = x * cos(an) - y * sin(an);
+            p.y = x * sin(an) + y * cos(an);
+            p.x += on.x;
+            p.y += on.y;
+            render(batch, delta, p, parentColor);
+        }
     }
 
     public void render(Batch batch, float delta, Point point, Color parentColor) {

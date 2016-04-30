@@ -56,7 +56,8 @@ public class Button extends LWidget {
     public void draw(Batch b) {
         float x = x();
         float y = y();
-        Color c = ColorFabricator.neon((float) (Math.max(0, lightness - 0.5) * 2));
+        float a = (float) (Math.max(0, lightness - 0.5) * 2);
+        Color c = ColorFabricator.neon(a);
         button_center.setColor(c);
         button_center.x = x;
         button_center.y = y;

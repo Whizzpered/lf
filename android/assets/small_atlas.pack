@@ -529,42 +529,49 @@ filter: Nearest,Nearest
 repeat: none
 plasma/explosion1
   rotate: false
-  xy: 1, 20
+  xy: 1, 154
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 plasma/explosion4
   rotate: false
-  xy: 103, 28
+  xy: 1, 60
+  size: 100, 92
+  orig: 100, 92
+  offset: 0, 0
+  index: -1
+plasma/explosion5
+  rotate: false
+  xy: 103, 162
   size: 100, 92
   orig: 100, 92
   offset: 0, 0
   index: -1
 plasma/explosion3
   rotate: false
-  xy: 205, 38
+  xy: 103, 78
   size: 82, 82
   orig: 82, 82
   offset: 0, 0
   index: -1
 plasma/explosion2
   rotate: false
-  xy: 289, 45
+  xy: 103, 1
   size: 75, 75
   orig: 75, 75
   offset: 0, 0
   index: -1
 plasma/explosion0
   rotate: false
-  xy: 366, 49
+  xy: 180, 5
   size: 74, 71
   orig: 74, 71
   offset: 0, 0
   index: -1
 plasma/b0
   rotate: false
-  xy: 1, 1
+  xy: 1, 41
   size: 32, 17
   orig: 32, 17
   offset: 0, 0

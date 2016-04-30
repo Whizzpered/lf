@@ -37,7 +37,7 @@ import com.lobseek.widgets.LWContainer;
 public class GameScreen extends Screen {
 
     Room room;
-    public LWContainer menu;
+    public LWContainer menu, unitList;
 
     void beginGame() {
         menu.hide();

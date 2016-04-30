@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.lobseek.decimated.Main;
 import com.lobseek.utils.ColorFabricator;
 
 /**
@@ -38,7 +39,7 @@ public class Font {
                 }
             }
 
-            Sprite sp = (ColorFabricator.highContrast ? letters_simple[c] : letters[c]);
+            Sprite sp = (Main.contrast ? letters_simple[c] : letters[c]);
             sp.setPosition(x, y);
             float width = sp.getWidth();
             sp.setColor(color);
@@ -71,7 +72,7 @@ public class Font {
                 }
             }
 
-            Sprite sp = (ColorFabricator.highContrast ? letters_simple[c] : letters[c]);
+            Sprite sp = (Main.contrast ? letters_simple[c] : letters[c]);
             if (c == ' ' || c == '\t' || c == '\n') {
                 space = i;
             }
@@ -116,7 +117,7 @@ public class Font {
                 }
             }
 
-            Sprite sp = (ColorFabricator.highContrast ? letters_simple[c] : letters[c]);
+            Sprite sp = (Main.contrast ? letters_simple[c] : letters[c]);
             ww += sp.getWidth();
         }
         return ww;

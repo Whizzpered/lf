@@ -14,12 +14,16 @@
  */
 package com.lobseek.decimated.units;
 
+import com.lobseek.decimated.Main;
 import com.lobseek.decimated.components.Bullet;
 import com.lobseek.decimated.components.Point;
 import com.lobseek.decimated.components.Sprite;
 import com.lobseek.decimated.components.Unit;
 import com.lobseek.decimated.components.Weapon;
 import com.lobseek.decimated.particles.Explosion;
+import com.lobseek.decimated.particles.Lazer;
+import static com.lobseek.utils.Math.*;
+import static java.lang.Math.max;
 
 /**
  *
@@ -27,45 +31,53 @@ import com.lobseek.decimated.particles.Explosion;
  */
 public class Disruptor extends Unit {
 
-    private static Sprite
-            explosion_1 = new Sprite("plasma/explosion1"),
-            explosion_2 = new Sprite("plasma/explosion2"); 
+    private static Sprite explosion_1 = new Sprite("plasma/explosion4"),
+            explosion_2 = new Sprite("plasma/explosion5");
     
-    class PlasmaBullet extends Bullet {
-
-        public PlasmaBullet(Unit from, Unit to, float x, float y) {
-            super(from, to, x, y);
-            speed = 1200;
-            sprite = new Sprite("plasma/b0");
-            detonationDistance = 80;
-        }
-
-        @Override
-        public void explode(Unit to) {
-            to.hit(60, from);
-            room.add(new Explosion(x, y, 300, explosion_1, 35, 400));
-            room.add(new Explosion(x, y, 600, explosion_2, 35, 120));
-        }
-    }
-
+    private float energy, energyReload = 30;
+    
     class DisruptorWeapon extends Weapon {
 
         public DisruptorWeapon() {
             x = 5;
             y = 0;
+            cx = 5;
             turnSpeed = 3;
-            range = 750;
+            range = 1550;
             ammo = maxAmmo = 1;
-            reloadTime = 5f;
-            reloadAmmoTime = 5;
+            reloadTime = 15f;
+            reloadAmmoTime = 15f;
             speed = 1200;
         }
 
         @Override
         public void shoot(Unit to, Point from) {
-            room.add(new PlasmaBullet(on, to, from.x, from.y));
+            to.hit(50, to);
+            room.add(new Lazer(this, from.x, from.y, to.x, to.y));
+            room.add(new Explosion(to.x, to.y, 400, explosion_1, 35, 300));
+            room.add(new Explosion(to.x, to.y, 500, explosion_2, 35, 120));
+            room.add(new Explosion(from.x, from.y, 200, explosion_2, 35, 80));
         }
 
+    }
+
+    @Override
+    public void hit(float hp, Unit from) {
+        super.hit(hp, from);
+        if(energy == 0){
+            energy = energyReload;
+            room.add(new Explosion(x, y, 1000, explosion_2, 35, 500));
+            float a = atan2(from.y - y, from.x - x) + Main.R.nextFloat() - 0.5f;
+            x -= cos(a) * weapons[0].range / 2;
+            y -= sin(a) * weapons[0].range / 2;
+            room.add(new Explosion(x, y, 1000, explosion_1, 35, 500));
+        }
+    }
+
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        energy = max(energy - delta, 0);
     }
 
     public Disruptor(float xcord, float ycord, float angle, int owner) {

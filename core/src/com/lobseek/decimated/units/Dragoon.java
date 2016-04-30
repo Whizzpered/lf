@@ -46,7 +46,7 @@ public class Dragoon extends Unit {
         public void explode(Unit to) {
             to.hit(100, from);
             room.add(new Explosion(x, y, 300, explosion_1, 35, 400));
-            room.add(new Explosion(x, y, 600, explosion_2, 35, 120));
+            room.add(new Explosion(x, y, 600, explosion_2, 35, 130));
         }
     }
 

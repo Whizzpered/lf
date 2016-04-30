@@ -368,9 +368,9 @@ public class Room implements Layer {
      */
     @Override
     public void render(float delta) {
-        if(running && minimapEnabled){
+        if (running && minimapEnabled) {
             minimapColor = Math.min(minimapColor + delta, 1);
-        }else{
+        } else {
             minimapColor = Math.max(minimapColor - delta, 0);
         }
         for (int i = 0; i < actors.length; i++) {
@@ -402,7 +402,7 @@ public class Room implements Layer {
         batch.begin();
         batch.setProjectionMatrix(camera.combined);
         com.badlogic.gdx.graphics.g2d.Sprite terrain;
-        if (width / screen.width < 1.5) {
+        if (width / screen.width < 1.5 && !Main.simple) {
             terrain = this.terrain;
         } else {
             terrain = this.terrain_small;
@@ -425,17 +425,19 @@ public class Room implements Layer {
                 }
             }
         }
-        for (Actor a : renderActors) {
-            if (a != null && !a.removed) {
-                if (a.x + a.width / 2
-                        >= camera.position.x - camera.viewportWidth / 2
-                        && a.y + a.height
-                        >= camera.position.y - camera.viewportHeight / 2
-                        && a.x - a.width
-                        <= camera.position.x + camera.viewportWidth / 2
-                        && a.y - a.height
-                        <= camera.position.y + camera.viewportHeight / 2) {
-                    a.renderShadow(batch, delta);
+        if (!Main.simple) {
+            for (Actor a : renderActors) {
+                if (a != null && !a.removed) {
+                    if (a.x + a.width / 2
+                            >= camera.position.x - camera.viewportWidth / 2
+                            && a.y + a.height
+                            >= camera.position.y - camera.viewportHeight / 2
+                            && a.x - a.width
+                            <= camera.position.x + camera.viewportWidth / 2
+                            && a.y - a.height
+                            <= camera.position.y + camera.viewportHeight / 2) {
+                        a.renderShadow(batch, delta);
+                    }
                 }
             }
         }

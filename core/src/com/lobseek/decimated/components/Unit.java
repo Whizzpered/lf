@@ -397,8 +397,6 @@ public class Unit extends Actor {
             hp.setScale(sqrt(0.6f - Math.abs(1 - hpColor) * 0.3f) * 0.5f);
             hp.x = x;
             hp.y = y + height / 3;
-            hp.setColor(new Color(0, 0, 0, 1 - Math.abs(1 - hpColor)));
-            hp.draw(batch);
             hp.setColor(ColorFabricator.neon(1 - Math.abs(1 - hpColor)));
             hp.draw(batch);
         }

@@ -73,9 +73,13 @@ public class Sprite {
                 loaded = true;
                 sprite = Main.atlas.createSprite(name);
                 if (sprite != null) {
-                    small_sprite = Main.small_atlas.createSprite(name);
-                    originalWidth = sprite.getWidth();
-                    originalHeight = sprite.getHeight();
+                    if (Main.atlas != Main.small_atlas) {
+                        small_sprite = Main.small_atlas.createSprite(name);
+                    }else{
+                        small_sprite = sprite;
+                    }
+                    originalWidth = small_sprite.getWidth() * 2;
+                    originalHeight = small_sprite.getHeight() * 2;
 
                     if (width == 0 && height == 0) {
                         width = originalWidth;
