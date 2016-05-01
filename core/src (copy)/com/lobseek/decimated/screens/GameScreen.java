@@ -17,7 +17,6 @@ package com.lobseek.decimated.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.lobseek.decimated.Main;
 import com.lobseek.decimated.actors.Base;
 import com.lobseek.decimated.actors.Test;
 import com.lobseek.decimated.components.Room;
@@ -27,7 +26,6 @@ import com.lobseek.decimated.gui.Image;
 import com.lobseek.decimated.gui.SpawnBar;
 import com.lobseek.decimated.units.Disruptor;
 import com.lobseek.utils.ColorFabricator;
-import com.lobseek.utils.MapGenerator;
 import static com.lobseek.utils.Math.*;
 import com.lobseek.widgets.LWAlignment;
 import com.lobseek.widgets.LWContainer;
@@ -40,65 +38,31 @@ public class GameScreen extends Screen {
 
     Room room;
     public LWContainer menu, unitList;
-    public static com.badlogic.gdx.graphics.g2d.Sprite background;
 
     void beginGame() {
         menu.hide();
-        if (unitList != null) {
-            unitList.hide();
-        }
         if (room == null) {
             room = new Room(this, 1024, 64);
             room.player = 1;
-            unitList = room.players[room.player].getUnitList();
-            Button play = new Button("menu.play") {
-                @Override
-                public void tapUp(Touch t) {
-                    beginGame();
-                }
-
-            };
-            play.setAlign(LWAlignment.RIGHT, LWAlignment.TOP);
-            play.y = -156f / 2f;
-            play.x = -447f / 2f;
-            play.hide();
-            unitList.add(play);
-            play = new Button("menu.exit") {
-                @Override
-                public void tapUp(Touch t) {
-                    unitList.hide();
-                    menu.show();
-                    remove(room);
-                    room.destroy();
-                    room = null;
-                }
-
-            };
-            play.setAlign(LWAlignment.LEFT, LWAlignment.TOP);
-            play.y = -156f / 2f;
-            play.x = 447f / 2f;
-            play.hide();
-            unitList.add(play);
-            add(unitList);
             add(room);
-            /*room.add(new Base(600, 2000, 1));
-             room.add(new Base(-600, 2000, 1));
-             room.add(new Base(-0, 2000, 1));
-             room.add(new Base(600, -2000, 2));
-             room.add(new Base(-600, -2000, 2));
-             room.add(new Base(-0, -2000, 2));
-             room.add(new Base(2000, 600, 3));
-             room.add(new Base(2000, -600, 3));
-             room.add(new Base(2000, 0, 3));
-             room.add(new Base(-2000, 600, 4));
-             room.add(new Base(-2000, -600, 4));
-             room.add(new Base(-2000, 0, 4));
-             */
-            MapGenerator mp = new MapGenerator(2 + Main.R.nextInt(7), 1);
-            mp.generate(room);
+            room.add(new Base(600, 2000, 1));
+            room.add(new Base(-600, 2000, 1));
+            room.add(new Base(-0, 2000, 1));
+            room.add(new Base(600, -2000, 2));
+            room.add(new Base(-600, -2000, 2));
+            room.add(new Base(-0, -2000, 2));
+            room.add(new Base(2000, 600, 3));
+            room.add(new Base(2000, -600, 3));
+            room.add(new Base(2000, 0, 3));
+            room.add(new Base(-2000, 600, 4));
+            room.add(new Base(-2000, -600, 4));
+            room.add(new Base(-2000, 0, 4));
+            unitList = room.players[room.player].getUnitList();
+            add(unitList);
         }
         room.pause();
     }
+    com.badlogic.gdx.graphics.g2d.Sprite background;
 
     public GameScreen() {
         background = new com.badlogic.gdx.graphics.g2d.Sprite(
@@ -178,6 +142,11 @@ public class GameScreen extends Screen {
         play.setAlign(LWAlignment.CENTER);
         play.y = 90 - 140 * 2;
         menu.add(play);
+        SpawnBar bar = new SpawnBar();
+        bar.setAlign(LWAlignment.LEFT);
+        bar.x = 60;
+        bar.setValue(0.5f);
+        menu.add(bar);
         add(menu);
     }
 

@@ -281,8 +281,4 @@ public class Math {
     public static float abs(double a){
         return (float) java.lang.Math.abs(a);
     }
-
-    static float tan(float f) {
-        return (float) java.lang.Math.tan(f);
-    }
 }

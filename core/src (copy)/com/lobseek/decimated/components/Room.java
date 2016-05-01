@@ -54,13 +54,13 @@ public class Room implements Layer {
     private long actTime, tickTime;
     private final Timer actTimer, tickTimer;
     private BitmapFont font = new BitmapFont();
-    private boolean running, lockSwipe;
+    private boolean running;
     private float fingerDistance, minimapColor;
     private Unit selectedUnit, targetedUnit;
     public final Player players[];
     public int player = -1, selectedUnits;
     public float unitRadius;
-    public boolean selection, minimapSwipe, minimapEnabled = true;
+    public boolean selection, minimapSwipe, minimapEnabled;
     private final com.badlogic.gdx.graphics.g2d.Sprite terrain, terrain_small;
     private final Barricade[][] barricades = new Barricade[64][64];
     private final float barricadeSize = 360;
@@ -96,10 +96,6 @@ public class Room implements Layer {
         players[2].color = Color.BLUE;
         players[3].color = Color.GREEN;
         players[4].color = Color.YELLOW;
-        players[5].color = Color.PINK;
-        players[6].color = Color.CYAN;
-        players[7].color = new Color(1, 0.5f, 0, 1);
-        players[8].color = new Color(0.7f, 0, 1, 1);
         actTimer = new Timer("Act Timer");
         tickTimer = new Timer("Tick Timer");
 
@@ -651,7 +647,6 @@ public class Room implements Layer {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         selection = false;
-        lockSwipe = false;
         minimapSwipe = false;
         return false;
     }
@@ -685,13 +680,10 @@ public class Room implements Layer {
             minimapSwipe = true;
             return true;
         }
-        if (screenX > screen.width - 30 && screen.touches[0].dx < 0 && !lockSwipe) {
+        if (screenX > screen.width - 30 && screen.touches[0].dx < 0) {
             screen.unitList.show();
             pause();
             return true;
-        }
-        if (screenX <= screen.width - 30) {
-            lockSwipe = true;
         }
         if (!selection) {
             if (screen.touches[0].down && !screen.touches[1].down) {
@@ -762,13 +754,6 @@ public class Room implements Layer {
         cam.x += cos(a) * d * fx * s;
         cam.y -= sin(a) * d * fy * s;
         return true;
-    }
-
-    public void destroy() {
-        tickTimer.cancel();
-        tickTimer.purge();
-        actTimer.cancel();
-        actTimer.purge();
     }
 
 }
