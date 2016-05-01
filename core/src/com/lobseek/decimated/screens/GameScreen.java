@@ -26,6 +26,7 @@ import com.lobseek.decimated.gui.Image;
 import com.lobseek.decimated.gui.SpawnBar;
 import com.lobseek.decimated.units.Disruptor;
 import com.lobseek.utils.ColorFabricator;
+import com.lobseek.utils.MapGenerator;
 import static com.lobseek.utils.Math.*;
 import com.lobseek.widgets.LWAlignment;
 import com.lobseek.widgets.LWContainer;
@@ -45,18 +46,21 @@ public class GameScreen extends Screen {
             room = new Room(this, 1024, 64);
             room.player = 1;
             add(room);
-            room.add(new Base(600, 2000, 1));
-            room.add(new Base(-600, 2000, 1));
-            room.add(new Base(-0, 2000, 1));
-            room.add(new Base(600, -2000, 2));
-            room.add(new Base(-600, -2000, 2));
-            room.add(new Base(-0, -2000, 2));
-            room.add(new Base(2000, 600, 3));
-            room.add(new Base(2000, -600, 3));
-            room.add(new Base(2000, 0, 3));
-            room.add(new Base(-2000, 600, 4));
-            room.add(new Base(-2000, -600, 4));
-            room.add(new Base(-2000, 0, 4));
+            /*room.add(new Base(600, 2000, 1));
+             room.add(new Base(-600, 2000, 1));
+             room.add(new Base(-0, 2000, 1));
+             room.add(new Base(600, -2000, 2));
+             room.add(new Base(-600, -2000, 2));
+             room.add(new Base(-0, -2000, 2));
+             room.add(new Base(2000, 600, 3));
+             room.add(new Base(2000, -600, 3));
+             room.add(new Base(2000, 0, 3));
+             room.add(new Base(-2000, 600, 4));
+             room.add(new Base(-2000, -600, 4));
+             room.add(new Base(-2000, 0, 4));
+             */
+            MapGenerator mp = new MapGenerator(4, 1);
+            mp.generate(room);
         }
         room.pause();
     }

@@ -63,14 +63,16 @@ public class Bullet extends Actor {
 
     @Override
     public void tick(float delta) {
-        for (Actor a : room.actors) {
-            if (a != null && (a instanceof Unit)) {
-                Unit u = (Unit) a;
-                if (u.hp > 0 && room.players[from.owner].isEnemy(u.owner)) {
-                    float d = dist(x, y, u.x, u.y);
-                    if (d < detonationDistance) {
-                        explode(u);
-                        remove();
+        if (room != null) {
+            for (Actor a : room.actors) {
+                if (a != null && (a instanceof Unit)) {
+                    Unit u = (Unit) a;
+                    if (u.hp > 0 && room.players[from.owner].isEnemy(u.owner)) {
+                        float d = dist(x, y, u.x, u.y);
+                        if (d < detonationDistance) {
+                            explode(u);
+                            remove();
+                        }
                     }
                 }
             }
