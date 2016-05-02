@@ -78,7 +78,7 @@ public class MapGenerator {
             }
         }
         for (current = 1; current <= players; current++) {
-            angle = ((Math.PI2 / players) * current);
+            angle = ((Math.PI2 / players));
             for (Point pa : p) {
                 float ax = pa.x;
                 pa.x = pa.x * Math.cos(angle) - pa.y * Math.sin(angle);
