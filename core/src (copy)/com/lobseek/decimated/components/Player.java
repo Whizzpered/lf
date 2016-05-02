@@ -22,7 +22,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.lobseek.decimated.Main;
 import com.lobseek.decimated.ProjectLogger;
 import com.lobseek.decimated.gui.SpawnBar;
-import com.lobseek.decimated.screens.GameScreen;
 import com.lobseek.utils.ColorFabricator;
 import com.lobseek.widgets.LWContainer;
 import java.lang.reflect.Constructor;
@@ -96,7 +95,8 @@ public class Player {
 
     public LWContainer getUnitList() {
         final com.badlogic.gdx.graphics.g2d.Sprite background
-                = GameScreen.background;
+                = new com.badlogic.gdx.graphics.g2d.Sprite(
+                        new Texture(Gdx.files.internal("background.png")));
 
         background.getTexture()
                 .setFilter(Texture.TextureFilter.Linear,
@@ -193,7 +193,7 @@ public class Player {
             //s.hide();
             menu.add(s);
         }
-        menu.hide();
+
         return menu;
     }
 
