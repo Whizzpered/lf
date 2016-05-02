@@ -28,6 +28,7 @@ import com.lobseek.decimated.gui.SpawnBar;
 import com.lobseek.decimated.units.Disruptor;
 import com.lobseek.utils.ColorFabricator;
 import com.lobseek.utils.MapGenerator;
+import com.lobseek.utils.MapManager;
 import static com.lobseek.utils.Math.*;
 import com.lobseek.widgets.LWAlignment;
 import com.lobseek.widgets.LWContainer;
@@ -81,21 +82,8 @@ public class GameScreen extends Screen {
             unitList.add(play);
             add(unitList);
             add(room);
-            /*room.add(new Base(600, 2000, 1));
-             room.add(new Base(-600, 2000, 1));
-             room.add(new Base(-0, 2000, 1));
-             room.add(new Base(600, -2000, 2));
-             room.add(new Base(-600, -2000, 2));
-             room.add(new Base(-0, -2000, 2));
-             room.add(new Base(2000, 600, 3));
-             room.add(new Base(2000, -600, 3));
-             room.add(new Base(2000, 0, 3));
-             room.add(new Base(-2000, 600, 4));
-             room.add(new Base(-2000, -600, 4));
-             room.add(new Base(-2000, 0, 4));
-             */
-            MapGenerator mp = new MapGenerator(2 + Main.R.nextInt(7), 1);
-            mp.generate(room);
+            MapManager mp = new MapManager(2 + Main.R.nextInt(7), 1, room);
+            mp.generate();
         }
         room.pause();
     }

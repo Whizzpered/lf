@@ -282,7 +282,7 @@ public class Math {
         return (float) java.lang.Math.abs(a);
     }
 
-    static float tan(float f) {
+    public static float tan(float f) {
         return (float) java.lang.Math.tan(f);
     }
 }
