@@ -54,6 +54,7 @@ public class Phantom extends Unit {
         public void explode(Unit to) {
             to.hit(35, from);
             room.add(new Explosion(x, y, 300, explosion_0, 20, 200));
+            room.blind(0.5f, x, y);
         }
 
         @Override

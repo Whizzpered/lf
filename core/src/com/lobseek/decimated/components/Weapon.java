@@ -33,6 +33,7 @@ public class Weapon {
 
     public int ammo, maxAmmo;
     public float reload, reloadTime, reloadAmmoTime;
+    public float attack, attackTime;
 
     public Weapon() {
     }
@@ -83,20 +84,25 @@ public class Weapon {
         }
         if (angle == ta && target != null) {
             if (reload == 0 && (on.visiblity == 1 || !on.selected || on.target == target)) {
-                ammo--;
-                if (ammo == 0) {
-                    reload = reloadAmmoTime;
-                    ammo = maxAmmo;
-                } else {
-                    reload = reloadTime;
+                if (attack == 0) {
+                    attack = attackTime;
+                    ammo--;
+                    if (ammo == 0) {
+                        reload = reloadAmmoTime;
+                        ammo = maxAmmo;
+                    } else {
+                        reload = reloadTime;
+                    }
+                    Point p = new Point(cx, cy);
+                    float ang = angle;
+                    p.x = cx * cos(ang) - cy * sin(ang);
+                    p.y = cx * sin(ang) + cy * cos(ang);
+                    p.x += x;
+                    p.y += y;
+                    shoot(target, p);
+                }else{
+                    attack = Math.max(0, attack - delta);
                 }
-                Point p = new Point(cx, cy);
-                float ang = angle;
-                p.x = cx * cos(ang) - cy * sin(ang);
-                p.y = cx * sin(ang) + cy * cos(ang);
-                p.x += x;
-                p.y += y;
-                shoot(target, p);
             }
         }
     }

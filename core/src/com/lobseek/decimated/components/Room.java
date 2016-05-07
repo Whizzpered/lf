@@ -55,13 +55,13 @@ public class Room implements Layer {
     private final Timer actTimer, tickTimer;
     private BitmapFont font = new BitmapFont();
     private boolean running, lockSwipe;
-    private float fingerDistance, minimapColor;
+    private float fingerDistance, minimapColor, blind;
     private Unit selectedUnit, targetedUnit;
     public final Player players[];
     public int player = -1, selectedUnits;
     public float unitRadius;
     public boolean selection, minimapSwipe, minimapEnabled = true;
-    private final com.badlogic.gdx.graphics.g2d.Sprite terrain, terrain_small;
+    private final com.badlogic.gdx.graphics.g2d.Sprite terrain, terrain_small, blindness;
     private final Barricade[][] barricades = new Barricade[64][64];
     private final float barricadeSize = 360;
     private float targetX, targetY, targetAngle, targetSpeed, targetColor;
@@ -127,6 +127,8 @@ public class Room implements Layer {
                 new Texture(Gdx.files.internal("dirt.png")));
         terrain_small = new com.badlogic.gdx.graphics.g2d.Sprite(
                 new Texture(Gdx.files.internal("dirt_small.png")));
+        blindness = new com.badlogic.gdx.graphics.g2d.Sprite(
+                new Texture(Gdx.files.internal("blindness.png")));
         terrain_small.setScale(2);
         for (int i = 0; i < barricades.length; i++) {
             for (int j = 0; j < barricades[i].length; j++) {
@@ -239,6 +241,21 @@ public class Room implements Layer {
     }
 
     /**
+     * Blinds player.
+     *
+     * @param lightness power of blinding light
+     * @param x x coordinate
+     * @param y y coordinate
+     */
+    public void blind(float lightness, float x, float y) {
+        float d = (1 - dist(x, y, cam.x, cam.y) / (screen.width - deltaSize) * 2) * lightness;
+        if(deltaSize < 0){
+            d += deltaSize / screen.width / 5;
+        }
+        blind = Math.min(1, Math.max(0, Math.max(blind, d)));
+    }
+
+    /**
      * Removes actor from this room. Actually, just hidding it before the next
      * one will replace it.
      *
@@ -292,6 +309,7 @@ public class Room implements Layer {
         }
         targetAngle -= targetSpeed * delta;
         targetSpeed = Math.max(1, targetSpeed - delta * 10);
+        blind = Math.max(0.25f, blind - delta / 2);
         int cur = 0, max = 0;
         for (Actor a : actors) {
             cur++;
@@ -459,6 +477,15 @@ public class Room implements Layer {
                 }
             }
         }
+        
+        blindness.setPosition(0, 0);
+        batch.end();
+        screen.B.begin();
+        blindness.setSize(screen.width, screen.height);
+        blindness.setAlpha(blind);
+        blindness.draw(screen.B);
+        screen.B.end();
+        batch.begin();
         for (Particle a : particles) {
             if (a != null && !a.removed) {
                 if (a.x + a.radius
@@ -546,7 +573,6 @@ public class Room implements Layer {
                 screen.width - 86, screen.height - 86) <= 78) {
             minimapFrame.draw(screen.B);
         }
-
         screen.B.end();
     }
 
