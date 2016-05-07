@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.Array;
 import com.lobseek.decimated.Main;
 import com.lobseek.decimated.components.Room;
 import com.lobseek.utils.mapgenerators.StandartGenerator;
-import java.util.Random;
 
 /**
  *
