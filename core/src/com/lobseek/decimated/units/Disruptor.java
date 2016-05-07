@@ -57,6 +57,7 @@ public class Disruptor extends Unit {
             room.add(new Explosion(to.x, to.y, 400, explosion_1, 35, 300));
             room.add(new Explosion(to.x, to.y, 500, explosion_2, 35, 120));
             room.add(new Explosion(from.x, from.y, 200, explosion_2, 35, 80));
+            room.blind(1f, to.x, to.y);
         }
 
     }
@@ -67,10 +68,12 @@ public class Disruptor extends Unit {
         if(energy == 0){
             energy = energyReload;
             room.add(new Explosion(x, y, 1000, explosion_2, 35, 500));
+            room.blind(1.5f, x, y);
             float a = atan2(from.y - y, from.x - x) + Main.R.nextFloat() - 0.5f;
             x -= cos(a) * weapons[0].range / 2;
             y -= sin(a) * weapons[0].range / 2;
             room.add(new Explosion(x, y, 1000, explosion_1, 35, 500));
+            room.blind(0.8f, x, y);
         }
     }
 

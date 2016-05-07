@@ -109,6 +109,7 @@ public class Unit extends Actor {
                 from.experience += this.experience / 2;
                 this.experience = 0;
             }
+            room.blind(1f, x, y);
             for (int i = 0; i < Main.R.nextInt(5) + 6; i++) {
                 room.add(
                         new Explosion(

@@ -47,6 +47,7 @@ public class Dragoon extends Unit {
             to.hit(100, from);
             room.add(new Explosion(x, y, 300, explosion_1, 35, 400));
             room.add(new Explosion(x, y, 600, explosion_2, 35, 130));
+            room.blind(0.7f, x, y);
         }
     }
 
@@ -60,7 +61,8 @@ public class Dragoon extends Unit {
             ammo = maxAmmo = 1;
             reloadTime = 5f;
             reloadAmmoTime = 5;
-            speed = 1200;
+            attack = attackTime = 0.2f;
+            speed = 1200; 
         }
 
         @Override
