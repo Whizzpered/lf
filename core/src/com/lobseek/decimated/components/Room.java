@@ -477,6 +477,7 @@ public class Room implements Layer {
                 }
             }
         }
+        
         blindness.setPosition(0, 0);
         batch.end();
         screen.B.begin();
