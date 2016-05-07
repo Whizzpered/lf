@@ -20,17 +20,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.lobseek.decimated.Main;
 import com.lobseek.decimated.ProjectLogger;
-import com.lobseek.decimated.actors.Test;
 import com.lobseek.decimated.gui.Font;
 import com.lobseek.decimated.screens.GameScreen;
-import com.lobseek.decimated.screens.Screen;
 import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Timer;
@@ -69,6 +64,14 @@ public class Room implements Layer {
     private Sprite minimapGUI = new Sprite("minimap/gui", true);
     private Sprite minimapFrame = new Sprite("minimap/frame", true);
     private Sprite targetSprite = new Sprite("target");
+
+    public int getHeight() {
+        return (int) camera.viewportHeight;
+    }
+
+    public int getWidth() {
+        return (int) camera.viewportWidth;
+    }
 
     /**
      * @param screen screen where Room will be displayed
@@ -249,7 +252,7 @@ public class Room implements Layer {
      */
     public void blind(float lightness, float x, float y) {
         float d = (1 - dist(x, y, cam.x, cam.y) / (screen.width - deltaSize) * 2) * lightness;
-        if(deltaSize < 0){
+        if (deltaSize < 0) {
             d += deltaSize / screen.width / 5;
         }
         blind = Math.min(1, Math.max(0, Math.max(blind, d)));
@@ -458,7 +461,10 @@ public class Room implements Layer {
                             <= camera.position.x + camera.viewportWidth / 2
                             && a.y - a.height
                             <= camera.position.y + camera.viewportHeight / 2) {
+                        a.onScreen = true;
                         a.renderShadow(batch, delta);
+                    } else {
+                        a.onScreen = false;
                     }
                 }
             }
@@ -473,11 +479,15 @@ public class Room implements Layer {
                         <= camera.position.x + camera.viewportWidth / 2
                         && a.y - a.height
                         <= camera.position.y + camera.viewportHeight / 2) {
+                    a.onScreen = true;
                     a.render(batch, delta);
+                } else {
+                    a.onScreen = false;
+
                 }
             }
         }
-        
+
         blindness.setPosition(0, 0);
         batch.end();
         screen.B.begin();

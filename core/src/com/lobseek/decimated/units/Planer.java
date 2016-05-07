@@ -38,7 +38,8 @@ public class Planer extends Unit {
         public PlasmaBullet(Unit from, Unit to, float x, float y) {
             super(from, to, x, y);
             speed = 2000;
-            sprite = new Sprite("laser");
+            name = "laser";
+            sprite = new Sprite(name);
             detonationDistance = 45;
         }
 
@@ -60,11 +61,13 @@ public class Planer extends Unit {
             reloadTime = 0.3f;
             reloadAmmoTime = 1;
             speed = 1600;
+            name  = "plasma";
         }
 
         @Override
         public void shoot(Unit to, Point from) {
             room.add(new PlasmaBullet(on, to, from.x, from.y));
+            super.shoot(to, from);
         }
 
     }

@@ -38,6 +38,7 @@ public class Dragoon extends Unit {
         public PlasmaBullet(Unit from, Unit to, float x, float y) {
             super(from, to, x, y);
             speed = 1200;
+            name = "plasma";
             sprite = new Sprite("plasma/b0");
             detonationDistance = 80;
         }
@@ -48,6 +49,7 @@ public class Dragoon extends Unit {
             room.add(new Explosion(x, y, 300, explosion_1, 35, 400));
             room.add(new Explosion(x, y, 600, explosion_2, 35, 130));
             room.blind(0.7f, x, y);
+            super.explode(to);
         }
     }
 
@@ -63,6 +65,7 @@ public class Dragoon extends Unit {
             reloadAmmoTime = 5;
             attack = attackTime = 0.2f;
             speed = 1200; 
+            
         }
 
         @Override

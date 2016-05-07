@@ -44,7 +44,8 @@ public class Phantom extends Unit {
             angle += (Main.R.nextFloat() - 0.5f) / 2f;
             vx = cos(angle) * speed;
             vy = sin(angle) * speed;
-            sprite = new Sprite("rocket");
+            name = "rocket";
+            sprite = new Sprite(name);
             sprite.setScale(0.5f);
             detonationDistance = 100;
             lifeTime = 5 + Main.R.nextInt(10);
@@ -55,6 +56,7 @@ public class Phantom extends Unit {
             to.hit(35, from);
             room.add(new Explosion(x, y, 300, explosion_0, 20, 200));
             room.blind(0.5f, x, y);
+            super.explode(to);
         }
 
         @Override
@@ -113,12 +115,14 @@ public class Phantom extends Unit {
             ammo = maxAmmo = 3;
             reloadTime = 0.1f;
             reloadAmmoTime = 5;
+            name  = "acid";
         }
 
         @Override
         public void shoot(Unit to, Point from) {
             room.add(new PlasmaBullet(on, to, from.x, from.y));
             on.visiblity = 1;
+            super.shoot(to, from);
         }
 
         @Override

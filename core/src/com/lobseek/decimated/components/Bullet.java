@@ -15,6 +15,7 @@
 package com.lobseek.decimated.components;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.lobseek.decimated.Main;
 import static com.lobseek.utils.Math.*;
 
 /**
@@ -27,6 +28,11 @@ public class Bullet extends Actor {
     public float speed;
     public float detonationDistance;
     public float lifeTime = 10;
+    protected String name;
+
+    public String getName() {
+        return name;
+    }
 
     public Sprite sprite;
     public static Sprite MMS = new Sprite("minimap/bullet");
@@ -80,7 +86,15 @@ public class Bullet extends Actor {
     }
 
     public void explode(Unit to) {
-
+        if (!to.onScreen) {
+            float dist = dist(to.x, to.y, room.cam.x, room.cam.y)
+                    - (room.getWidth() / 3 + room.getHeight() / 3);
+            if (dist < 300) {
+                Main.sl.getSound(name).play((300 - dist) / 300);
+            }
+        } else {
+            Main.sl.getSound(name).play();
+        }
     }
 
     @Override

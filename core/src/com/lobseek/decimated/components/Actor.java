@@ -29,6 +29,7 @@ public class Actor implements Comparable<Actor> {
     public boolean phantom, standing;
     public Room room;
     public Sprite minimapSprite;
+    public boolean onScreen;
 
     /**
      * @param x abscissa of actor

@@ -16,6 +16,7 @@ package com.lobseek.decimated.components;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.lobseek.decimated.Main;
 import static com.lobseek.utils.Math.*;
 
 /**
@@ -34,6 +35,7 @@ public class Weapon {
     public int ammo, maxAmmo;
     public float reload, reloadTime, reloadAmmoTime;
     public float attack, attackTime;
+    public String name;
 
     public Weapon() {
     }
@@ -46,6 +48,7 @@ public class Weapon {
     public void setSprite(String name) {
         sprite = new Sprite(name + "_head");
         sprite_shadow = new Sprite(name + "_head_shadow");
+        //this.name = name;// + "_shoot";
     }
 
     public void act(float delta) {
@@ -100,7 +103,7 @@ public class Weapon {
                     p.x += x;
                     p.y += y;
                     shoot(target, p);
-                }else{
+                } else {
                     attack = Math.max(0, attack - delta);
                 }
             }
@@ -148,6 +151,11 @@ public class Weapon {
     }
 
     public void shoot(Unit to, Point from) {
+        float dist = dist(to.x, to.y, room.cam.x, room.cam.y);
+        float d = 300 + (room.getWidth() / 3 + room.getHeight() / 3);
+        if (dist < d) {
+            Main.sl.getSound(name).play((d - dist) / d);
+        }
 
     }
 

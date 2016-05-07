@@ -33,9 +33,9 @@ public class Disruptor extends Unit {
 
     private static Sprite explosion_1 = new Sprite("plasma/explosion4"),
             explosion_2 = new Sprite("plasma/explosion5");
-    
+
     private float energy, energyReload = 30;
-    
+
     class DisruptorWeapon extends Weapon {
 
         public DisruptorWeapon() {
@@ -58,6 +58,15 @@ public class Disruptor extends Unit {
             room.add(new Explosion(to.x, to.y, 500, explosion_2, 35, 120));
             room.add(new Explosion(from.x, from.y, 200, explosion_2, 35, 80));
             room.blind(1f, to.x, to.y);
+            if (!to.onScreen) {
+                float dist = dist(to.x, to.y, room.cam.x, room.cam.y)
+                        - (room.getWidth() / 2 + room.getHeight() / 2) / 2;
+                if (dist < 300) {
+                    Main.sl.getSound("laser").play((300 - dist) / 300);
+                }
+            } else {
+                Main.sl.getSound("laser").play();
+            }
         }
 
     }
@@ -65,7 +74,7 @@ public class Disruptor extends Unit {
     @Override
     public void hit(float hp, Unit from) {
         super.hit(hp, from);
-        if(energy == 0){
+        if (energy == 0) {
             energy = energyReload;
             room.add(new Explosion(x, y, 1000, explosion_2, 35, 500));
             room.blind(1.5f, x, y);
