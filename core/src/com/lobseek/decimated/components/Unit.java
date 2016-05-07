@@ -385,7 +385,7 @@ public class Unit extends Actor {
         }
 
         int hp_index = (int) Math.max(0, Math.min(hp / maxHp * 6, 6));
-        if (hp_index != hpNumber) {
+        if (hp < maxHp && hp > 0) {
             if (hpColor < 1) {
                 hpColor = 2 - hpColor;
             }
