@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.lobseek.decimated.gui.Font;
 import com.lobseek.decimated.screens.GameScreen;
 import com.lobseek.decimated.screens.SplashScreen;
+import com.lobseek.utils.SoundLoader;
 import com.lobseek.widgets.LWLocale;
 import java.util.Random;
 
@@ -43,6 +44,7 @@ public class Main extends Game {
     private static long time;
     private static int frames;
     public static Texture laser;
+    public static SoundLoader sl = new SoundLoader();
 
     /**
      * Called when application is loading. Handle load of all textures, sounds,
@@ -59,6 +61,7 @@ public class Main extends Game {
         AM.load("small_atlas.pack", TextureAtlas.class);
         AM.load("font.pack", TextureAtlas.class);
         AM.load("font_simple.pack", TextureAtlas.class);
+        sl.load(AM);
         laser = new Texture(Gdx.files.internal("laser.png"));
         System.out.println("laser " + laser);
         AM.finishLoading();
