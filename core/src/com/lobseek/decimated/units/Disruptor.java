@@ -103,6 +103,7 @@ public class Disruptor extends Unit {
         hp = maxHp = 600;
         speed = 100;
         turnSpeed = 2;
+        agressive = true;
     }
 
 }

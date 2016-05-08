@@ -115,7 +115,7 @@ public class Phantom extends Unit {
             ammo = maxAmmo = 3;
             reloadTime = 0.1f;
             reloadAmmoTime = 5;
-            name  = "acid";
+            name = "acid";
         }
 
         @Override
@@ -154,6 +154,7 @@ public class Phantom extends Unit {
         hp = maxHp = 250;
         speed = 350;
         turnSpeed = 2;
+        agressive = true;
     }
 
     @Override

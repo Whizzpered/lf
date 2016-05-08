@@ -21,12 +21,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.lobseek.decimated.Main;
 import com.lobseek.decimated.ProjectLogger;
+import com.lobseek.decimated.actors.Base;
 import com.lobseek.decimated.gui.SpawnBar;
 import com.lobseek.decimated.screens.GameScreen;
 import com.lobseek.utils.ColorFabricator;
+import static com.lobseek.utils.Math.*;
 import com.lobseek.widgets.LWContainer;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,11 +44,12 @@ public class Player {
     private final Room room;
     public String name = "Bot";
     public Color color = Color.RED;
-    public boolean ai = false;
+    public boolean ai = true;
     public int alliance = -1;
     public Class types[];
     public float produce[];
     public int units, maxUnits = 20;
+    private Base base;
 
     public void setTypes(Class... types) {
         this.types = types;
@@ -92,6 +97,40 @@ public class Player {
             ProjectLogger.println(ex);
         }
         return null;
+    }
+
+    public Base getTarget() {
+        if(this.base != null && (this.base.owner != index || this.base.power < 20)){
+            return this.base;
+        }
+        float x = 0, y = 0, i = 0;
+        List<Base> base = new ArrayList<Base>();
+        for (Actor a : room.actors) {
+            if (a instanceof Base) {
+                Base b = (Base) a;
+                if(b.owner == index){
+                    x += b.x;
+                    y += b.y;
+                    i++;
+                }else{
+                    base.add(b);
+                }
+            }
+        }
+        Base bs = null;
+        float dist = Float.MAX_VALUE;
+        for(Base b : base){
+            float d = dist(b.x, b.y, x, y);
+            if(d < dist){
+                dist = d;
+                bs = b;
+            }
+        }
+        this.base = bs;
+        if(bs != null){
+            System.out.println("Base of " + bs.owner + " player is now target for " + index);
+        }
+        return bs;
     }
 
     public LWContainer getUnitList() {

@@ -51,6 +51,7 @@ public class GameScreen extends Screen {
         if (room == null) {
             room = new Room(this, 1024, 64);
             room.player = 1;
+            room.players[1].ai = false;
             unitList = room.players[room.player].getUnitList();
             Button play = new Button("menu.play") {
                 @Override

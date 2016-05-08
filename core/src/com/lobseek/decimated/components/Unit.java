@@ -17,6 +17,7 @@ package com.lobseek.decimated.components;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.lobseek.decimated.Main;
+import com.lobseek.decimated.actors.Base;
 import com.lobseek.decimated.particles.Explosion;
 import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
@@ -36,8 +37,9 @@ public class Unit extends Actor {
     protected float deathTimer;
     public boolean selected, immortal;
     public Weapon weapons[];
-    public boolean flying;
+    public boolean flying, waving, agressive;
     public Unit target;
+    protected boolean ai;
 
     protected static final Sprite selection = new Sprite("selection");
     protected Sprite body, body_team, body_shadow;
@@ -89,6 +91,55 @@ public class Unit extends Actor {
                 weapons[i].room = room;
                 weapons[i].angle = angle;
                 weapons[i].create();
+            }
+        }
+    }
+
+    public void ai() {
+        Player p = room.players[owner];
+        if (p.units >= p.maxUnits * 2 / 3) {
+            ai = true;
+        }
+        if (p.ai) {
+            if (ai) {
+                if (agressive) {
+                    if (target == null || target.hp < 0) {
+                        Unit unit = null;
+                        float dist = Float.MAX_VALUE;
+                        for (Actor a : room.actors) {
+                            if (a != null && a instanceof Unit) {
+                                Unit u = (Unit) a;
+                                if (room.players[owner].isEnemy(u.owner) && u.hp < 0) {
+                                    float d = dist(u.x, u.y, x, y);
+                                    if (d < dist) {
+                                        dist = d;
+                                        unit = u;
+                                    }
+                                }
+                            }
+                        }
+                        target = unit;
+                        System.out.println(target);
+                    }
+                    if (target != null) {
+                        float ang = atan2(y - target.y, x - target.x);
+                        float dist = dist(target.x, target.y, x, y);
+                        float maxdist = 500;
+                        if (weapons != null && weapons[0] != null) {
+                            maxdist = weapons[0].range;
+                        }
+                        if (dist < 300 && dist > maxdist) {
+                            tx = x - (maxdist - 50) * cos(ang);
+                            ty = y - (maxdist - 50) * sin(ang);
+                        }
+                    }
+                } else {
+                    Base b = p.getTarget();
+                    if (b != null) {
+                        tx = b.x;
+                        ty = b.y;
+                    }
+                }
             }
         }
     }
@@ -279,6 +330,7 @@ public class Unit extends Actor {
      */
     @Override
     public void tick(float delta) {
+        ai();
         if (weapons != null) {
             for (int i = 0; i < weapons.length; i++) {
                 weapons[i].tick(delta);

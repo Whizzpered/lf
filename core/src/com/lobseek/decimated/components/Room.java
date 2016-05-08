@@ -95,6 +95,7 @@ public class Room implements Layer {
         players[0].name = "NPCs";
         for (int i = 1; i < 16; i++) {
             players[i] = new Player(this, i);
+            players[i].ai = true;
         }
         players[2].color = Color.BLUE;
         players[3].color = Color.GREEN;

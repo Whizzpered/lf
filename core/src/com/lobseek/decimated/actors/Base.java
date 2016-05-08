@@ -32,8 +32,9 @@ public class Base extends Actor {
 
     public int owner = 1, unitsPerBase = 5;
     float animation, animation2, timer, platformAngle;
-    float power = 20, maxPower = 20, captureDistance = 400;
+    public float power = 20, maxPower = 20, captureDistance = 400;
     Unit inQueue;
+    private boolean waving;
     public static Sprite MMS = new Sprite("minimap/base");
 
     Sprite sprite = new Sprite("base_hand"),
