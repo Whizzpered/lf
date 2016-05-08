@@ -691,6 +691,138 @@ small_atlas7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+tentacle/pantsu6_shadow
+  rotate: false
+  xy: 1, 352
+  size: 500, 125
+  orig: 500, 125
+  offset: 0, 0
+  index: -1
+tentacle/pantsu7_shadow
+  rotate: false
+  xy: 1, 235
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu3
+  rotate: false
+  xy: 1, 118
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu0
+  rotate: false
+  xy: 1, 1
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+
+small_atlas8.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tentacle/pantsu5
+  rotate: false
+  xy: 1, 352
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu6
+  rotate: false
+  xy: 1, 235
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu5_shadow
+  rotate: false
+  xy: 1, 118
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu1
+  rotate: false
+  xy: 1, 1
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+
+small_atlas9.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tentacle/pantsu0_shadow
+  rotate: false
+  xy: 1, 352
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu3_shadow
+  rotate: false
+  xy: 1, 235
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu7
+  rotate: false
+  xy: 1, 118
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu1_shadow
+  rotate: false
+  xy: 1, 1
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+
+small_atlas10.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+tentacle/pantsu2_shadow
+  rotate: false
+  xy: 1, 352
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu2
+  rotate: false
+  xy: 1, 235
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu4
+  rotate: false
+  xy: 1, 118
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+tentacle/pantsu4_shadow
+  rotate: false
+  xy: 1, 1
+  size: 500, 115
+  orig: 500, 115
+  offset: 0, 0
+  index: -1
+
+small_atlas11.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
 frame/lb
   rotate: false
   xy: 1, 1
@@ -755,7 +887,7 @@ frame/lt
   offset: 0, 0
   index: -1
 
-small_atlas8.png
+small_atlas12.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
