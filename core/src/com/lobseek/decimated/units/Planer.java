@@ -61,7 +61,7 @@ public class Planer extends Unit {
             reloadTime = 0.3f;
             reloadAmmoTime = 1;
             speed = 1600;
-            name  = "plasma";
+            name  = "rocket";
         }
 
         @Override
