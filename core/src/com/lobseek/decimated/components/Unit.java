@@ -103,13 +103,13 @@ public class Unit extends Actor {
         if (p.ai) {
             if (ai) {
                 if (agressive) {
-                    if (target == null || target.hp < 0) {
+                    if (target == null || target.hp <= 0) {
                         Unit unit = null;
                         float dist = Float.MAX_VALUE;
                         for (Actor a : room.actors) {
                             if (a != null && a instanceof Unit) {
                                 Unit u = (Unit) a;
-                                if (room.players[owner].isEnemy(u.owner) && u.hp < 0) {
+                                if (room.players[owner].isEnemy(u.owner) && u.hp > 0) {
                                     float d = dist(u.x, u.y, x, y);
                                     if (d < dist) {
                                         dist = d;
@@ -119,7 +119,6 @@ public class Unit extends Actor {
                             }
                         }
                         target = unit;
-                        System.out.println(target);
                     }
                     if (target != null) {
                         float ang = atan2(y - target.y, x - target.x);
@@ -128,9 +127,9 @@ public class Unit extends Actor {
                         if (weapons != null && weapons[0] != null) {
                             maxdist = weapons[0].range;
                         }
-                        if (dist < 300 && dist > maxdist) {
-                            tx = x - (maxdist - 50) * cos(ang);
-                            ty = y - (maxdist - 50) * sin(ang);
+                        if (dist < maxdist / 2 || dist > maxdist) {
+                            tx = target.x + (maxdist - 50) * cos(ang);
+                            ty = target.y + (maxdist - 50) * sin(ang);
                         }
                     }
                 } else {

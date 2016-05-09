@@ -191,6 +191,7 @@ public class Controller extends Unit {
 
     @Override
     public void tick(float delta) {
+        ai();
         boolean b = true;
         if (drones != null) {
             for (Drone d : drones) {

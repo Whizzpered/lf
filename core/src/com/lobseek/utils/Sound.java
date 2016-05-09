@@ -16,7 +16,7 @@ import com.lobseek.decimated.Main;
 public class Sound {
 
     String name;
-    public float volume = 1f;
+    public float volume = 0.1f;
     private com.badlogic.gdx.audio.Sound sound;
 
     Sound(String name, AssetManager am) {
@@ -32,7 +32,11 @@ public class Sound {
     }
 
     public void play(float volume) {
+        try{
         sound.play(this.volume * volume);
+        }catch(Exception e){
+            //fuck off
+        }
     }
 
     public void play() {
