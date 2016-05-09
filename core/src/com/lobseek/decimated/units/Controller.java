@@ -52,7 +52,6 @@ public class Controller extends Unit {
             super(x, y, angle);
             this.place = place;
             z = 15;
-            agressive = true;
         }
 
         @Override
