@@ -62,6 +62,20 @@ public class Base extends Actor {
     }
 
     @Override
+    public void create() {
+        int tentacles = 5;
+        float dist = 125;
+        float a = PI2 / ((float) tentacles);
+        for (int i = 0; i < tentacles; i++) {
+            room.add(new Turret(
+                    x + cos(a * i + angle) * dist,
+                    y + sin(a * i + angle) * dist,
+                    0, this)
+            );
+        }
+    }
+
+    @Override
     public void act(float delta) {
         platformAngle -= delta / 4;
         if (inQueue != null) {

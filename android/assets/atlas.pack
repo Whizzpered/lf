@@ -31,18 +31,18 @@ base_hand_shadow
   orig: 220, 62
   offset: 0, 0
   index: -1
-planer_shield
+turret_head_shadow
   rotate: false
-  xy: 203, 269
-  size: 150, 140
-  orig: 150, 140
+  xy: 203, 275
+  size: 150, 134
+  orig: 150, 134
   offset: 0, 0
   index: -1
-base_platform_shadow
+planer_shield
   rotate: false
-  xy: 183, 131
-  size: 145, 136
-  orig: 145, 136
+  xy: 183, 133
+  size: 150, 140
+  orig: 150, 140
   offset: 0, 0
   index: -1
 controller_body_shadow
@@ -66,309 +66,342 @@ base_hand_team
   orig: 200, 42
   offset: 0, 0
   index: -1
+base_platform_shadow
+  rotate: false
+  xy: 399, 311
+  size: 145, 136
+  orig: 145, 136
+  offset: 0, 0
+  index: -1
 turret_body_shadow
   rotate: false
-  xy: 355, 284
+  xy: 546, 322
   size: 120, 125
   orig: 120, 125
   offset: 0, 0
   index: -1
 base_platform
   rotate: false
-  xy: 477, 331
+  xy: 668, 351
   size: 125, 116
   orig: 125, 116
   offset: 0, 0
   index: -1
-disruptor_body_shadow
-  rotate: false
-  xy: 477, 237
-  size: 120, 92
-  orig: 120, 92
-  offset: 0, 0
-  index: -1
-planer_body_shadow
-  rotate: false
-  xy: 355, 169
-  size: 120, 113
-  orig: 120, 113
-  offset: 0, 0
-  index: -1
-disruptor_head_shadow
-  rotate: false
-  xy: 477, 168
-  size: 120, 67
-  orig: 120, 67
-  offset: 0, 0
-  index: -1
-rocket
-  rotate: false
-  xy: 621, 457
-  size: 147, 10
-  orig: 147, 10
-  offset: 0, 0
-  index: -1
-crater
-  rotate: false
-  xy: 142, 5
-  size: 108, 107
-  orig: 108, 107
-  offset: 0, 0
-  index: -1
 dragoon_leg_shadow
   rotate: false
-  xy: 252, 11
+  xy: 795, 349
   size: 118, 118
   orig: 118, 118
   offset: 0, 0
   index: -1
-turret_body
+crater
   rotate: false
-  xy: 372, 63
-  size: 100, 104
-  orig: 100, 104
+  xy: 915, 360
+  size: 108, 107
+  orig: 108, 107
   offset: 0, 0
   index: -1
-phantom_body_shadow
+rocket
   rotate: false
-  xy: 372, 1
-  size: 105, 60
-  orig: 105, 60
-  offset: 0, 0
-  index: -1
-smoke
-  rotate: false
-  xy: 474, 66
-  size: 100, 100
-  orig: 100, 100
-  offset: 0, 0
-  index: -1
-disruptor_head
-  rotate: false
-  xy: 479, 17
-  size: 100, 47
-  orig: 100, 47
+  xy: 183, 121
+  size: 147, 10
+  orig: 147, 10
   offset: 0, 0
   index: -1
 dragoon_leg
   rotate: false
-  xy: 604, 329
+  xy: 183, 1
   size: 118, 118
   orig: 118, 118
   offset: 0, 0
   index: -1
 leg
   rotate: false
-  xy: 599, 209
+  xy: 303, 1
   size: 118, 118
   orig: 118, 118
   offset: 0, 0
   index: -1
+disruptor_body_shadow
+  rotate: false
+  xy: 668, 257
+  size: 120, 92
+  orig: 120, 92
+  offset: 0, 0
+  index: -1
+planer_body_shadow
+  rotate: false
+  xy: 790, 234
+  size: 120, 113
+  orig: 120, 113
+  offset: 0, 0
+  index: -1
+disruptor_head_shadow
+  rotate: false
+  xy: 546, 253
+  size: 120, 67
+  orig: 120, 67
+  offset: 0, 0
+  index: -1
+turret_body
+  rotate: false
+  xy: 335, 169
+  size: 100, 104
+  orig: 100, 104
+  offset: 0, 0
+  index: -1
+smoke
+  rotate: false
+  xy: 437, 209
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
 controller_body
   rotate: false
-  xy: 599, 122
+  xy: 539, 166
   size: 110, 85
   orig: 110, 85
   offset: 0, 0
   index: -1
-dragoon_door
+disruptor_head
   rotate: false
-  xy: 724, 360
-  size: 92, 95
-  orig: 92, 95
+  xy: 437, 160
+  size: 100, 47
+  orig: 100, 47
   offset: 0, 0
   index: -1
 dragoon_body
   rotate: false
-  xy: 818, 372
+  xy: 423, 63
   size: 102, 95
   orig: 102, 95
   offset: 0, 0
   index: -1
-planer_body
+phantom_body_shadow
   rotate: false
-  xy: 922, 374
-  size: 100, 93
-  orig: 100, 93
+  xy: 423, 1
+  size: 105, 60
+  orig: 105, 60
   offset: 0, 0
   index: -1
-dragoon_body_shadow
+phantom_body
   rotate: false
-  xy: 581, 25
-  size: 102, 95
-  orig: 102, 95
-  offset: 0, 0
-  index: -1
-planer_head
-  rotate: false
-  xy: 581, 1
-  size: 80, 22
-  orig: 80, 22
-  offset: 0, 0
-  index: -1
-disruptor_body_team
-  rotate: false
-  xy: 724, 286
-  size: 100, 72
-  orig: 100, 72
+  xy: 335, 127
+  size: 85, 40
+  orig: 85, 40
   offset: 0, 0
   index: -1
 missile_body_team
   rotate: false
-  xy: 719, 199
+  xy: 539, 79
   size: 110, 85
   orig: 110, 85
   offset: 0, 0
   index: -1
 controller_body_team
   rotate: false
-  xy: 719, 199
+  xy: 539, 79
   size: 110, 85
   orig: 110, 85
   offset: 0, 0
   index: -1
-missile_body_shadow
+disruptor_body_team
   rotate: false
-  xy: 711, 112
-  size: 110, 85
-  orig: 110, 85
-  offset: 0, 0
-  index: -1
-planer_body_team
-  rotate: false
-  xy: 685, 17
-  size: 100, 93
-  orig: 100, 93
-  offset: 0, 0
-  index: -1
-disruptor_body
-  rotate: false
-  xy: 826, 298
+  xy: 530, 5
   size: 100, 72
   orig: 100, 72
   offset: 0, 0
   index: -1
-planer_power
+missile_body_shadow
   rotate: false
-  xy: 831, 203
+  xy: 668, 170
+  size: 110, 85
+  orig: 110, 85
+  offset: 0, 0
+  index: -1
+dragoon_body_shadow
+  rotate: false
+  xy: 651, 73
+  size: 102, 95
+  orig: 102, 95
+  offset: 0, 0
+  index: -1
+planer_body
+  rotate: false
+  xy: 780, 139
   size: 100, 93
   orig: 100, 93
   offset: 0, 0
   index: -1
-dragoon_thing_shadow
+turret_head_glow
   rotate: false
-  xy: 933, 282
-  size: 90, 90
-  orig: 90, 90
-  offset: 0, 0
-  index: -1
-sand
-  rotate: false
-  xy: 933, 205
-  size: 75, 75
-  orig: 75, 75
+  xy: 755, 48
+  size: 100, 89
+  orig: 100, 89
   offset: 0, 0
   index: -1
 planer_head_shadow
   rotate: false
-  xy: 831, 159
+  xy: 632, 29
   size: 100, 42
   orig: 100, 42
   offset: 0, 0
   index: -1
-phantom_body
+dragoon_door
   rotate: false
-  xy: 823, 117
-  size: 85, 40
-  orig: 85, 40
+  xy: 882, 137
+  size: 92, 95
+  orig: 92, 95
+  offset: 0, 0
+  index: -1
+turret_head
+  rotate: false
+  xy: 857, 46
+  size: 100, 89
+  orig: 100, 89
+  offset: 0, 0
+  index: -1
+planer_body_team
+  rotate: false
+  xy: 915, 265
+  size: 100, 93
+  orig: 100, 93
+  offset: 0, 0
+  index: -1
+planer_head
+  rotate: false
+  xy: 632, 5
+  size: 80, 22
+  orig: 80, 22
   offset: 0, 0
   index: -1
 phantom_body_terrain
   rotate: false
-  xy: 933, 163
+  xy: 734, 6
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
-dragoon_thing
-  rotate: false
-  xy: 787, 49
-  size: 61, 61
-  orig: 61, 61
-  offset: 0, 0
-  index: -1
-drone_shadow
-  rotate: false
-  xy: 850, 64
-  size: 65, 51
-  orig: 65, 51
-  offset: 0, 0
-  index: -1
-laser
-  rotate: false
-  xy: 770, 457
-  size: 40, 10
-  orig: 40, 10
-  offset: 0, 0
-  index: -1
 phantom_body_invisible
   rotate: false
-  xy: 787, 7
+  xy: 821, 4
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
 phantom_body_team
   rotate: false
-  xy: 933, 121
+  xy: 908, 4
   size: 85, 40
   orig: 85, 40
   offset: 0, 0
   index: -1
+dragoon_thing
+  rotate: false
+  xy: 959, 74
+  size: 61, 61
+  orig: 61, 61
+  offset: 0, 0
+  index: -1
 drone_wing
   rotate: false
-  xy: 330, 227
+  xy: 142, 72
   size: 22, 40
   orig: 22, 40
   offset: 0, 0
   index: -1
 drone_wing2
   rotate: false
-  xy: 330, 185
+  xy: 355, 369
   size: 22, 40
   orig: 22, 40
   offset: 0, 0
   index: -1
 drone
   rotate: false
-  xy: 399, 427
+  xy: 959, 52
   size: 35, 20
   orig: 35, 20
   offset: 0, 0
   index: -1
+laser
+  rotate: false
+  xy: 621, 457
+  size: 40, 10
+  orig: 40, 10
+  offset: 0, 0
+  index: -1
 bullet
   rotate: false
-  xy: 812, 463
+  xy: 632, 73
   size: 4, 4
   orig: 4, 4
   offset: 0, 0
   index: -1
 dragoon_body_team
   rotate: false
-  xy: 474, 63
+  xy: 332, 130
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 missile_body
   rotate: false
-  xy: 183, 293
+  xy: 912, 346
   size: 1, 1
   orig: 1, 1
   offset: 0, 0
   index: -1
 
 atlas2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+planer_power
+  rotate: false
+  xy: 1, 33
+  size: 100, 93
+  orig: 100, 93
+  offset: 0, 0
+  index: -1
+turret_head_glow2
+  rotate: false
+  xy: 103, 37
+  size: 100, 89
+  orig: 100, 89
+  offset: 0, 0
+  index: -1
+dragoon_thing_shadow
+  rotate: false
+  xy: 205, 36
+  size: 90, 90
+  orig: 90, 90
+  offset: 0, 0
+  index: -1
+disruptor_body
+  rotate: false
+  xy: 297, 54
+  size: 100, 72
+  orig: 100, 72
+  offset: 0, 0
+  index: -1
+sand
+  rotate: false
+  xy: 399, 51
+  size: 75, 75
+  orig: 75, 75
+  offset: 0, 0
+  index: -1
+drone_shadow
+  rotate: false
+  xy: 297, 1
+  size: 65, 51
+  orig: 65, 51
+  offset: 0, 0
+  index: -1
+
+atlas3.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -422,7 +455,7 @@ healthbar/2
   offset: 0, 0
   index: -1
 
-atlas3.png
+atlas4.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -476,7 +509,7 @@ minimap/bullet
   offset: 0, 0
   index: -1
 
-atlas4.png
+atlas5.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -551,7 +584,7 @@ fog/2
   offset: 0, 0
   index: -1
 
-atlas5.png
+atlas6.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -590,6 +623,13 @@ plasma/explosion2
   orig: 150, 150
   offset: 0, 0
   index: -1
+plasma/explosion6
+  rotate: false
+  xy: 369, 183
+  size: 130, 134
+  orig: 130, 134
+  offset: 0, 0
+  index: -1
 plasma/explosion0
   rotate: false
   xy: 355, 8
@@ -605,7 +645,7 @@ plasma/b0
   offset: 0, 0
   index: -1
 
-atlas6.png
+atlas7.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -701,159 +741,7 @@ gui/spawn_bar_center
   offset: 0, 0
   index: -1
 
-atlas7.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-tentacle/pantsu6_shadow
-  rotate: false
-  xy: 1, 233
-  size: 1000, 250
-  orig: 1000, 250
-  offset: 0, 0
-  index: -1
-tentacle/pantsu7_shadow
-  rotate: false
-  xy: 1, 1
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-
 atlas8.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-tentacle/pantsu3
-  rotate: false
-  xy: 1, 233
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-tentacle/pantsu0
-  rotate: false
-  xy: 1, 1
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-
-atlas9.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-tentacle/pantsu5
-  rotate: false
-  xy: 1, 233
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-tentacle/pantsu6
-  rotate: false
-  xy: 1, 1
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-
-atlas10.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-tentacle/pantsu5_shadow
-  rotate: false
-  xy: 1, 233
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-tentacle/pantsu1
-  rotate: false
-  xy: 1, 1
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-
-atlas11.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-tentacle/pantsu0_shadow
-  rotate: false
-  xy: 1, 233
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-tentacle/pantsu3_shadow
-  rotate: false
-  xy: 1, 1
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-
-atlas12.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-tentacle/pantsu7
-  rotate: false
-  xy: 1, 233
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-tentacle/pantsu1_shadow
-  rotate: false
-  xy: 1, 1
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-
-atlas13.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-tentacle/pantsu2_shadow
-  rotate: false
-  xy: 1, 233
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-tentacle/pantsu2
-  rotate: false
-  xy: 1, 1
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-
-atlas14.png
-format: RGBA8888
-filter: Nearest,Nearest
-repeat: none
-tentacle/pantsu4
-  rotate: false
-  xy: 1, 233
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-tentacle/pantsu4_shadow
-  rotate: false
-  xy: 1, 1
-  size: 1000, 230
-  orig: 1000, 230
-  offset: 0, 0
-  index: -1
-
-atlas15.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -921,7 +809,7 @@ frame/lt
   offset: 0, 0
   index: -1
 
-atlas16.png
+atlas9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
