@@ -69,6 +69,16 @@ public class Player {
                 Dragoon.class,
                 Controller.class
         );
+        randomizeProduction();
+    }
+    
+    public void randomizeProduction(){
+        for (int i = 0; i < produce.length; i++) {
+            produce[i] = 0;
+        }
+        for (int i = 0; i < 5; i++) {
+            produce[Main.R.nextInt(produce.length)] += 0.2f;
+        }
     }
 
     public Unit spawn(float x, float y, float angle) {

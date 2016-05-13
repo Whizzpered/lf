@@ -461,49 +461,49 @@ filter: Nearest,Nearest
 repeat: none
 minimap/gui
   rotate: false
-  xy: 1, 29
-  size: 250, 322
-  orig: 250, 322
+  xy: 1, 5
+  size: 322, 250
+  orig: 322, 250
   offset: 0, 0
   index: -1
 minimap/head
   rotate: false
-  xy: 1, 20
+  xy: 325, 248
   size: 15, 7
   orig: 15, 7
   offset: 0, 0
   index: -1
 minimap/base
   rotate: false
-  xy: 1, 8
+  xy: 325, 236
   size: 9, 10
   orig: 9, 10
   offset: 0, 0
   index: -1
 minimap/planer
   rotate: false
-  xy: 18, 22
+  xy: 342, 250
   size: 6, 5
   orig: 6, 5
   offset: 0, 0
   index: -1
 minimap/frame
   rotate: false
-  xy: 1, 1
+  xy: 325, 229
   size: 5, 5
   orig: 5, 5
   offset: 0, 0
   index: -1
 minimap/unit
   rotate: false
-  xy: 26, 24
+  xy: 350, 252
   size: 6, 3
   orig: 6, 3
   offset: 0, 0
   index: -1
 minimap/bullet
   rotate: false
-  xy: 253, 349
+  xy: 1, 1
   size: 2, 2
   orig: 2, 2
   offset: 0, 0

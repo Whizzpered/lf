@@ -67,7 +67,8 @@ public class Base extends Actor {
         float dist = 125;
         float a = PI2 / ((float) tentacles);
         for (int i = 0; i < tentacles; i++) {
-            room.add(new Turret(
+            room.add(
+                    new Turret(
                     x + cos(a * i + angle) * dist,
                     y + sin(a * i + angle) * dist,
                     0, this)

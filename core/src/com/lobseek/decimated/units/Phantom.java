@@ -151,8 +151,8 @@ public class Phantom extends Unit {
         setSprite("phantom");
         width = height = 50;
         mass = 15;
-        hp = maxHp = 250;
-        speed = 350;
+        hp = maxHp = 350;
+        speed = 400;
         turnSpeed = 2;
         agressive = true;
     }
@@ -160,9 +160,49 @@ public class Phantom extends Unit {
     @Override
     public void act(float delta) {
         super.act(delta);
+        if (hp < maxHp && hp > 0) {
+            hp = Math.min(maxHp, hp + delta * 2.5f);
+        }
         if (visiblity > 0) {
             visiblity = Math.max(0, visiblity - 0.1f * delta);
         }
     }
 
+    @Override
+    public void ai() {
+        if (visiblity == 0) {
+            super.ai();
+        } else if (room.players[owner].ai) {
+            Unit target = null;
+            {
+                float dist = Float.MAX_VALUE;
+                for (Actor a : room.actors) {
+                    if (a != null && a instanceof Unit) {
+                        Unit u = (Unit) a;
+                        if (room.players[owner].isEnemy(u.owner) && u.hp > 0) {
+                            float r = 500;
+                            if (u.weapons != null && u.weapons.length > 0
+                                    && u.weapons[0] != null) {
+                                r = weapons[0].range;
+                            }
+                            float d = dist(u.x, u.y, x, y) - r;
+                            if (d < dist) {
+                                dist = d;
+                                target = u;
+                            }
+                        }
+                    }
+                }
+            }
+            float ang = atan2(y - target.y, x - target.x);
+            float dist = dist(target.x, target.y, x, y);
+            float maxdist = 500;
+            if (target.weapons != null && target.weapons.length > 0
+                    && target.weapons[0] != null) {
+                maxdist = weapons[0].range;
+            }
+            tx = target.x + (maxdist * 2 + 500) * cos(ang);
+            ty = target.y + (maxdist * 2 + 500) * sin(ang);
+        }
+    }
 }

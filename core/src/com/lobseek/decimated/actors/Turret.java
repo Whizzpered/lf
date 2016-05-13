@@ -21,6 +21,7 @@ import com.lobseek.decimated.components.Room;
 import com.lobseek.decimated.components.Unit;
 import com.lobseek.decimated.components.Sprite;
 import com.lobseek.decimated.particles.Explosion;
+import com.lobseek.decimated.units.Phantom;
 import static com.lobseek.utils.Math.*;
 
 /**
@@ -168,11 +169,19 @@ public class Turret extends Actor {
     Unit unit = new Unit(x, y, 0, 0);
 
     private void shoot(Unit target, Point p) {
-        room.add(new Explosion(target.x, target.y, 600, exp, 35, 230));
-        room.add(new Explosion(target.x, target.y, 400, exp, 35, 330));
-        room.add(new Explosion(target.x, target.y, 200, exp, 35, 430));
-        room.blind(1f, target.x, target.y);
-        target.hit(250, unit);
+        if (target instanceof Phantom) {
+            room.add(new Explosion(x, y, 600, exp, 35, 230));
+            room.add(new Explosion(x, y, 400, exp, 35, 330));
+            room.add(new Explosion(x, y, 200, exp, 35, 430));
+            room.blind(0.7f, target.x, target.y);
+            ((Phantom) target).visiblity = 1;
+        } else {
+            room.add(new Explosion(target.x, target.y, 600, exp, 35, 230));
+            room.add(new Explosion(target.x, target.y, 400, exp, 35, 330));
+            room.add(new Explosion(target.x, target.y, 200, exp, 35, 430));
+            room.blind(0.7f, target.x, target.y);
+            target.hit(250, unit);
+        }
     }
 
 }

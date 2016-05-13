@@ -45,14 +45,14 @@ public class SpawnBar extends LWidget {
     @Override
     public void tapDown(Touch t) {
         float rh = (height - spawn_bar_bottom.height - spawn_bar_top.height);
-        t.y -= (spawn_bar_bottom.height);
+        t.y -= (spawn_bar_bottom.height) + 80;
         setValue(Math.max(0, Math.min(1, t.y / rh)));
     }
 
     @Override
     public void swipe(Touch t) {
         float rh = (height - spawn_bar_bottom.height - spawn_bar_top.height);
-        t.y -= (spawn_bar_bottom.height);
+        t.y -= (spawn_bar_bottom.height) + 80;
         setValue(Math.max(0, Math.min(1, t.y / rh)));
     }
 
@@ -88,7 +88,7 @@ public class SpawnBar extends LWidget {
             if(sprite != null){
                 sprite.setColor(c);
                 sprite.x = x;
-                sprite.y = h + 50f;
+                sprite.y = parent.height - 65;
                 sprite.draw(b);
             }
             this.height = h;
@@ -96,24 +96,24 @@ public class SpawnBar extends LWidget {
                     * value * lightness;
             ////////////////////////
             spawn_bar_bottom.x = x;
-            spawn_bar_bottom.y = spawn_bar_bottom.height / 2;
+            spawn_bar_bottom.y = spawn_bar_bottom.height / 2 + 80;
             spawn_bar_bottom.setColor(c);
             spawn_bar_bottom.draw(b);
             ////////////////////////
             spawn_bar_top.x = x;
-            spawn_bar_top.y = rh + spawn_bar_bottom.height + spawn_bar_top.height / 2;
+            spawn_bar_top.y = rh + spawn_bar_bottom.height + spawn_bar_top.height /  2 + 80;
             spawn_bar_top.setColor(c);
             spawn_bar_top.draw(b);
             ////////////////////////
             spawn_bar_center.x = x;
-            spawn_bar_center.y = spawn_bar_bottom.height + rh / 2;
+            spawn_bar_center.y = spawn_bar_bottom.height + rh / 2 + 80;
             spawn_bar_center.height = rh;
             spawn_bar_center.setColor(c);
             spawn_bar_center.draw(b);
             ////////////////////////
             String code = (Math.round(value * 100)) + "%";
             Font.draw(code, x - Font.width(code) / 2, rh
-                    + spawn_bar_bottom.height + spawn_bar_top.height - 20, c, b);
+                    + spawn_bar_bottom.height + spawn_bar_top.height + 50, c, b);
         }
     }
 }
