@@ -103,6 +103,21 @@ public class Phantom extends Unit {
         }
     }
 
+    @Override
+    public void hit(float hp, Unit from) {
+        float h = this.hp;
+        super.hit(hp, from);
+        if (this.hp < h && this.hp == 0) {
+            if (from instanceof Planer) {
+                ((Planer) from).power = 0;
+                ((Planer) from).shield = 0;
+            }
+            for (int i = 0; i < weapons.length; i++) {
+                weapons[i].shoot(from, new Point(x, y));
+            }
+        }
+    }
+
     class PhantomWeapon extends Weapon {
 
         public PhantomWeapon(float y) {
@@ -194,15 +209,19 @@ public class Phantom extends Unit {
                     }
                 }
             }
-            float ang = atan2(y - target.y, x - target.x);
-            float dist = dist(target.x, target.y, x, y);
-            float maxdist = 500;
-            if (target.weapons != null && target.weapons.length > 0
-                    && target.weapons[0] != null) {
-                maxdist = weapons[0].range;
+            if (target != null) {
+                float ang = atan2(y - target.y, x - target.x);
+                float dist = dist(target.x, target.y, x, y);
+                float maxdist = 500;
+                if (target.weapons != null && target.weapons.length > 0
+                        && target.weapons[0] != null) {
+                    maxdist = weapons[0].range;
+                }
+                if (dist < maxdist * 2 + 400) {
+                    tx = target.x + (maxdist * 2 + 500) * cos(ang);
+                    ty = target.y + (maxdist * 2 + 500) * sin(ang);
+                }
             }
-            tx = target.x + (maxdist * 2 + 500) * cos(ang);
-            ty = target.y + (maxdist * 2 + 500) * sin(ang);
         }
     }
 }

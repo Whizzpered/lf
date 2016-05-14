@@ -22,6 +22,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lobseek.decimated.Main;
 import com.lobseek.decimated.ProjectLogger;
+import com.lobseek.decimated.backgrounds.BackgroundContainer;
+import com.lobseek.decimated.backgrounds.BackgroundObject;
 import com.lobseek.decimated.gui.Font;
 import com.lobseek.decimated.screens.GameScreen;
 import com.lobseek.utils.ColorFabricator;
@@ -58,6 +60,7 @@ public class Room implements Layer {
     public boolean selection, minimapSwipe, minimapEnabled = true;
     private final com.badlogic.gdx.graphics.g2d.Sprite terrain, terrain_small, blindness;
     private final Barricade[][] barricades = new Barricade[64][64];
+    private final BackgroundContainer[][] backgrounds = new BackgroundContainer[64][64];
     private final float barricadeSize = 360;
     private float targetX, targetY, targetAngle, targetSpeed, targetColor;
 
@@ -146,6 +149,52 @@ public class Room implements Layer {
                 }
             }
         }
+        for (int i = 0; i < backgrounds.length; i++) {
+            for (int j = 0; j < backgrounds[i].length; j++) {
+                backgrounds[i][j] = new BackgroundContainer(i, j);
+            }
+        }
+    }
+
+    public void add(BackgroundObject o) {
+        if (o == null) {
+            return;
+        }
+        BackgroundContainer bc = getBackgroundContainer((float) o.x, (float) o.y);
+        if (bc != null) {
+            bc.add(o);
+        }
+    }
+
+    /**
+     * Getting barricade that may be touched it this coordinates. Yep, just may
+     * be.
+     *
+     * @param x coordinate
+     * @param y coordinate
+     * @return this barricade
+     */
+    public BackgroundContainer getBackgroundContainer(float x, float y) {
+        return getBackgroundContainer((int) (x / 256) - (x < 0 ? 1 : 0),
+                (int) (y / 256) - (y < 0 ? 1 : 0));
+    }
+
+    /**
+     * Barricade index in array. Don't care about it, just use first method
+     * (with float parameters), k?
+     *
+     * @param x index
+     * @param y index
+     * @return Barricade. But I already told you that you mustn't use it.
+     */
+    public BackgroundContainer getBackgroundContainer(int x, int y) {
+        x += backgrounds.length / 2;
+        y += backgrounds.length / 2;
+        if (x >= 0 && x < backgrounds.length
+                && y >= 0 && y < backgrounds[x].length) {
+            return backgrounds[x][y];
+        }
+        return null;
     }
 
     /**
@@ -439,6 +488,17 @@ public class Room implements Layer {
                     j < (int) ((cam.y + height / 2) / this.terrain.getHeight()) + 2; j++) {
                 terrain.setCenter(i * this.terrain.getWidth(), j * this.terrain.getHeight());
                 terrain.draw(batch);
+            }
+        }
+
+        for (int i = (int) ((cam.x - width / 2) / 256f) - 2;
+                i < (int) ((cam.x + width / 2) / 256f) + 2; i++) {
+            for (int j = (int) ((cam.y - height / 2) / 256f) - 2;
+                    j < (int) ((cam.y + height / 2) / 256f) + 2; j++) {
+                BackgroundContainer b = getBackgroundContainer(i, j);
+                if (b != null) {
+                    b.render(batch);
+                }
             }
         }
         for (int i = (int) ((cam.x - width / 2) / barricadeSize) - 2;

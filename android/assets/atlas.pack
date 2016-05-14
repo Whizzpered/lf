@@ -407,51 +407,51 @@ filter: Nearest,Nearest
 repeat: none
 healthbar/4
   rotate: false
-  xy: 1, 252
-  size: 250, 249
-  orig: 250, 249
+  xy: 1, 303
+  size: 150, 149
+  orig: 150, 149
   offset: 0, 0
   index: -1
 healthbar/1
   rotate: false
-  xy: 1, 1
-  size: 250, 249
-  orig: 250, 249
+  xy: 1, 152
+  size: 150, 149
+  orig: 150, 149
   offset: 0, 0
   index: -1
 healthbar/0
   rotate: false
-  xy: 253, 252
-  size: 250, 249
-  orig: 250, 249
+  xy: 153, 303
+  size: 150, 149
+  orig: 150, 149
   offset: 0, 0
   index: -1
 healthbar/5
   rotate: false
-  xy: 253, 1
-  size: 250, 249
-  orig: 250, 249
+  xy: 1, 1
+  size: 150, 149
+  orig: 150, 149
   offset: 0, 0
   index: -1
 healthbar/3
   rotate: false
-  xy: 505, 252
-  size: 250, 249
-  orig: 250, 249
+  xy: 153, 152
+  size: 150, 149
+  orig: 150, 149
   offset: 0, 0
   index: -1
 healthbar/6
   rotate: false
-  xy: 505, 1
-  size: 250, 249
-  orig: 250, 249
+  xy: 305, 303
+  size: 150, 149
+  orig: 150, 149
   offset: 0, 0
   index: -1
 healthbar/2
   rotate: false
-  xy: 757, 252
-  size: 250, 249
-  orig: 250, 249
+  xy: 153, 1
+  size: 150, 149
+  orig: 150, 149
   offset: 0, 0
   index: -1
 

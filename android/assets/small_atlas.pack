@@ -388,51 +388,51 @@ filter: Nearest,Nearest
 repeat: none
 healthbar/4
   rotate: false
-  xy: 1, 127
-  size: 125, 124
-  orig: 125, 124
+  xy: 1, 153
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/1
   rotate: false
-  xy: 1, 1
-  size: 125, 124
-  orig: 125, 124
+  xy: 1, 77
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/0
   rotate: false
-  xy: 128, 127
-  size: 125, 124
-  orig: 125, 124
+  xy: 78, 153
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/5
   rotate: false
-  xy: 128, 1
-  size: 125, 124
-  orig: 125, 124
+  xy: 1, 1
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/3
   rotate: false
-  xy: 255, 127
-  size: 125, 124
-  orig: 125, 124
+  xy: 78, 77
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/6
   rotate: false
-  xy: 255, 1
-  size: 125, 124
-  orig: 125, 124
+  xy: 155, 153
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/2
   rotate: false
-  xy: 382, 127
-  size: 125, 124
-  orig: 125, 124
+  xy: 78, 1
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 

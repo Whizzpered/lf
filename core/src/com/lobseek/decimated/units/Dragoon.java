@@ -16,6 +16,7 @@ package com.lobseek.decimated.units;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.lobseek.decimated.backgrounds.Crater;
 import com.lobseek.decimated.components.Bullet;
 import com.lobseek.decimated.components.Point;
 import com.lobseek.decimated.components.Sprite;
@@ -49,6 +50,7 @@ public class Dragoon extends Unit {
             room.add(new Explosion(x, y, 300, explosion_1, 35, 400));
             room.add(new Explosion(x, y, 600, explosion_2, 35, 130));
             room.blind(0.7f, x, y);
+            room.add(new Crater(x, y));
             super.explode(to);
         }
     }

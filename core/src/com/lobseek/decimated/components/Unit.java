@@ -18,6 +18,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.lobseek.decimated.Main;
 import com.lobseek.decimated.actors.Base;
+import com.lobseek.decimated.backgrounds.Crater;
 import com.lobseek.decimated.particles.Explosion;
 import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
@@ -101,7 +102,7 @@ public class Unit extends Actor {
             ai = true;
         }
         if (p.ai) {
-            if (ai) {
+            if (ai || agressive) {
                 if (agressive) {
                     if (target == null || target.hp <= 0) {
                         Unit unit = null;
@@ -109,7 +110,7 @@ public class Unit extends Actor {
                         for (Actor a : room.actors) {
                             if (a != null && a instanceof Unit) {
                                 Unit u = (Unit) a;
-                                if (room.players[owner].isEnemy(u.owner) && u.hp > 0) {
+                                if (room.players[owner].isEnemy(u.owner) && u.hp > 0 && u.visiblity > 0) {
                                     float d = dist(u.x, u.y, x, y);
                                     if (d < dist) {
                                         dist = d;
@@ -160,6 +161,7 @@ public class Unit extends Actor {
                 this.experience = 0;
             }
             room.blind(1f, x, y);
+            room.add(new Crater(x, y));
             for (int i = 0; i < Main.R.nextInt(5) + 6; i++) {
                 room.add(
                         new Explosion(
@@ -398,7 +400,7 @@ public class Unit extends Actor {
     }
 
     public void handleTargetCollision(float delta) {
-        /*
+        /*if(!selected)
         for (Actor a : room.actors) {
             if (a != null && a instanceof Unit) {
                 Unit u = (Unit) a;
@@ -414,7 +416,6 @@ public class Unit extends Actor {
                         r -= d;
                         r *= delta * 5;
                         float an = atan2(u.y - y, u.x - x);
-                        //System.out.println(an + ":" + u.y + "-" + y);
                         u.tx += cos(an) * r;
                         u.tx += sin(an) * r;
                         tx -= cos(an) * r;
@@ -436,7 +437,7 @@ public class Unit extends Actor {
         }
 
         int hp_index = (int) Math.max(0, Math.min(hp / maxHp * 6, 6));
-        if (hp < maxHp && hp > 0) {
+        if (hp_index != hpNumber) {
             if (hpColor < 1) {
                 hpColor = 2 - hpColor;
             }
