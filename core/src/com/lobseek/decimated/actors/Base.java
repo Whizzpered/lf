@@ -35,7 +35,7 @@ public class Base extends Actor {
     public float power = 20, maxPower = 20, captureDistance = 400;
     Unit inQueue;
     private boolean waving;
-    public static Sprite MMS = new Sprite("minimap/base");
+    public static Sprite MMS = new Sprite("minimap/base", true);
 
     Sprite sprite = new Sprite("base_hand"),
             sprite_shadow = new Sprite("base_hand_shadow"),
@@ -58,6 +58,9 @@ public class Base extends Actor {
     @Override
     public void minimapRender(Batch batch, float delta, float alpha) {
         minimapSprite.setColor(room.players[owner].color);
+        minimapSprite.r = minimapSprite.r + (1 - sprite.r) * (1 - power / maxPower);
+        minimapSprite.g = minimapSprite.g + (1 - sprite.g) * (1 - power / maxPower);
+        minimapSprite.b = minimapSprite.b + (1 - sprite.b) * (1 - power / maxPower);
         super.minimapRender(batch, delta, alpha);
     }
 
@@ -69,9 +72,9 @@ public class Base extends Actor {
         for (int i = 0; i < tentacles; i++) {
             room.add(
                     new Turret(
-                    x + cos(a * i + angle) * dist,
-                    y + sin(a * i + angle) * dist,
-                    0, this)
+                            x + cos(a * i + angle) * dist,
+                            y + sin(a * i + angle) * dist,
+                            0, this)
             );
         }
     }
@@ -111,6 +114,8 @@ public class Base extends Actor {
     @Override
     public void tick(float delta) {
         handleCollision(delta);
+
+        power = Math.min(maxPower, power + delta);
 
         for (Actor a : room.actors) {
             if (a instanceof Unit) {

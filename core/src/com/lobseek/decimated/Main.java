@@ -56,12 +56,19 @@ public class Main extends Game {
         }
         loaded = true;
         if (!simple) {
-        AM.load("atlas.pack", TextureAtlas.class);
+            AM.load("atlas.pack", TextureAtlas.class);
         }
         AM.load("small_atlas.pack", TextureAtlas.class);
         AM.load("font.pack", TextureAtlas.class);
         AM.load("font_simple.pack", TextureAtlas.class);
-        sl.load(AM);
+        Thread soundLoaderThread = new Thread() {
+            @Override
+            public void run() {
+                sl.load(AM);
+            }
+
+        };
+        soundLoaderThread.start();
         laser = new Texture(Gdx.files.internal("laser.png"));
         System.out.println("laser " + laser);
         AM.finishLoading();

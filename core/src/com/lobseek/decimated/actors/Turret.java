@@ -15,6 +15,7 @@
 package com.lobseek.decimated.actors;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.lobseek.decimated.Main;
 import com.lobseek.decimated.components.Actor;
 import com.lobseek.decimated.components.Point;
 import com.lobseek.decimated.components.Room;
@@ -23,6 +24,8 @@ import com.lobseek.decimated.components.Sprite;
 import com.lobseek.decimated.particles.Explosion;
 import com.lobseek.decimated.units.Phantom;
 import static com.lobseek.utils.Math.*;
+import com.lobseek.utils.Sound;
+import com.lobseek.utils.SoundLoader;
 
 /**
  *
@@ -180,7 +183,12 @@ public class Turret extends Actor {
             room.add(new Explosion(target.x, target.y, 400, exp, 35, 330));
             room.add(new Explosion(target.x, target.y, 200, exp, 35, 430));
             room.blind(0.7f, target.x, target.y);
-            target.hit(250, unit);
+            target.hit(500, unit);
+        }
+        float dist = dist(x, y, room.cam.x, room.cam.y)
+                - (room.getWidth() / 3 + room.getHeight() / 3);
+        if (dist < 300) {
+            Main.sl.getSound("tesla").play((300 - dist) / 300);
         }
     }
 

@@ -86,7 +86,8 @@ public class Weapon {
             }
         }
         if (angle == ta && target != null) {
-            if (reload == 0 && (on.visiblity == 1 || !on.selected || on.target == target)) {
+            if (reload == 0 && (on.visiblity == 1 ? true : ((!on.selected &&
+                    (on.target == null || on.target.hp <= 0)) || on.target == target))) {
                 if (attack == 0) {
                     attack = attackTime;
                     ammo--;

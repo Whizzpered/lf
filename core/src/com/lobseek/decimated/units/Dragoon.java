@@ -97,7 +97,8 @@ public class Dragoon extends Unit {
 
     @Override
     public void act(float delta) {
-        thingAngle += delta * 3;
+        thingAngle += delta * (3 + (1 - hp / maxHp) * 2);
+        speed = 85 + (1 - hp / maxHp) * 70;
         super.act(delta);
         if (weapons[0].target != null && weapons[0].reload < 0.3f) {
             doorAngle = Math.min(2, doorAngle + delta * 8);
