@@ -15,6 +15,7 @@
 package com.lobseek.decimated.units;
 
 import com.lobseek.decimated.Main;
+import com.lobseek.decimated.backgrounds.Crater;
 import com.lobseek.decimated.components.Bullet;
 import com.lobseek.decimated.components.Point;
 import com.lobseek.decimated.components.Sprite;
@@ -58,6 +59,7 @@ public class Disruptor extends Unit {
             room.add(new Explosion(to.x, to.y, 500, explosion_2, 35, 120));
             room.add(new Explosion(from.x, from.y, 200, explosion_2, 35, 80));
             room.blind(1f, to.x, to.y);
+            room.add(new Crater(to.x, to.y));
             if (!to.onScreen) {
                 float dist = dist(to.x, to.y, room.cam.x, room.cam.y)
                         - (room.getWidth() / 2 + room.getHeight() / 2) / 2;

@@ -45,6 +45,9 @@ public class Planer extends Unit {
 
         @Override
         public void explode(Unit to) {
+            if(to instanceof Phantom){
+                ((Phantom) to).visiblity = 1;
+            }
             to.hit(2, from);
         }
     }

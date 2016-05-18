@@ -46,7 +46,7 @@ public class Controller extends Unit {
         Unit target = controller;
         boolean sitting = true;
         int place;
-        float wings = Main.R.nextFloat() * 10, speed = 400;
+        float wings = Main.R.nextFloat() * 10, speed = 500;
 
         public Drone(float x, float y, float angle, int place) {
             super(x, y, angle);
@@ -87,6 +87,7 @@ public class Controller extends Unit {
                                     y + (0.5f - Main.R.nextFloat()) * target.width,
                                     200, deathExplosion, 5, 60));
                         }
+                        visiblity = 1;
                     } else {
                         target.hp = Math.min(target.maxHp, target.hp + delta * 5);
                     }

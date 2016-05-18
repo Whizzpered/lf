@@ -388,51 +388,51 @@ filter: Nearest,Nearest
 repeat: none
 healthbar/4
   rotate: false
-  xy: 1, 127
-  size: 125, 124
-  orig: 125, 124
+  xy: 1, 153
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/1
   rotate: false
-  xy: 1, 1
-  size: 125, 124
-  orig: 125, 124
+  xy: 1, 77
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/0
   rotate: false
-  xy: 128, 127
-  size: 125, 124
-  orig: 125, 124
+  xy: 78, 153
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/5
   rotate: false
-  xy: 128, 1
-  size: 125, 124
-  orig: 125, 124
+  xy: 1, 1
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/3
   rotate: false
-  xy: 255, 127
-  size: 125, 124
-  orig: 125, 124
+  xy: 78, 77
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/6
   rotate: false
-  xy: 255, 1
-  size: 125, 124
-  orig: 125, 124
+  xy: 155, 153
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 healthbar/2
   rotate: false
-  xy: 382, 127
-  size: 125, 124
-  orig: 125, 124
+  xy: 78, 1
+  size: 75, 74
+  orig: 75, 74
   offset: 0, 0
   index: -1
 
@@ -442,49 +442,49 @@ filter: Nearest,Nearest
 repeat: none
 minimap/gui
   rotate: false
-  xy: 1, 16
-  size: 125, 161
-  orig: 125, 161
+  xy: 1, 1
+  size: 161, 125
+  orig: 161, 125
   offset: 0, 0
   index: -1
 minimap/head
   rotate: false
-  xy: 1, 11
+  xy: 164, 123
   size: 7, 3
   orig: 7, 3
   offset: 0, 0
   index: -1
 minimap/base
   rotate: false
-  xy: 1, 4
+  xy: 164, 116
   size: 4, 5
   orig: 4, 5
   offset: 0, 0
   index: -1
 minimap/planer
   rotate: false
-  xy: 10, 12
+  xy: 173, 124
   size: 3, 2
   orig: 3, 2
   offset: 0, 0
   index: -1
 minimap/unit
   rotate: false
-  xy: 1, 1
+  xy: 164, 113
   size: 3, 1
   orig: 3, 1
   offset: 0, 0
   index: -1
 minimap/frame
   rotate: false
-  xy: 15, 12
+  xy: 178, 124
   size: 2, 2
   orig: 2, 2
   offset: 0, 0
   index: -1
 minimap/bullet
   rotate: false
-  xy: 7, 8
+  xy: 170, 120
   size: 1, 1
   orig: 1, 1
   offset: 0, 0

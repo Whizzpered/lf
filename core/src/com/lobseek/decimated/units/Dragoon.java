@@ -16,6 +16,7 @@ package com.lobseek.decimated.units;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.lobseek.decimated.backgrounds.Crater;
 import com.lobseek.decimated.components.Bullet;
 import com.lobseek.decimated.components.Point;
 import com.lobseek.decimated.components.Sprite;
@@ -49,6 +50,7 @@ public class Dragoon extends Unit {
             room.add(new Explosion(x, y, 300, explosion_1, 35, 400));
             room.add(new Explosion(x, y, 600, explosion_2, 35, 130));
             room.blind(0.7f, x, y);
+            room.add(new Crater(x, y));
             super.explode(to);
         }
     }
@@ -95,7 +97,8 @@ public class Dragoon extends Unit {
 
     @Override
     public void act(float delta) {
-        thingAngle += delta * 3;
+        thingAngle += delta * (3 + (1 - hp / maxHp) * 2);
+        speed = 85 + (1 - hp / maxHp) * 70;
         super.act(delta);
         if (weapons[0].target != null && weapons[0].reload < 0.3f) {
             doorAngle = Math.min(2, doorAngle + delta * 8);

@@ -58,8 +58,8 @@ public class GameScreen extends Screen {
                 }
 
             };
-            play.setAlign(LWAlignment.RIGHT, LWAlignment.TOP);
-            play.y = -156f / 2f;
+            play.setAlign(LWAlignment.RIGHT, LWAlignment.BOTTOM);
+            play.y = 156f / 2f;
             play.x = -447f / 2f;
             play.hide();
             unitList.add(play);
@@ -74,8 +74,8 @@ public class GameScreen extends Screen {
                 }
 
             };
-            play.setAlign(LWAlignment.LEFT, LWAlignment.TOP);
-            play.y = -156f / 2f;
+            play.setAlign(LWAlignment.LEFT, LWAlignment.BOTTOM);
+            play.y = 156f / 2f;
             play.x = 447f / 2f;
             play.hide();
             unitList.add(play);
