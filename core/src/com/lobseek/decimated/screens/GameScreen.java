@@ -24,10 +24,8 @@ import com.lobseek.decimated.components.Room;
 import com.lobseek.decimated.components.Touch;
 import com.lobseek.decimated.gui.Button;
 import com.lobseek.decimated.gui.Image;
-import com.lobseek.decimated.gui.SpawnBar;
-import com.lobseek.decimated.units.Disruptor;
+import com.lobseek.decimated.gui.Trigger;
 import com.lobseek.utils.ColorFabricator;
-import com.lobseek.utils.MapGenerator;
 import com.lobseek.utils.MapManager;
 import static com.lobseek.utils.Math.*;
 import com.lobseek.widgets.LWAlignment;
@@ -40,7 +38,7 @@ import com.lobseek.widgets.LWContainer;
 public class GameScreen extends Screen {
 
     Room room;
-    public LWContainer menu, unitList;
+    public LWContainer menu, unitList, settings;
     public static com.badlogic.gdx.graphics.g2d.Sprite background;
 
     void beginGame() {
@@ -89,11 +87,7 @@ public class GameScreen extends Screen {
         room.pause();
     }
 
-    public GameScreen() {
-        background = new com.badlogic.gdx.graphics.g2d.Sprite(
-                new Texture(Gdx.files.internal("background.png")));
-        background.getTexture().setFilter(Texture.TextureFilter.Linear,
-                Texture.TextureFilter.Linear);
+    public void initMenu() {
         menu = new LWContainer() {
             float alpha = 0;
 
@@ -157,7 +151,7 @@ public class GameScreen extends Screen {
         play.setAlign(LWAlignment.CENTER);
         play.y = 90 - 140 * 1;
         menu.add(play);
-        play = new Button("menu.exit") {
+        /*play = new Button("menu.exit") {
             @Override
             public void tapUp(Touch t) {
                 System.exit(0);
@@ -166,8 +160,83 @@ public class GameScreen extends Screen {
         };
         play.setAlign(LWAlignment.CENTER);
         play.y = 90 - 140 * 2;
+        menu.add(play);*/
+        play = new Trigger("menu.settings");
+        play.setAlign(LWAlignment.CENTER);
+        play.y = 90 - 140 * 2;
+        ((Trigger)(play)).done();
         menu.add(play);
         add(menu);
+    }
+
+    /*
+     Звук, музыка, тумблеры high contrast, additional particles и fast/fancy graphics.
+     Тумблер ака tuggle switch ещё надо сделать. Юзай любой спрайт, я потом нарисую
+     */
+    public void initSettings() {
+        settings = new LWContainer() {
+            float alpha = 0;
+
+            @Override
+            public void act(float delta) {
+                if (isVisible()) {
+                    alpha = Math.min(1, alpha + delta);
+                } else {
+                    alpha = Math.max(0, alpha - delta);
+                }
+                super.act(delta);
+            }
+
+            @Override
+            public void draw(Batch b) {
+                background.setSize(parent.width, parent.height);
+                background.setPosition(0, 0);
+                background.setColor(ColorFabricator.neon(alpha));
+                background.draw(b);
+                width = parent.width;
+                height = parent.height;
+                super.draw(b);
+            }
+
+            @Override
+            public boolean checkSwipe(Touch t) {
+                super.checkSwipe(t);
+                return isVisible();
+            }
+
+            @Override
+            public boolean checkTapDown(Touch t) {
+                super.checkTapDown(t);
+                return isVisible();
+            }
+
+            @Override
+            public boolean checkTapUp(Touch t) {
+                super.checkTapUp(t);
+                return isVisible();
+            }
+
+        };
+        Button play = new Button("menu.play") {
+            @Override
+            public void tapUp(Touch t) {
+                beginGame();
+            }
+
+        };
+        play.setAlign(LWAlignment.CENTER);
+        play.y = 90 - 140 * 0;
+        settings.add(play);
+    }
+
+    public GameScreen() {
+        background = new com.badlogic.gdx.graphics.g2d.Sprite(
+                new Texture(Gdx.files.internal("background.png")));
+        background.getTexture().setFilter(Texture.TextureFilter.Linear,
+                Texture.TextureFilter.Linear);
+
+        initMenu();
+        initSettings();
     }
 
     @Override

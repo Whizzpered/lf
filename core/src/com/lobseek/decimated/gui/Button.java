@@ -27,7 +27,7 @@ import com.lobseek.utils.ColorFabricator;
 public class Button extends LWidget {
 
     String code;
-    private float lightness;
+    protected float lightness;
     private static Sprite button_left = new Sprite("gui/button_left", true),
             button_center = new Sprite("gui/button_center", true),
             button_right = new Sprite("gui/button_right", true);
@@ -74,4 +74,5 @@ public class Button extends LWidget {
         button_left.y = y;
         button_left.draw(b);
     }
+
 }
