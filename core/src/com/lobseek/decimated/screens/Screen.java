@@ -86,10 +86,10 @@ public class Screen extends LWContainer implements com.badlogic.gdx.Screen, Inpu
 
     @Override
     public void resize(int width, int height) {
-        this.width = width;
-        this.height = height;
-        x = width / 2;
-        y = height / 2;
+        this.width = ((float)width) / Main.scale;
+        this.height = ((float)height) / Main.scale;
+        x = this.width / 2;
+        y = this.height / 2;
     }
 
     @Override
@@ -125,7 +125,8 @@ public class Screen extends LWContainer implements com.badlogic.gdx.Screen, Inpu
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        screenY = (int) (height - screenY);
+        screenX = (int) (((float)screenX)  / Main.scale);
+        screenY = (int) (height - ((float) screenY) / Main.scale);
         if (pointer < 10) {
             Touch t = touches[pointer];
             t.x = t.lx = screenX;
@@ -146,7 +147,8 @@ public class Screen extends LWContainer implements com.badlogic.gdx.Screen, Inpu
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        screenY = (int) (height - screenY);
+        screenX = (int) (((float)screenX)  / Main.scale);
+        screenY = (int) (height - ((float) screenY) / Main.scale);
         if (pointer < 10) {
             Touch t = touches[pointer];
             t.down = false;
@@ -164,7 +166,8 @@ public class Screen extends LWContainer implements com.badlogic.gdx.Screen, Inpu
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        screenY = (int) (height - screenY);
+        screenX = (int) (((float)screenX)  / Main.scale);
+        screenY = (int) (height - ((float) screenY) / Main.scale);
         if (pointer < 10) {
             Touch t = touches[pointer];
             t.lx = t.x;

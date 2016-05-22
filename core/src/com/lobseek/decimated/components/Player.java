@@ -48,7 +48,7 @@ public class Player {
     public int alliance = -1;
     public Class types[];
     public float produce[];
-    public int units, maxUnits = 20;
+    public int units, max, maxUnits = max = 5;
     private Base base;
 
     public void setTypes(Class... types) {
@@ -71,8 +71,35 @@ public class Player {
         );
         randomizeProduction();
     }
-    
-    public void randomizeProduction(){
+
+    public void win() {
+        System.out.println("Player " + index + " won!");
+    }
+
+    public void checkVictory() {
+        for (int i = 1; i <= room.players.length; i++) {
+            if (isEnemy(i) && room.players[i].maxUnits >= room.players[i].max) {
+                System.out.println("Player " + i + " --- "
+                        + room.players[i].maxUnits + " of " + room.players[i].max);
+                return;
+            }
+        }
+        win();
+    }
+
+    public void fail() {
+        for (Actor a : room.actors) {
+            if (a != null && a instanceof Unit) {
+                Unit u = (Unit) a;
+                if (u.owner == index) {
+                    u.hp = 0;
+                }
+            }
+        }
+        System.out.println("Player " + index + " failed!");
+    }
+
+    public void randomizeProduction() {
         for (int i = 0; i < produce.length; i++) {
             produce[i] = 0;
         }
@@ -110,7 +137,7 @@ public class Player {
     }
 
     public Base getTarget() {
-        if(this.base != null && (this.base.owner != index || this.base.power < 20)){
+        if (this.base != null && (this.base.owner != index || this.base.power < 20)) {
             return this.base;
         }
         float x = 0, y = 0, i = 0;
@@ -118,26 +145,26 @@ public class Player {
         for (Actor a : room.actors) {
             if (a instanceof Base) {
                 Base b = (Base) a;
-                if(b.owner == index){
+                if (b.owner == index) {
                     x += b.x;
                     y += b.y;
                     i++;
-                }else{
+                } else {
                     base.add(b);
                 }
             }
         }
         Base bs = null;
         float dist = Float.MAX_VALUE;
-        for(Base b : base){
+        for (Base b : base) {
             float d = dist(b.x, b.y, x, y);
-            if(d < dist){
+            if (d < dist) {
                 dist = d;
                 bs = b;
             }
         }
         this.base = bs;
-        if(bs != null){
+        if (bs != null) {
             System.out.println("Base of " + bs.owner + " player is now target for " + index);
         }
         return bs;

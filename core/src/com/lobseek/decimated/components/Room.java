@@ -100,13 +100,27 @@ public class Room implements Layer {
             players[i] = new Player(this, i);
             players[i].ai = true;
         }
-        players[2].color = Color.BLUE;
-        players[3].color = Color.GREEN;
-        players[4].color = Color.YELLOW;
-        players[5].color = Color.PINK;
-        players[6].color = Color.CYAN;
-        players[7].color = new Color(1, 0.5f, 0, 1);
-        players[8].color = new Color(0.7f, 0, 1, 1);
+        
+        Color c[] = {
+            Color.RED,
+            Color.BLUE,
+            Color.GREEN,
+            Color.YELLOW,
+            Color.PINK,
+            Color.CYAN,
+            new Color(1, 0.5f, 0, 1),
+            new Color(0.7f, 0, 1, 1)
+        };
+        boolean b[] = new boolean[c.length];
+        for (int i = 1; i <= 8; i++) {
+            int j = 0;
+            do{
+               j = Main.R.nextInt(b.length);
+            } while(b[j]);
+            players[i].color = c[j];
+            b[j] = true;
+        }
+        
         actTimer = new Timer("Act Timer");
         tickTimer = new Timer("Tick Timer");
 
@@ -594,8 +608,8 @@ public class Room implements Layer {
 
         batch.end();
         screen.B.begin();
-        Font.draw(Main.fps + "fps", 20,
-                0, ColorFabricator.neon(minimapColor), screen.B);
+        //Font.draw(Main.fps + "fps", 20,
+        //        0, ColorFabricator.neon(minimapColor), screen.B);
         if (false) {
             for (int i = 0; i < (screen.height / 20); i++) {
                 if (ProjectLogger.internalLog[i] != null) {

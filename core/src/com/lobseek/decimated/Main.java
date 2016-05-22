@@ -45,12 +45,16 @@ public class Main extends Game {
     private static int frames;
     public static Texture laser;
     public static SoundLoader sl = new SoundLoader();
+    public static float scale = 1;
 
     /**
      * Called when application is loading. Handle load of all textures, sounds,
      * fonts and locale files.
      */
     public void load() {
+        if(Gdx.graphics.getDensity() > 2){
+           scale = Gdx.graphics.getDensity() / 2;
+        }
         if (loaded) {
             return;
         }
@@ -70,7 +74,6 @@ public class Main extends Game {
         };
         soundLoaderThread.start();
         laser = new Texture(Gdx.files.internal("laser.png"));
-        System.out.println("laser " + laser);
         AM.finishLoading();
         LWLocale.init();
         if (!simple) {
@@ -90,6 +93,11 @@ public class Main extends Game {
     public void create() {
         main = this;
         setScreen(new SplashScreen());
+    }
+
+    @Override
+    public void pause() {
+        super.pause(); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

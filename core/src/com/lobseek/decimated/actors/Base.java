@@ -77,6 +77,7 @@ public class Base extends Actor {
                             0, this)
             );
         }
+        room.players[owner].maxUnits += unitsPerBase;
     }
 
     @Override
@@ -128,6 +129,20 @@ public class Base extends Actor {
                         power = Math.max(0, power - delta * (captureDistance - d) / captureDistance);
                         if (power == 0) {
                             room.players[owner].maxUnits -= unitsPerBase;
+                            if (room.players[owner].maxUnits == room.players[owner].max) {
+                                System.out.println(room.players[owner].maxUnits
+                                        + "==" + room.players[owner].max);
+                                for (int i = 1; i < room.players.length; i++) {
+                                    if (i == owner) {
+                                        room.players[i].fail();
+                                    } else {
+                                        room.players[i].checkVictory();
+                                    }
+                                }
+                            } else {
+                                System.out.println(room.players[owner].maxUnits
+                                        + "!=" + room.players[owner].max);
+                            }
                             owner = u.owner;
                             room.players[owner].maxUnits += unitsPerBase;
                         }
