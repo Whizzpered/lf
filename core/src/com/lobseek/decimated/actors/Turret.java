@@ -183,6 +183,7 @@ public class Turret extends Actor {
             room.add(new Explosion(target.x, target.y, 400, exp, 35, 330));
             room.add(new Explosion(target.x, target.y, 200, exp, 35, 430));
             room.blind(0.7f, target.x, target.y);
+            unit.owner = base.owner;
             target.hit(500, unit);
         }
         float dist = dist(x, y, room.cam.x, room.cam.y)

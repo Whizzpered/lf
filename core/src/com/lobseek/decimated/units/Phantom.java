@@ -24,6 +24,7 @@ import com.lobseek.decimated.components.Sprite;
 import com.lobseek.decimated.components.Unit;
 import com.lobseek.decimated.components.Weapon;
 import com.lobseek.decimated.particles.Explosion;
+import com.lobseek.utils.ColorFabricator;
 import static com.lobseek.utils.Math.*;
 
 /**
@@ -170,6 +171,20 @@ public class Phantom extends Unit {
         speed = 400;
         turnSpeed = 2;
         agressive = true;
+    }
+    
+    static Sprite invisible = new Sprite("phantom_body_invisible");
+
+    @Override
+    public void render(Batch batch, float delta) {
+        if(owner == room.player){
+        invisible.x = x;
+        invisible.y = y;
+        invisible.angle = angle;
+        invisible.setColor(ColorFabricator.neon(1 - visiblity));
+        invisible.draw(batch);
+        }
+        super.render(batch, delta);
     }
 
     @Override

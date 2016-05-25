@@ -49,6 +49,7 @@ public class Player {
     public Class types[];
     public float produce[];
     public int units, max, maxUnits = max = 5;
+    public int experience;
     private Base base;
 
     public void setTypes(Class... types) {
@@ -69,7 +70,9 @@ public class Player {
                 Dragoon.class,
                 Controller.class
         );
-        randomizeProduction();
+        if (index != 1) {
+            randomizeProduction();
+        }
     }
 
     public void win() {
@@ -77,10 +80,11 @@ public class Player {
     }
 
     public void checkVictory() {
-        for (int i = 1; i <= room.players.length; i++) {
-            if (isEnemy(i) && room.players[i].maxUnits >= room.players[i].max) {
-                System.out.println("Player " + i + " --- "
-                        + room.players[i].maxUnits + " of " + room.players[i].max);
+        for (int in = 1; in < room.players.length; in++) {
+            if (in == index) {
+                continue;
+            }
+            if (isEnemy(in) && room.players[in].maxUnits > room.players[in].max) {
                 return;
             }
         }

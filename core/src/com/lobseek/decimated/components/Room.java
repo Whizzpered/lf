@@ -100,7 +100,7 @@ public class Room implements Layer {
             players[i] = new Player(this, i);
             players[i].ai = true;
         }
-        
+
         Color c[] = {
             Color.RED,
             Color.BLUE,
@@ -114,13 +114,13 @@ public class Room implements Layer {
         boolean b[] = new boolean[c.length];
         for (int i = 1; i <= 8; i++) {
             int j = 0;
-            do{
-               j = Main.R.nextInt(b.length);
-            } while(b[j]);
+            do {
+                j = Main.R.nextInt(b.length);
+            } while (b[j]);
             players[i].color = c[j];
             b[j] = true;
         }
-        
+
         actTimer = new Timer("Act Timer");
         tickTimer = new Timer("Tick Timer");
 
@@ -202,6 +202,9 @@ public class Room implements Layer {
      * @return Barricade. But I already told you that you mustn't use it.
      */
     public BackgroundContainer getBackgroundContainer(int x, int y) {
+        if (!Main.particles) {
+            return null;
+        }
         x += backgrounds.length / 2;
         y += backgrounds.length / 2;
         if (x >= 0 && x < backgrounds.length
@@ -504,14 +507,15 @@ public class Room implements Layer {
                 terrain.draw(batch);
             }
         }
-
-        for (int i = (int) ((cam.x - width / 2) / 256f) - 2;
-                i < (int) ((cam.x + width / 2) / 256f) + 2; i++) {
-            for (int j = (int) ((cam.y - height / 2) / 256f) - 2;
-                    j < (int) ((cam.y + height / 2) / 256f) + 2; j++) {
-                BackgroundContainer b = getBackgroundContainer(i, j);
-                if (b != null) {
-                    b.render(batch);
+        if (Main.particles) {
+            for (int i = (int) ((cam.x - width / 2) / 256f) - 2;
+                    i < (int) ((cam.x + width / 2) / 256f) + 2; i++) {
+                for (int j = (int) ((cam.y - height / 2) / 256f) - 2;
+                        j < (int) ((cam.y + height / 2) / 256f) + 2; j++) {
+                    BackgroundContainer b = getBackgroundContainer(i, j);
+                    if (b != null) {
+                        b.render(batch);
+                    }
                 }
             }
         }

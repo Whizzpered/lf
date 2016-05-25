@@ -32,7 +32,7 @@ import java.util.Random;
  */
 public class Main extends Game {
 
-    public static final String NAME = "LobseekForces";
+    public static final String NAME = "Decimare";
     public static final Random R = new Random(Long.MAX_VALUE - System.nanoTime());
     public static final AssetManager AM = new AssetManager();
     public static Main main;
@@ -40,11 +40,12 @@ public class Main extends Game {
     public static long nanos;
     public static TextureAtlas atlas, small_atlas;
     private boolean loaded;
-    public static boolean simple, contrast;
+    public static boolean simple, contrast, particles = true;
     private static long time;
     private static int frames;
     public static Texture laser;
     public static SoundLoader sl = new SoundLoader();
+    public static GameScreen gameScreen;
     public static float scale = 1;
 
     /**
@@ -52,8 +53,9 @@ public class Main extends Game {
      * fonts and locale files.
      */
     public void load() {
-        if(Gdx.graphics.getDensity() > 2){
-           scale = Gdx.graphics.getDensity() / 2;
+        float que = 1.2f;
+        if (Gdx.graphics.getDensity() > que) {
+            scale = Gdx.graphics.getDensity() / que;
         }
         if (loaded) {
             return;
@@ -79,6 +81,16 @@ public class Main extends Game {
         if (!simple) {
             atlas = main.AM.get("atlas.pack");
             small_atlas = main.AM.get("small_atlas.pack");
+            if (Gdx.graphics.getDensity() > que) {
+                for (Texture t : atlas.getTextures()) {
+                    t.setFilter(Texture.TextureFilter.Linear,
+                            Texture.TextureFilter.Linear);
+                }
+                for (Texture t : small_atlas.getTextures()) {
+                    t.setFilter(Texture.TextureFilter.Linear,
+                            Texture.TextureFilter.Linear);
+                }
+            }
         } else {
             atlas = small_atlas = main.AM.get("small_atlas.pack");
         }
@@ -97,7 +109,10 @@ public class Main extends Game {
 
     @Override
     public void pause() {
-        super.pause(); //To change body of generated methods, choose Tools | Templates.
+        super.pause(); 
+        if(gameScreen != null && gameScreen.room != null){
+            gameScreen.room.stop();
+        }
     }
 
     /**

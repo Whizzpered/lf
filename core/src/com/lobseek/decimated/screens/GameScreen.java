@@ -37,9 +37,17 @@ import com.lobseek.widgets.LWContainer;
  */
 public class GameScreen extends Screen {
 
-    Room room;
+    public Room room;
     public LWContainer menu, unitList, settings;
     public static com.badlogic.gdx.graphics.g2d.Sprite background;
+
+    public GameScreen(Room room, LWContainer menu, LWContainer unitList, LWContainer settings) {
+        this.room = room;
+        this.menu = menu;
+        this.unitList = unitList;
+        this.settings = settings;
+        Main.gameScreen = this;
+    }
 
     void beginGame() {
         menu.hide();

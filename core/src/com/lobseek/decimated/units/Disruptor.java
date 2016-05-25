@@ -32,6 +32,7 @@ import static java.lang.Math.max;
  */
 public class Disruptor extends Unit {
 
+    private Disruptor self = this;
     private static Sprite explosion_1 = new Sprite("plasma/explosion4"),
             explosion_2 = new Sprite("plasma/explosion5");
 
@@ -53,7 +54,7 @@ public class Disruptor extends Unit {
 
         @Override
         public void shoot(Unit to, Point from) {
-            to.hit(50, to);
+            to.hit(50, self);
             room.add(new Lazer(this, from.x, from.y, to.x, to.y));
             room.add(new Explosion(to.x, to.y, 400, explosion_1, 35, 300));
             room.add(new Explosion(to.x, to.y, 500, explosion_2, 35, 120));

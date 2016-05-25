@@ -686,16 +686,23 @@ gui/phantom
   orig: 60, 62
   offset: 0, 0
   index: -1
+gui/trigger
+  rotate: false
+  xy: 303, 23
+  size: 54, 75
+  orig: 54, 75
+  offset: 0, 0
+  index: -1
 gui/button_left
   rotate: false
-  xy: 303, 20
+  xy: 359, 20
   size: 43, 78
   orig: 43, 78
   offset: 0, 0
   index: -1
 gui/button_right
   rotate: false
-  xy: 348, 20
+  xy: 404, 20
   size: 43, 78
   orig: 43, 78
   offset: 0, 0
@@ -716,7 +723,7 @@ gui/spawn_bar_top
   index: -1
 gui/spawn_bar_center
   rotate: false
-  xy: 303, 17
+  xy: 430, 106
   size: 60, 1
   orig: 60, 1
   offset: 0, 0

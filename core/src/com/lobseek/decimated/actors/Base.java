@@ -78,6 +78,10 @@ public class Base extends Actor {
             );
         }
         room.players[owner].maxUnits += unitsPerBase;
+        if(owner == room.player){
+            room.cam.x = x;
+            room.cam.y = y;
+        }
     }
 
     @Override

@@ -152,12 +152,11 @@ public class Unit extends Actor {
      * @param from unit that attacked.
      */
     public void hit(float hp, Unit from) {
-        /**
-         * @todo make angle of attack. Powershell animation will be soon.
-         */
         if (this.hp > 0 && this.hp - hp <= 0) {
             if (from != null) {
                 from.experience += this.experience / 2;
+                room.players[from.owner].experience += this.experience / 2;
+                if(from.owner == 0)System.out.println(from.getClass());
                 this.experience = 0;
             }
             room.blind(1f, x, y);
