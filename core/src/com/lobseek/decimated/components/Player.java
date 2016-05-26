@@ -81,6 +81,7 @@ public class Player {
         System.out.println("Player " + index + " won!");
         if (index == room.player) {
             blocked = true;
+            room.stop();
             room.screen.add(new Button("game.victory") {
                 @Override
                 public void tapUp(Touch t) {
@@ -90,6 +91,7 @@ public class Player {
                     hide();
                 }
             });
+
         }
     }
 
@@ -116,6 +118,7 @@ public class Player {
         }
         if (index == room.player) {
             blocked = true;
+            room.stop();
             room.screen.add(new Button("game.defeat") {
                 @Override
                 public void tapUp(Touch t) {

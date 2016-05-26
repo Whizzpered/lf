@@ -75,7 +75,7 @@ public class Sprite {
                 if (sprite != null) {
                     if (Main.atlas != Main.small_atlas) {
                         small_sprite = Main.small_atlas.createSprite(name);
-                    }else{
+                    } else {
                         small_sprite = sprite;
                     }
                     originalWidth = small_sprite.getWidth() * 2;
@@ -104,7 +104,7 @@ public class Sprite {
             return;
         }
         com.badlogic.gdx.graphics.g2d.Sprite sprite = this.sprite;
-        if (!qual && width * worldScale <= originalWidth / 2 && height * worldScale <= originalHeight / 2) {
+        if (Main.simple || (!qual && width * worldScale <= originalWidth / 2 && height * worldScale <= originalHeight / 2)) {
             sprite = small_sprite;
         }
         sprite.setSize(width, height);

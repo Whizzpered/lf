@@ -16,7 +16,7 @@ import com.lobseek.decimated.Main;
 public class Sound {
 
     String name;
-    public float volume = 0.1f;
+    public static float volume = 0.1f;
     private com.badlogic.gdx.audio.Sound sound;
 
     Sound(String name, AssetManager am) {

@@ -21,13 +21,17 @@ import com.lobseek.decimated.Main;
 import com.lobseek.decimated.actors.Base;
 import com.lobseek.decimated.actors.Test;
 import com.lobseek.decimated.components.Room;
+import com.lobseek.decimated.components.Sprite;
 import com.lobseek.decimated.components.Touch;
 import com.lobseek.decimated.gui.Button;
 import com.lobseek.decimated.gui.Image;
+import com.lobseek.decimated.gui.SpawnBar;
 import com.lobseek.decimated.gui.Trigger;
 import com.lobseek.utils.ColorFabricator;
 import com.lobseek.utils.MapManager;
 import static com.lobseek.utils.Math.*;
+import com.lobseek.utils.MusicLoader;
+import com.lobseek.utils.Sound;
 import com.lobseek.widgets.LWAlignment;
 import com.lobseek.widgets.LWContainer;
 
@@ -40,14 +44,6 @@ public class GameScreen extends Screen {
     public Room room;
     public LWContainer menu, unitList, settings;
     public static com.badlogic.gdx.graphics.g2d.Sprite background;
-
-    public GameScreen(Room room, LWContainer menu, LWContainer unitList, LWContainer settings) {
-        this.room = room;
-        this.menu = menu;
-        this.unitList = unitList;
-        this.settings = settings;
-        Main.gameScreen = this;
-    }
 
     void beginGame() {
         menu.hide();
@@ -155,7 +151,12 @@ public class GameScreen extends Screen {
         play.x = -300 / 2 - 75;
         menu.add(play);
         play = new Button("menu.settings") {
-
+            @Override
+            public void tapUp(Touch t) {
+                menu.hide();
+                settings.show();
+            }
+            
         };
         play.setAlign(LWAlignment.CENTER);
         play.y = 50 - 140 * 0;
@@ -228,16 +229,83 @@ public class GameScreen extends Screen {
             }
 
         };
+        Trigger trigger = new Trigger("settings.simple"){
+            @Override
+            public void valueChanged() {
+                Main.simple = value;
+            }
+            
+        };
+        trigger.setAlign(LWAlignment.LEFT, LWAlignment.TOP);
+        trigger.x = 250;
+        trigger.y = -75;
+        trigger.value = Main.simple;
+        settings.add(trigger);
+        trigger = new Trigger("settings.contrast"){
+            @Override
+            public void valueChanged() {
+                Main.contrast = value;
+            }
+            
+        };
+        trigger.setAlign(LWAlignment.LEFT, LWAlignment.CENTER);
+        trigger.x = 250;
+        trigger.value = Main.contrast;
+        settings.add(trigger);
+        trigger = new Trigger("settings.particles"){
+            @Override
+            public void valueChanged() {
+                Main.particles = value;
+            }
+            
+        };
+        trigger.setAlign(LWAlignment.LEFT, LWAlignment.BOTTOM);
+        trigger.x = 250;
+        trigger.y = 75;
+        trigger.value = Main.particles;
+        settings.add(trigger);
+        
+        SpawnBar bar = new SpawnBar(){
+            @Override
+            public void valueChanged(float delta) {
+                Sound.volume = value;
+            }
+            
+        };
+        bar.setAlign(LWAlignment.RIGHT);
+        bar.x = -150;
+        bar.value = Sound.volume;
+        bar.sprite = new Sprite("gui/sound", true);
+        settings.add(bar);
+        
+        bar = new SpawnBar(){
+            @Override
+            public void valueChanged(float delta) {
+                MusicLoader.setVolume(value);
+            }
+            
+        };
+        bar.setAlign(LWAlignment.RIGHT);
+        bar.x = -350;
+        bar.value = MusicLoader.getVolume();
+        bar.sprite = new Sprite("gui/music", true);
+        settings.add(bar);
+        
         Button play = new Button("menu.play") {
             @Override
             public void tapUp(Touch t) {
-                beginGame();
+                Main.updateSettings();
+                settings.hide();
+                menu.show();
             }
 
         };
-        play.setAlign(LWAlignment.CENTER);
-        play.y = 90 - 140 * 0;
+        play.setAlign(LWAlignment.RIGHT, LWAlignment.BOTTOM);
+        play.x = -250;
+        play.y = 75;
         settings.add(play);
+        settings.hide();
+        add(settings);
     }
 
     public GameScreen() {
@@ -245,6 +313,7 @@ public class GameScreen extends Screen {
                 new Texture(Gdx.files.internal("background.png")));
         background.getTexture().setFilter(Texture.TextureFilter.Linear,
                 Texture.TextureFilter.Linear);
+        Main.gameScreen = this;
 
         initMenu();
         initSettings();

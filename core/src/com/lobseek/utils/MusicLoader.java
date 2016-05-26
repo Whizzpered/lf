@@ -31,6 +31,16 @@ public class MusicLoader {
     private static FileHandle[] music;
     private static int index = 1;
     private static Music mc, mn;
+    
+    private static float volume = 1;
+    public static void setVolume(float volume){
+        MusicLoader.volume = volume;
+        if(mc != null)
+        mc.setVolume(volume);
+    }
+    public static float getVolume(){
+        return volume;
+    }
 
     public static void load() {
         FileHandle fh = Gdx.files.internal("music");
@@ -49,6 +59,7 @@ public class MusicLoader {
         b = null;
         fh = null;
         mc = Gdx.audio.newMusic(music[0]);
+        mc.setVolume(volume);
         mc.play();
         mn = Gdx.audio.newMusic(music[index]);
         Timer t = new Timer("Music timer");
@@ -63,6 +74,7 @@ public class MusicLoader {
     private static void play() {
         try {
             if (!mc.isPlaying()) {
+                mn.setVolume(volume);
                 mn.play();
                 mc.dispose();
                 mc = mn;

@@ -45,15 +45,15 @@ public class SpawnBar extends LWidget {
     @Override
     public void tapDown(Touch t) {
         float rh = (height - spawn_bar_bottom.height - spawn_bar_top.height);
-        t.y -= (spawn_bar_bottom.height) + 80;
-        setValue(Math.max(0, Math.min(1, t.y / rh)));
+        float ty = t.y - (spawn_bar_bottom.height) - 80;
+        setValue(Math.max(0, Math.min(1, ty / rh)));
     }
 
     @Override
     public void swipe(Touch t) {
         float rh = (height - spawn_bar_bottom.height - spawn_bar_top.height);
-        t.y -= (spawn_bar_bottom.height) + 80;
-        setValue(Math.max(0, Math.min(1, t.y / rh)));
+        float ty = t.y - (spawn_bar_bottom.height) - 80;
+        setValue(Math.max(0, Math.min(1, ty / rh)));
     }
 
     public void valueChanged(float delta) {

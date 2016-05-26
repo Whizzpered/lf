@@ -706,6 +706,11 @@ public class Room implements Layer {
      */
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if(!players[player].blocked && dist(screen.width - 216, screen.height - 37, screenX, screenY) < 37) {
+            screen.unitList.show();
+            pause();
+            return true;
+        }
         if (dist(screen.width - 86, screen.height - 86, screenX, screenY) < 78) {
             float camx = screenX - screen.width + 86;
             float camy = screenY - screen.height + 86;
@@ -799,14 +804,6 @@ public class Room implements Layer {
             }
             minimapSwipe = true;
             return true;
-        }
-        if (screenX > screen.width - 30 && screen.touches[0].dx < 0 && !lockSwipe) {
-            screen.unitList.show();
-            pause();
-            return true;
-        }
-        if (screenX <= screen.width - 30) {
-            lockSwipe = true;
         }
         if (!selection) {
             if (screen.touches[0].down && !screen.touches[1].down) {

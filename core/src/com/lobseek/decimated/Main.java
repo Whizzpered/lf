@@ -16,6 +16,7 @@ package com.lobseek.decimated;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -23,6 +24,7 @@ import com.lobseek.decimated.gui.Font;
 import com.lobseek.decimated.screens.GameScreen;
 import com.lobseek.decimated.screens.SplashScreen;
 import com.lobseek.utils.MusicLoader;
+import com.lobseek.utils.Sound;
 import com.lobseek.utils.SoundLoader;
 import com.lobseek.widgets.LWLocale;
 import java.util.Random;
@@ -113,13 +115,14 @@ public class Main extends Game {
     @Override
     public void create() {
         main = this;
+        loadSettings();
         setScreen(new SplashScreen());
     }
 
     @Override
     public void pause() {
-        super.pause(); 
-        if(gameScreen != null && gameScreen.room != null){
+        super.pause();
+        if (gameScreen != null && gameScreen.room != null) {
             gameScreen.room.stop();
         }
     }
@@ -140,5 +143,37 @@ public class Main extends Game {
         super.render();
         n = System.nanoTime() - n;
         nanos = (nanos * 10 + n) / 11;
+    }
+
+    private static Preferences pref;
+
+    private static void loadSettings() {
+        pref = Gdx.app.getPreferences("settings");
+        if (pref.contains("simple")) {
+            simple = pref.getBoolean("simple");
+            System.out.println("Simple - " + simple);
+        }
+        if (pref.contains("contrast")) {
+            contrast = pref.getBoolean("contrast");
+            System.out.println("Simple - " + simple);
+        }
+        if (pref.contains("particles")) {
+            particles = pref.getBoolean("particles");
+        }
+        if (pref.contains("sound")) {
+            Sound.volume = pref.getFloat("sound");
+        }
+        if (pref.contains("music")) {
+            MusicLoader.setVolume(pref.getFloat("music"));
+        }
+    }
+
+    public static void updateSettings() {
+        pref.putBoolean("simple", simple);
+        pref.putBoolean("contrast", contrast);
+        pref.putBoolean("particles", particles);
+        pref.putFloat("sound", Sound.volume);
+        pref.putFloat("music", MusicLoader.getVolume());
+        pref.flush();
     }
 }

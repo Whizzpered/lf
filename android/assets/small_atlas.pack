@@ -632,98 +632,112 @@ filter: Nearest,Nearest
 repeat: none
 gui/logo
   rotate: false
-  xy: 1, 89
+  xy: 1, 351
   size: 241, 148
   orig: 241, 148
   offset: 0, 0
   index: -1
 gui/example
   rotate: false
-  xy: 1, 9
+  xy: 1, 271
   size: 300, 78
   orig: 300, 78
   offset: 0, 0
   index: -1
 gui/button_center
   rotate: false
-  xy: 244, 164
+  xy: 1, 196
   size: 223, 73
   orig: 223, 73
   offset: 0, 0
   index: -1
+gui/trigger
+  rotate: false
+  xy: 244, 417
+  size: 50, 82
+  orig: 50, 82
+  offset: 0, 0
+  index: -1
+gui/music
+  rotate: false
+  xy: 1, 132
+  size: 62, 62
+  orig: 62, 62
+  offset: 0, 0
+  index: -1
+gui/sound
+  rotate: false
+  xy: 226, 207
+  size: 60, 62
+  orig: 60, 62
+  offset: 0, 0
+  index: -1
 gui/controller
   rotate: false
-  xy: 244, 100
+  xy: 296, 437
   size: 60, 62
   orig: 60, 62
   offset: 0, 0
   index: -1
 gui/disruptor
   rotate: false
-  xy: 306, 100
-  size: 60, 62
-  orig: 60, 62
-  offset: 0, 0
-  index: -1
-gui/dragoon
-  rotate: false
-  xy: 306, 100
-  size: 60, 62
-  orig: 60, 62
-  offset: 0, 0
-  index: -1
-gui/planer
-  rotate: false
-  xy: 306, 100
+  xy: 1, 68
   size: 60, 62
   orig: 60, 62
   offset: 0, 0
   index: -1
 gui/phantom
   rotate: false
-  xy: 368, 100
+  xy: 65, 132
   size: 60, 62
   orig: 60, 62
   offset: 0, 0
   index: -1
-gui/trigger
+gui/dragoon
   rotate: false
-  xy: 303, 23
-  size: 54, 75
-  orig: 54, 75
+  xy: 358, 437
+  size: 60, 62
+  orig: 60, 62
+  offset: 0, 0
+  index: -1
+gui/planer
+  rotate: false
+  xy: 1, 4
+  size: 60, 62
+  orig: 60, 62
   offset: 0, 0
   index: -1
 gui/button_left
   rotate: false
-  xy: 359, 20
-  size: 43, 78
-  orig: 43, 78
-  offset: 0, 0
-  index: -1
-gui/button_right
-  rotate: false
-  xy: 404, 20
+  xy: 63, 52
   size: 43, 78
   orig: 43, 78
   offset: 0, 0
   index: -1
 gui/spawn_bar_bottom
   rotate: false
-  xy: 430, 109
+  xy: 127, 141
   size: 60, 53
   orig: 60, 53
   offset: 0, 0
   index: -1
+gui/button_right
+  rotate: false
+  xy: 420, 421
+  size: 43, 78
+  orig: 43, 78
+  offset: 0, 0
+  index: -1
 gui/spawn_bar_top
   rotate: false
-  xy: 1, 1
+  xy: 226, 199
   size: 60, 6
   orig: 60, 6
   offset: 0, 0
   index: -1
 gui/spawn_bar_center
   rotate: false
-  xy: 430, 106
+  xy: 1, 1
   size: 60, 1
   orig: 60, 1
   offset: 0, 0

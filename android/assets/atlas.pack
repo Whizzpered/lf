@@ -691,11 +691,11 @@ gui/button_left
   orig: 87, 156
   offset: 0, 0
   index: -1
-gui/controller
+gui/music
   rotate: false
   xy: 485, 236
-  size: 120, 125
-  orig: 120, 125
+  size: 125, 125
+  orig: 125, 125
   offset: 0, 0
   index: -1
 gui/trigger
@@ -705,28 +705,28 @@ gui/trigger
   orig: 100, 165
   offset: 0, 0
   index: -1
+gui/sound
+  rotate: false
+  xy: 612, 236
+  size: 120, 125
+  orig: 120, 125
+  offset: 0, 0
+  index: -1
+gui/controller
+  rotate: false
+  xy: 734, 236
+  size: 120, 125
+  orig: 120, 125
+  offset: 0, 0
+  index: -1
 gui/disruptor
   rotate: false
-  xy: 607, 236
+  xy: 856, 226
   size: 120, 125
   orig: 120, 125
   offset: 0, 0
   index: -1
 gui/phantom
-  rotate: false
-  xy: 729, 236
-  size: 120, 125
-  orig: 120, 125
-  offset: 0, 0
-  index: -1
-gui/dragoon
-  rotate: false
-  xy: 851, 226
-  size: 120, 125
-  orig: 120, 125
-  offset: 0, 0
-  index: -1
-gui/planer
   rotate: false
   xy: 705, 109
   size: 120, 125
@@ -740,15 +740,34 @@ gui/spawn_bar_bottom
   orig: 120, 106
   offset: 0, 0
   index: -1
+gui/dragoon
+  rotate: false
+  xy: 827, 99
+  size: 120, 125
+  orig: 120, 125
+  offset: 0, 0
+  index: -1
+
+atlas8.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+gui/planer
+  rotate: false
+  xy: 1, 32
+  size: 120, 125
+  orig: 120, 125
+  offset: 0, 0
+  index: -1
 gui/button_right
   rotate: false
-  xy: 827, 68
+  xy: 123, 1
   size: 87, 156
   orig: 87, 156
   offset: 0, 0
   index: -1
 
-atlas8.png
+atlas9.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
@@ -816,7 +835,7 @@ frame/lt
   offset: 0, 0
   index: -1
 
-atlas9.png
+atlas10.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
