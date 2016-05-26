@@ -1,0 +1,17 @@
+menu
+    play = Spielen
+    settings = Einstellungen
+    exit = Ausgang
+settings
+    simple = Schnelle Grafik
+    contrast = Hoher Kontrast
+    particles = Weitere Partikel
+authors
+    PhDEngelhardt
+    Künstler und Spieleentwickler
+    
+    Whizzpered
+    Video-Editor
+game
+    victory = Sieg!
+    defeat = Niederlage!

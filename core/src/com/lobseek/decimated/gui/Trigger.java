@@ -20,6 +20,10 @@ public class Trigger extends Button {
     public boolean value = true;
     private Sprite pimpochka = new Sprite("gui/trigger", true);
     private float pimpochkiPolozhenie = 0;
+    
+    public void valueChanged(){
+        
+    }
 
     public Trigger(String code) {
         super(code);
@@ -30,12 +34,20 @@ public class Trigger extends Button {
     }
 
     @Override
+    public void tapDown(Touch t) {
+        value = !value;
+        valueChanged();
+    }
+
+    @Override
     public void tapUp(Touch t) {
     }
 
     @Override
     public void swipe(Touch t) {
+        boolean v = value;
         value = t.dx > 0;
+        if(v != value)valueChanged();
     }
 
     @Override

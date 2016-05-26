@@ -33,7 +33,6 @@ public class Test extends Actor {
 
     @Override
     public void act(float delta) {
-
         x += cos(angle) * delta * 30;
         y += sin(angle) * delta * 30;
         dangle += (Main.R.nextFloat() - 0.5f) * 0.02f * delta;

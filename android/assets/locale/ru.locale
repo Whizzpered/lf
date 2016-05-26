@@ -2,10 +2,16 @@ menu
     play = Играть
     settings = Настройки
     exit = Выход
-unit
-    name = Вестник
-    dragoon = Огня
-    planer = Потопа
-    devastator = Труб
-    phantom = Башни
-    controller = Слепней
+settings
+    simple = Быстрая графика
+    contrast = Контраст. интерфейс
+    particles = Много частиц
+authors
+    PhDEngelhardt
+    программист и художник
+    
+    Whizzpered
+    монтажёр видео
+game
+    victory = Победа!
+    defeat = Поражение!

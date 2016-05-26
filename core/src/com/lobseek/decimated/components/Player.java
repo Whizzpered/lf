@@ -22,6 +22,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.lobseek.decimated.Main;
 import com.lobseek.decimated.ProjectLogger;
 import com.lobseek.decimated.actors.Base;
+import com.lobseek.decimated.gui.Button;
 import com.lobseek.decimated.gui.SpawnBar;
 import com.lobseek.decimated.screens.GameScreen;
 import com.lobseek.utils.ColorFabricator;
@@ -50,6 +51,7 @@ public class Player {
     public float produce[];
     public int units, max, maxUnits = max = 5;
     public int experience;
+    public boolean blocked;
     private Base base;
 
     public void setTypes(Class... types) {
@@ -77,6 +79,18 @@ public class Player {
 
     public void win() {
         System.out.println("Player " + index + " won!");
+        if (index == room.player) {
+            blocked = true;
+            room.screen.add(new Button("game.victory") {
+                @Override
+                public void tapUp(Touch t) {
+                    room.screen.menu.show();
+                    room.screen.room = null;
+                    room.destroy();
+                    hide();
+                }
+            });
+        }
     }
 
     public void checkVictory() {
@@ -99,6 +113,18 @@ public class Player {
                     u.hp = 0;
                 }
             }
+        }
+        if (index == room.player) {
+            blocked = true;
+            room.screen.add(new Button("game.defeat") {
+                @Override
+                public void tapUp(Touch t) {
+                    room.screen.menu.show();
+                    room.screen.room = null;
+                    room.destroy();
+                    hide();
+                }
+            });
         }
         System.out.println("Player " + index + " failed!");
     }

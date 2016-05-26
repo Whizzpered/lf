@@ -141,7 +141,7 @@ public class GameScreen extends Screen {
         };
         Image i = new Image("gui/logo");
         i.setAlign(LWAlignment.CENTER);
-        i.y = 220;
+        i.y = 180;
         menu.add(i);
         Button play = new Button("menu.play") {
             @Override
@@ -151,15 +151,17 @@ public class GameScreen extends Screen {
 
         };
         play.setAlign(LWAlignment.CENTER);
-        play.y = 90 - 140 * 0;
+        play.y = 50 - 140 * 0;
+        play.x = -300 / 2 - 75;
         menu.add(play);
         play = new Button("menu.settings") {
 
         };
         play.setAlign(LWAlignment.CENTER);
-        play.y = 90 - 140 * 1;
+        play.y = 50 - 140 * 0;
+        play.x = +300 / 2 + 75;
         menu.add(play);
-        /*play = new Button("menu.exit") {
+        play = new Button("menu.exit") {
             @Override
             public void tapUp(Touch t) {
                 System.exit(0);
@@ -167,12 +169,13 @@ public class GameScreen extends Screen {
 
         };
         play.setAlign(LWAlignment.CENTER);
-        play.y = 90 - 140 * 2;
-        menu.add(play);*/
+        play.y = 50 - 140 * 1;
+        /*
+        menu.add(play);
         play = new Trigger("menu.settings");
         play.setAlign(LWAlignment.CENTER);
-        play.y = 90 - 140 * 2;
-        ((Trigger)(play)).done();
+        play.y = 90 - 140 * 1;
+        ((Trigger)(play)).done();*/
         menu.add(play);
         add(menu);
     }

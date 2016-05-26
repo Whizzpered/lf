@@ -1,0 +1,17 @@
+menu
+    play = Грати
+    settings = Налаштування
+    exit = Вихiд
+settings
+    simple = Швидка графiка
+    contrast = Висока контрастнiсть
+    particles = Багато частинок
+authors
+    PhDEngelhardt
+    програмiст i художник
+    
+    Whizzpered
+    монтажер вiдео
+game
+    victory = Перемога!
+    defeat = Зрада!

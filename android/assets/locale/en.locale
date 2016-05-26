@@ -2,10 +2,16 @@ menu
     play = Play
     settings = Settings
     exit = Exit
-unit
-    name = Herald of
-    dragoon = Sulpur Rain
-    planer = Antediluvian
-    devastator = Jericho Trumpet
-    phantom = Migdal Babel
-    controller = Gnats and Fleas
+settings
+    simple = Fast graphics
+    contrast = High contrast
+    particles = Lot of particles
+authors
+    PhDEngelhardt
+    artist and game developer
+    
+    Whizzpered
+    video editor
+game
+    victory = Victory!
+    defeat = Defeat!
