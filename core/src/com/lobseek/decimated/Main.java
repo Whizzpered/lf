@@ -56,7 +56,7 @@ public class Main extends Game {
      * fonts and locale files.
      */
     public void load() {
-        float que = 1.2f;
+        float que = 1.5f;
         if (Gdx.graphics.getDensity() > que) {
             scale = Gdx.graphics.getDensity() / que;
         }
@@ -123,7 +123,10 @@ public class Main extends Game {
     public void pause() {
         super.pause();
         if (gameScreen != null && gameScreen.room != null) {
-            gameScreen.room.stop();
+            if (!gameScreen.room.players[gameScreen.room.player].blocked) {
+                gameScreen.room.stop();
+                gameScreen.unitList.show();
+            }
         }
     }
 
@@ -166,6 +169,9 @@ public class Main extends Game {
         if (pref.contains("music")) {
             MusicLoader.setVolume(pref.getFloat("music"));
         }
+        if (pref.contains("scale")) {
+            scale = pref.getFloat("scale");
+        }
     }
 
     public static void updateSettings() {
@@ -174,6 +180,7 @@ public class Main extends Game {
         pref.putBoolean("particles", particles);
         pref.putFloat("sound", Sound.volume);
         pref.putFloat("music", MusicLoader.getVolume());
+        pref.putFloat("scale", scale);
         pref.flush();
     }
 }

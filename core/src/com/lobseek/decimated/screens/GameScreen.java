@@ -273,8 +273,23 @@ public class GameScreen extends Screen {
             
         };
         bar.setAlign(LWAlignment.RIGHT);
-        bar.x = -150;
+        bar.x = -250;
         bar.value = Sound.volume;
+        bar.sprite = new Sprite("gui/sound", true);
+        settings.add(bar);
+        
+        
+        bar = new SpawnBar(){
+            @Override
+            public void valueChanged(float delta) {
+                Main.scale = value + 1;
+                Main.gameScreen.resize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            }
+            
+        };
+        bar.setAlign(LWAlignment.RIGHT);
+        bar.x = -125;
+        bar.value = Main.scale - 1;
         bar.sprite = new Sprite("gui/sound", true);
         settings.add(bar);
         
@@ -286,7 +301,7 @@ public class GameScreen extends Screen {
             
         };
         bar.setAlign(LWAlignment.RIGHT);
-        bar.x = -350;
+        bar.x = -375;
         bar.value = MusicLoader.getVolume();
         bar.sprite = new Sprite("gui/music", true);
         settings.add(bar);
